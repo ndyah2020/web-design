@@ -1,0 +1,596 @@
+/* :root {
+    --text-color-dark: #1a162e;
+    --text-color-light: #9e9da8;
+    --btn-color: #ffb700;
+    --background-color: #f6f6f6;
+    --background-header: #eeeeee;
+}
+
+/* ============ PC ============== */
+@media screen and (min-width: 992px) {
+    .hide-on-desktop {
+        display: none;
+    }
+}
+
+/* ============ Tablet & mobile ============ */
+@media screen and (max-width: 991.98px) {
+    /* header */
+    .header .nav {
+        display: none;
+    }
+
+    .header .logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin-right: 100px;
+    }
+
+    .header .last-icon svg {
+        left: 233px;
+    }
+
+    .header .bar {
+        width: 30px;
+        height: 30px;
+        color: #666;
+    }
+
+    /* .header .search-field {
+      width: 280px;
+   } */
+
+    .header-mobile .logo {
+        width: 237px;
+    }
+
+    .header-mobile .menu-overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 50;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.5s;
+    }
+
+    .header-mobile .menu-content {
+        position: fixed;
+        background-color: #fff;
+        inset: 0 40% 0 0;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: 0.5s;
+    }
+
+    .menu-content .container {
+        padding: 30px;
+    }
+
+    /* 
+   .header-mobile .nav {
+      margin-top: 30px;
+   } */
+
+    .header-mobile .nav ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0 32px;
+    }
+
+    .header-mobile li {
+        padding: 4px 8px;
+    }
+
+    .header-mobile ul li {
+        padding: 4px 8px;
+        width: fit-content;
+        position: relative;
+    }
+
+    .header-mobile .nav ul li a::after {
+        display: flex;
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        left: 5px;
+        bottom: 0px;
+        width: 80%;
+        height: 2px;
+        background-color: #1ebfc1;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.5s;
+    }
+
+    .header-mobile .nav ul li:hover > a {
+        color: #1ebfc1;
+    }
+
+    .header-mobile .nav ul li:hover > a::after {
+        transform: scale(1);
+        transform-origin: left;
+    }
+
+    .header-mobile .nav ul li .arrown {
+        position: absolute;
+        top: 10px;
+        right: -7px;
+    }
+
+    .header-mobile ul li a {
+        text-decoration: none;
+        color: var(--text-color-dark);
+        font-family: Gordita;
+        font-size: 2rem;
+        font-weight: 500;
+        line-height: 1.46;
+    }
+
+    /* thong bao add to cart thanh cong */
+    .notification {
+        width: 30%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* recommend */
+    .recommend .row {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* form tim kiem nang cao */
+    .row-filer {
+        flex-direction: column;
+    }
+
+    /* lay out hien thi san pham */
+    .list-show-product {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* tao account */
+    .create-acc .container {
+        gap: 0px;
+        justify-content: space-between;
+    }
+
+    /* footer */
+    .footer .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0px;
+        padding-top: 60px;
+        justify-content: space-between;
+    }
+
+    .footer .row .column:last-child {
+        margin-top: 42px;
+    }
+
+    .separate-last {
+        margin: 0 auto;
+        margin-top: 38px;
+        width: auto;
+        height: 1px;
+        background: #59554b;
+    }
+
+    /* form dang nhap, dang ki */
+    /* .loginBlock {
+      top: calc(50% - 297px);
+      left: calc(50% - 272px);
+   } */
+
+    /* HistoryOrder */
+    .historyOrder {
+        width: 80%;
+    }
+
+    .historyOrder .title {
+        font-size: 2.4rem;
+    }
+
+    .historyOrder .close-history {
+        width: 10%;
+        height: 10%;
+    }
+
+    .historyOrder .tableHistoryHead {
+        width: 80%;
+    }
+
+    .historyOrder .container {
+        width: 80%;
+    }
+
+    .historyOrder .tableHistoryHead th {
+        width: fit-content;
+    }
+
+    .historyOrder .tableHistoryBody td {
+        font-weight: 500;
+    }
+
+    /* PopupAbout */
+    #supportPopup .popup-content {
+        width: 80%;
+    }
+
+    #supportPopup .popup-content .header-popup {
+        font-size: 2.8rem;
+    }
+
+    #supportPopup .popup-content .nav-popup a {
+        font-size: 1.8rem;
+    }
+}
+
+/* ============ Tablet =========== */
+@media screen and (min-width: 768px) and (max-width: 991.98px) {
+    .hide-on-tablet {
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .list-show-product .cart .img-cart {
+        width: 400px;
+        height: 284px;
+        object-fit: cover;
+        transition: all 0.5s;
+    }
+    .historyOrder {
+        width: 600px;
+        max-height: 560px;
+    }
+}
+
+/* ============ Mobile =========== */
+@media screen and (max-width: 767.98px) {
+    .hide-on-mobile {
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .menu-content .container {
+        padding: 25px;
+        margin: 0px;
+    }
+
+    /* header */
+    .img-huge {
+        height: 150px;
+    }
+
+    .header .logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin-right: 100px;
+    }
+
+    .header .container {
+        padding: 16px 0;
+    }
+
+    .dots {
+        position: absolute;
+        top: 129px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+    }
+
+    /* Main */
+    .main .icon-delete-mb {
+        color: rgb(182, 175, 175);
+    }
+
+    .main .group-search {
+        background-color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0px -6px 40px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .group-search .search-field {
+        width: auto;
+        height: 54px;
+        border: none;
+        outline: none;
+        padding: 0 36px 0 12px;
+        font-size: 16px;
+        color: var(--text-color-dark);
+        border-radius: 8px 0 0 8px;
+    }
+
+    .main .group-search .btn-search {
+        border: none;
+        padding: 13px;
+        background-color: #fff;
+        border-radius: 0 8px 8px 0;
+        /* margin-left: 0px; */
+    }
+
+    /* header mobile */
+    .group-cart,
+    .group-history {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding-bottom: 5px;
+    }
+    .group-history .icon-list-order {
+        width: 30px;
+        height: 30px;
+    }
+
+    .header-mobile .cart-text {
+        text-decoration: none;
+        color: var(--text-color-dark);
+        font-family: Gordita;
+        font-size: 2rem;
+        font-weight: 500;
+        line-height: 1.46;
+        cursor: pointer;
+    }
+    .header-mobile .cart-text a {
+        text-decoration: none;
+        color: var(--text-color-dark);
+        font-family: Gordita;
+        font-size: 2rem;
+        font-weight: 500;
+        line-height: 1.46;
+        cursor: pointer;
+    }
+
+    /* slider */
+    .main .slider {
+        height: 153px;
+    }
+
+    .hello-filter .hello-name,
+    .hello-filter .hello {
+        font-size: 1.8rem;
+    }
+
+    .list-show-product {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .buy-cart {
+        cursor: pointer;
+    }
+
+    .cart {
+        margin-bottom: 0;
+    }
+
+    .cart-quantity {
+        margin-left: 50px;
+        font-weight: 500;
+    }
+
+    /* form tim kiem nang cao */
+    .form-item #name {
+        width: 208px;
+        padding-right: 35px;
+    }
+
+    .form-filter {
+        padding: 15px;
+    }
+
+    .row-filer {
+        margin-top: 15px;
+    }
+
+    .form-item select,
+    .form-item input {
+        margin-top: 10px;
+    }
+
+    .form-item > svg {
+        top: 40px;
+        right: 24px;
+    }
+
+    .list-show-product .cart .img-cart {
+        width: 400px;
+        height: 284px;
+        object-fit: cover;
+        transition: all 0.5s;
+    }
+
+    /* phan tạo account */
+    .create-acc .container {
+        padding: 30px 0;
+        display: flex;
+        gap: 57px;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .create-acc .title {
+        color: #070707;
+        font-size: 3.2rem;
+        font-weight: 700;
+    }
+
+    /* Phan footer */
+    .footer .row {
+        padding-top: 30px;
+    }
+
+    .footer .column .list-icon {
+        margin-top: 7px;
+    }
+
+    .footer .row .column:nth-child(3) {
+        margin-top: 42px;
+    }
+
+    /* Phan form dang nhap, dang ki */
+    .loginBlock {
+        width: 314px;
+        padding: 15px 20px;
+    }
+
+    .loginLogo {
+        margin-top: 0px;
+    }
+
+    .tab-item {
+        width: 50%;
+        padding: 16px 20px 11px 20px;
+        margin: auto;
+        font-size: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-submit {
+        margin-top: 10px;
+    }
+
+    .loginError {
+        margin: 0px;
+    }
+}
+
+/* ======== Các điểm break point thêm */
+@media screen and (max-width: 714px) {
+    .list-show-product {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .list-show-product {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* @media screen and (max-width: 436px) {
+   .footer .row .column:nth-child(2) {
+      margin-top: 42px;
+   } 
+} */
+/* @media screen and (max-width: 606px) {
+   .footer .row .column:nth-child(3) {
+      margin-top: 0px;
+   } 
+} */
+@media screen and (max-width: 570px) {
+    .footer .row .column:nth-child(2) {
+        margin-top: 42px;
+    }
+}
+
+@media screen and (min-width: 595px) and (max-width: 752px) {
+    .footer .row .column:nth-child(3) {
+        margin-top: 0px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    #supportPopup .popup-content .header-popup {
+        font-size: 2.4rem;
+    }
+
+    #supportPopup .popup-content .nav-popup {
+        display: grid;
+        row-gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #supportPopup .popup-content .nav-popup a {
+        width: fit-content;
+    }
+
+    #supportPopup .popup-content .nav-popup a:nth-child(even) {
+        margin-left: auto;
+    }
+}
+
+@media screen and (min-width: 375px) and (max-width: 667px) {
+    #supportPopup .popup-content .header-popup {
+        font-size: 1.9rem;
+        word-break: keep-all;
+        text-align: center;
+    }
+
+    #supportPopup .popup-content .nav-popup {
+        display: grid;
+        row-gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #supportPopup .popup-content .nav-popup a {
+        width: fit-content;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    #supportPopup .popup-content .nav-popup a:nth-child(even) {
+        margin-left: auto;
+    }
+
+    #supportPopup .popup-content .footer-popup {
+        text-align: center;
+        font-size: 1.4rem;
+    }
+}
+
+@media screen and (min-width: 525px) and (max-width: 682px) {
+    .historyOrder .title {
+        font-size: 2rem;
+    }
+
+    .historyOrder .tableHistoryHead th {
+        font-size: 1.5rem;
+    }
+
+    .historyOrder .tableHistoryBody td {
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .historyOrder .img-history {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media screen and (min-width: 375px) and (max-width: 525px) {
+    .historyOrder .title {
+        font-size: 1.5rem;
+    }
+
+    .historyOrder .tableHistoryHead th {
+        font-size: 1.3rem;
+    }
+
+    .historyOrder .tableHistoryBody td {
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .historyOrder .img-history {
+        width: 40px;
+        height: 40px;
+    }
+} 
