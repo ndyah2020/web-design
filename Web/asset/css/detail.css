@@ -26,6 +26,8 @@ body {
 }
 
 .container h1 {
+    width: 100%;
+    margin: 10px;
     font-size: 30px;
     height: auto;
 }
@@ -349,7 +351,7 @@ a {
     color: var(--secondary-color-secondary-2, #9e9da8);
     font-size: 1.6rem;
     font-weight: 500;
-    line-height: 1.5; /* 150% */
+    line-height: 1.5; 
 }
 
 .body-filter .title:hover {
@@ -389,37 +391,130 @@ a {
 /* Body right */
 
 .body-right {
+    width: 50%;
     padding: 20px;
     border-radius: 10px; 
     position: relative;
 }
+/* Body left */
+
 .details-product .row-review {
     display: flex;
 }
-.details-product .btn {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+/* css giá  */
+.details-product .price {
+    font-size: 26px;
+    display: block;
+    color: red;
+    margin-bottom: 10px;
 }
+
+/* Chọn cấu hình*/
+
+.select-config {
+    display: flex; 
+    flex-wrap: wrap;
+    width: 100%; 
+    margin-bottom: 20px;
+}
+
+.select-config .btn-config {
+    padding: 20px 30px; 
+    margin: 4px;
+    background-color: #ffffff;
+    color: #333;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.select-config .btn-config:hover {
+    background-color: #9e9da8;
+    color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.select-config .btn-config:active {
+    background-color: #7e7d87;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    transform: translateY(1px);
+}
+/* js khi chọn cấu hình */
+.btn-config.active {
+    font-weight: bold; 
+    background-color: #9e9da8; 
+    color: white; 
+}
+/* detail config */
+.warranty-info {
+    list-style: none; 
+    padding: 0; 
+    margin: 10px 0; 
+    flex-wrap: wrap;
+    gap: 15px; 
+}
+
+.warranty-item {
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    font-size: 1em;
+    color: #333;
+    padding: 8px 12px; 
+}
+
+.warranty-title {
+    font-weight: bold;
+    color: #444; 
+}
+
+.warranty-value {
+    color: #666; 
+}
+
+/* bắt đầu css nút mua hàng */
+.details-product .btn {
+    display: flex;
+    justify-content: space-between; 
+    margin-top: 20px; 
+}
+
 .details-product .btn-buy,
-.details-product .btn-add{
+.details-product .btn-add {
     padding: 20px;
     background-color: #313737;
     border: none;
     text-transform: uppercase;
     cursor: pointer;
     color: #f6f6f6;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
+
 .details-product .btn-buy:hover,
-.details-product .btn-add:hover{
-    transform: scale(1.01);
+.details-product .btn-add:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
 }
+
+.details-product .btn-buy:active,
+.details-product .btn-add:active {
+    background-color: #7e7d87;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    transform: translateY(1px);
+}
+
 .details-product .btn-buy {
-    width: 70%;
+    flex: 2;
 }
+
 .details-product .btn-add {
-    width: calc(30% - 20px);
+    margin-left: 10px; 
+    flex: 1;
 }
+/* kết thúc css nút mua hàng */
 
 
 
@@ -431,8 +526,6 @@ a {
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
 }
-
-
 
 .action {
     display: flex;
