@@ -244,11 +244,92 @@
                 </div>
             </div>
 
-        </main>
-
+            <div class="loginBackground">
+                <div class="loginBlock">
+                    <div class="closeLoginBlock"><img src="./asset/images/bx-x.svg" alt=""></div>
+                    <div class="loginLogo"><img src="./asset/images/Logo.svg" alt=""></div>
+                    <div class="loginError"></div>
+                    
+                    <div class="tab-form">
+                        <!-- 2 cái nút để di chuyển qua lại đăng nhập, đăng kí -->
+                        <div class="tabs">
+                            <div class="tab-item active">Đăng nhập</div>
+                            <div class="tab-item">Đăng kí</div>
+                            <div class="line"></div>
+                        </div>
+                        
+                        <!-- tab login -->
+                        <div class="tab-content">
+                            <form action="" method="POST" class="form" id="form-1">
+                                <div class="tab-pane active">
+                                    <div class="form-group">
+                                        <label for="email1" class="form-label">Email</label>
+                                        <div class="div">
+                                            <input type="text" name="email1" id="email1" placeholder="VD: email@domain.com" class="form-control">
+                                        </div>
+                                        <span class="form-message"></span>
+                                    </div>
         
+                                    <div class="form-group">
+                                        <label for="password1" class="form-label">Mật khẩu</label>
+                                        <div class="div">
+                                            <input type="password" name="password" id="password1" placeholder="Nhập mật khẩu" class="form-control">
+                                        </div>
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <button class="form-submit">Đăng nhập</button>
+                                </div>
+                            </form>
+
+                            <form action="" method="POST" class="form" id="form-2">
+
+                                <div class="tab-pane">
+                                    <div class="form-group">
+                                        <label for="email2" class="form-label">Email</label>
+                                        <div class="div">
+                                            <input type="text" name="email2" id="email2" placeholder="VD: email@domain.com" class="form-control">
+                                        </div>
+                                        <span class="form-message"></span>
+                                    </div>
+        
+                                    <div class="form-group">
+                                        <label for="name" class="form-label">Name</label>
+                                        <div class="div">
+                                            <input id="name" name="name" type="text" placeholder="VD: Nguyễn Văn A"
+                                                class="form-control">
+                                        </div>
+                                        <span class="form-message"></span>
+                                    </div>
+        
+                                    <div class="form-group">
+                                        <label for="password2" class="form-label">Mật khẩu</label>
+                                        <div class="div">
+                                            <input type="password" name="password" id="password2" placeholder="Nhập mật khẩu" class="form-control">
+                                            <img src="./asset/images/hide.png" alt="" class="password1"> 
+                                        </div>
+                                        <span class="form-message"></span>
+                                    </div>
+        
+                                    <div class="form-group">
+                                        <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+                                        <div class="div">
+                                            <input id="password_confirmation" name="password_confirmation"
+                                                placeholder="Nhập lại mật khẩu" type="password" class="form-control">
+                                            <img src="./asset/images/hide.png" alt="" class="password_confirmation">
+                                        </div>
+                                        <span class="form-message"></span>
+                                    </div>
+                                    <button class="form-submit">Đăng ký</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
         <script src="./asset/js/form.js"></script>
         <script src="./asset/js/detail.js"></script>
         <script src="./asset/js/responsive.js"></script>
+        <script src="./asset/js/script.js"></script>
     </body>
 </html>
