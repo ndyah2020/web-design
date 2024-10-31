@@ -24,448 +24,512 @@
 </head>
 
 <body>
-    <!-- Desktop Header -->
-    <header class="header">
-        <div class="container">
+    <div id="index">
 
-            <!-- Hamburger Menu Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" class="bar hide-on-desktop">
-                <path fill="currentColor"
-                    d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32<H3>2C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-            </svg>
-
-            <!-- Logo -->
-            <a href="#"><img src="./asset/images/Logo.svg" alt="" class="logo hide-on-tablet" /></a>
-
-            <!-- Navigation Menu -->
-            <nav class="nav">
-                <ul>
-                    <li class="header-product">
-                        <a href="#!">Product</a>
-                        <img src="./asset/images/header-arrown.svg" alt="" class="arrown" />
-                        <ul class="sub-menu">
-                            <li><a href="/Web/details.html#" class="btn-acer">Acer</a></li>
-                            <li><a href="#recommend" class="btn-asus">Asus</a></li>
-                            <li><a href="#recommend" class="btn-dell">Dell</a></li>
-                            <li><a href="#recommend" class="btn-lenovo">Lenovo</a></li>
-                            <li><a href="#recommend" class="btn-msi">Msi</a></li>
-                        </ul>
-                    </li>
-                    <li id="aboutLink"><a href="#!">About</a></li>
-                    <li><a href="#footer">Contact us</a></li>
-                </ul>
-            </nav>
-
-            <!-- Search, Cart, History Icons Desktop-->
-            <div class="last-icon">
-                <input type="text" placeholder="Search for..." class="search-field hide-on-mobile" spellcheck="false" />
-                <svg xmlns="" height="1em" viewBox="0 0 512 512" class="icon-delete hidden hide-on-mobile">
-                    <path fill="currentColor"
-                        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z">
-                    </path>
-                </svg>
-                <button class="btn-search hide-on-mobile">
-                    <img src="./asset/images/header-search.svg" alt="" class="search-icon" />
-                </button>
-                <div class="buy-cart hide-on-mobile">
-                    <img src="./asset/images/header-buy.svg" alt="" />
-                    <span class="price price-buy-cart">0đ</span>
-                    <div class="list-preview">
-                        <p class="no-product">No product in your cart</p>
-                        <div class="have-product hidden">
-                            <div class="row-1">
-                                <p class="you-have">You have 0 item</p>
-                                <a href="./cart.html" class="see-all">See all</a>
-                            </div>
-                            <div class="row-2">
-
-                            </div>
-                            <div class="separate"></div>
-                            <div class="row-3 row">
-                                <p class="subtotal">Subtotal: </p>
-                                <span class="price price-subtotal">0đ</span>
-                            </div>
-                            <div class="row-4 row">
-                                <p class="shipping">Shipping: </p>
-                                <span class="price price-shipping">0đ</span>
-                            </div>
-                            <div class="row-5 row">
-                                <p class="total-price">Total price: </p>
-                                <span class="price" id="price-total">0đ</span>
-                            </div>
-                            <div class="separate"></div>
-                            <button id="checkout-button" class="checkout-button">
-                                <a href="./cart.html">Check Out All</a>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="history hide-on-mobile">
-                    <img src="./asset/images/header-list-order.png" alt="" class="icon-list-order">
-                </div>
-                <div class="iconUser">
-                    <img src="./asset/images/header-user.svg" alt="" class="icon-user">
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Mobile Header -->
-    <header class="header-mobile hide-on-desktop">
-        <div class="menu-overlay"></div>
-        <div class="menu-content">
+        <!-- Desktop Header -->
+        <header class="header">
             <div class="container">
-                <!-- Mobile Logo -->
-                <a href="#"><img src="./asset/images/Logo.svg" alt="" class="logo hide-on-mobile" /></a>
-
-                <!-- Mobile Cart & History -->
-                <div class="group-cart hide-on-tablet">
-                    <a href="./cart.html"><img src="./asset/images/header-buy.svg" alt="" class="buy-cart" /></a>
-                    <span class="cart-text"><a href="./cart.html">Cart</a></span>
-                    <span class="cart-quantity"></span>
-                </div>
-                <div class="group-history hide-on-tablet">
-                    <img src="./asset/images/header-list-order.png" alt="" class="icon-list-order">
-                    <span class="cart-text">Ordered</span>
-                </div>
-
-                <!-- Mobile Navigation Menu -->
+    
+                <!-- Hamburger Menu Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" class="bar hide-on-desktop">
+                    <path fill="currentColor"
+                        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32<H3>2C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+                </svg>
+    
+                <!-- Logo -->
+                <a href="#"><img src="./asset/images/Logo.svg" alt="" class="logo hide-on-tablet" /></a>
+    
+                <!-- Navigation Menu -->
                 <nav class="nav">
                     <ul>
-                        <li><a href="#hello" class="btn-acer">Acer</a></li>
-                        <li><a href="#hello" class="btn-asus">Asus</a></li>
-                        <li><a href="#hello" class="btn-dell">Dell</a></li>
-                        <li><a href="#hello" class="btn-lenovo">Lenovo</a></li>
-                        <li><a href="#!">Msi</a></li>
-                        <li id="aboutLinkmobile"><a href="#!">About</a></li>
+                        <li class="header-product">
+                            <a href="#!">Product</a>
+                            <img src="./asset/images/header-arrown.svg" alt="" class="arrown" />
+                            <ul class="sub-menu">
+                                <li><a href="/Web/details.html#" class="btn-acer">Acer</a></li>
+                                <li><a href="#recommend" class="btn-asus">Asus</a></li>
+                                <li><a href="#recommend" class="btn-dell">Dell</a></li>
+                                <li><a href="#recommend" class="btn-lenovo">Lenovo</a></li>
+                                <li><a href="#recommend" class="btn-msi">Msi</a></li>
+                            </ul>
+                        </li>
+                        <li id="aboutLink"><a href="#!">About</a></li>
                         <li><a href="#footer">Contact us</a></li>
                     </ul>
                 </nav>
-            </div>
-        </div>
-    </header>
-    <!-- Main -->
-    <main id="main" class="main">
-        <div class="container">
-            <!-- Search in Mobile -->
-            <div class="group-search hide-on-desktop hide-on-tablet">
-                <input type="text" name="" id="" placeholder="Search for..." class="search-field search-field-mb" spellcheck="false" />
-                <svg xmlns="" height="1em" viewBox="0 0 512 512" class="icon-delete-mb hidden">
-                    <path fill="currentColor"   
-                        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z">
-                    </path>
-                </svg>
-                <button class="btn-search btn-search-Mb">
-                    <img src="./asset/images/header-search.svg" alt="" class="search-icon" />
-                </button>
-            </div>
-            <!-- Banner -->
-            <div class="slider">
-                <div class="slide">
-                    <img src="./asset/images/Banner/Banner_1.jpg" alt="" class="img-huge" />
-                </div>
-                <div class="slide">
-                    <img src="./asset/images/Banner/Banner_2.jpg" alt="" class="img-huge" />
-                </div>
-                <div class="slide">
-                    <img src="./asset/images/Banner/Banner_3.jpg" alt="" class="img-huge" />
-                </div>
-                <div class="slide">
-                    <img src="./asset/images/Banner/Banner_4.png" alt="" class="img-huge" />
-                </div>
-                <div class="slide">
-                    <img src="./asset/images/Banner/Banner_5.jpg" alt="" class="img-huge" />
-                </div>
-                <!-- Button left-right banner -->
-                <button class="btn-left hide-on-mobile">&larr;</button>
-                <button class="btn-right hide-on-mobile">&larr;</button>
-                <div class="dots"></div>
-            </div>
-            <!-- Recommend -->
-            <div class="recommend" id="recommend">
-                <h3 class="title">Recommend for you</h3>
-                <div class="row">
-                    <div class="recommend-product">
-                        <img src="./asset/images/Product_Gaming/MSI/Laptop MSI Cyborg 15 A12UCX-281VN.webp" alt="" class="img-product" />
-                        <div class="recommend-product-right">
-                            <span class="price">15.490.000đ</span>
-                            <p class="desc">
-                                Laptop MSI Cyborg 15 A12UCX-281VN
-                            </p>
-                        </div>
-                    </div>
-                    <div class="recommend-product">
-                        <img src="./asset/images/Product_Gaming/Lenovo/Laptop Lenovo Gaming Legion 5 16IRX9 83DG004YVN.webp" alt="" class="img-product" />
-                        <div class="recommend-product-right">
-                            <span class="price">39.990.000đ</span>
-                            <p class="desc">
-                                Laptop Lenovo Legion 5 16IRX9-83DG004YVN
-                            </p>
-                        </div>
-                    </div>
-                    <div class="recommend-product">
-                        <img src="./asset/images/Product_Gaming/ASUS/Laptop ASUS ROG Strix G16 G614JU-N3135W.webp" alt="" class="img-product" />
-                        <div class="recommend-product-right">
-                            <span class="price">29.990.000đ</span>
-                            <p class="desc">
-                                Laptop ASUS ROG Strix G16 G614JU-N3135W
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Hello and filter -->
-            <div class="row hello-filter" id="hello">
-                <p class="hello">Hello <span class="hello-name">everybody</span> . Welcome our website</p>
-                <!-- filter -->
-                <div class="filter-toggle">
-                    <span class="filter-text">Filter</span>
-                    <img src="./asset/images/main-filter.svg" alt="" class="icon-filter" /> 
-                </div>
-                <form action="" class="form-filter">
-                    <h3 class="title-filter">Filter</h3>
-                    <div class="row-filter">
-                        <div class="group-form">
-                            <div class="form-item">
-                                <label for="type">Type</label>
-                                <select name="type" id="type">
-                                    <option value="">---</option>
-                                    <option value="acer">Acer</option>
-                                    <option value="asus">Asus</option>
-                                    <option value="dell">Dell</option>
-                                    <option value="lenovo">Lenovo</option>
-                                    <option value="msi">Msi</option>
-                                </select>
-                            </div>
-                            <div class="form-item">
-                                <label for="style">Style</label>
-                                <select name="style" id="style">
-                                    <option value="">---</option>
-                                    <option value="gaming">Gaming</option>
-                                    <option value="vanphong">Văn phòng</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-item">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" placeholder="Search name product">
-                            <svg xmlns="" height="1em" viewBox="0 0 512 512" class="icon-delete-advance hidden">
-                                <path fill="currentColor"
-                                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div class="group-form">
-                            <div class="filter-price">
-                                <div class="values">
-                                    <label for="min-max">
-                                        Min Price <span id="minPriceValue">10.000.000</span>₫ - 
-                                        Max Price <span id="maxPriceValue">100.000.000</span>₫
-                                    </label>
+    
+                <!-- Search, Cart, History Icons Desktop-->
+                <div class="last-icon">
+                    <input type="text" placeholder="Search for..." class="search-field hide-on-mobile" spellcheck="false" />
+                    <svg xmlns="" height="1em" viewBox="0 0 512 512" class="icon-delete hidden hide-on-mobile">
+                        <path fill="currentColor"
+                            d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z">
+                        </path>
+                    </svg>
+                    <button class="btn-search hide-on-mobile">
+                        <img src="./asset/images/header-search.svg" alt="" class="search-icon" />
+                    </button>
+                    <div class="buy-cart hide-on-mobile">
+                        <img src="./asset/images/header-buy.svg" alt="" />
+                        <span class="price price-buy-cart">0đ</span>
+                        <div class="list-preview">
+                            <p class="no-product">No product in your cart</p>
+                            <div class="have-product hidden">
+                                <div class="row-1">
+                                    <p class="you-have">You have 0 item</p>
+                                    <a href="./cart.html" class="see-all">See all</a>
                                 </div>
-                                <input type="range" id="minPrice" min="5000000" max="100000000" value="5000000" step="100000">
-                                <input type="range" id="maxPrice" min="5000000" max="100000000" value="100000000" step="100000">
+                                <div class="row-2">
+    
+                                </div>
+                                <div class="separate"></div>
+                                <div class="row-3 row">
+                                    <p class="subtotal">Subtotal: </p>
+                                    <span class="price price-subtotal">0đ</span>
+                                </div>
+                                <div class="row-4 row">
+                                    <p class="shipping">Shipping: </p>
+                                    <span class="price price-shipping">0đ</span>
+                                </div>
+                                <div class="row-5 row">
+                                    <p class="total-price">Total price: </p>
+                                    <span class="price" id="price-total">0đ</span>
+                                </div>
+                                <div class="separate"></div>
+                                <button id="checkout-button" class="checkout-button">
+                                    <a href="./cart.html">Check Out All</a>
+                                </button>
                             </div>
-                             <!-- <div class="filter-price">
+                        </div>
+                    </div>
+                    <div class="history hide-on-mobile">
+                        <img src="./asset/images/header-list-order.png" alt="" class="icon-list-order">
+                    </div>
+                    <div class="iconUser">
+                        <img src="./asset/images/header-user.svg" alt="" class="icon-user">
+                    </div>
+                </div>
+            </div>
+        </header>
+    
+        <!-- Mobile Header -->
+        <header class="header-mobile hide-on-desktop">
+            <div class="menu-overlay"></div>
+            <div class="menu-content">
+                <div class="container">
+                    <!-- Mobile Logo -->
+                    <a href="#"><img src="./asset/images/Logo.svg" alt="" class="logo hide-on-mobile" /></a>
+    
+                    <!-- Mobile Cart & History -->
+                    <div class="group-cart hide-on-tablet">
+                        <a href="./cart.html"><img src="./asset/images/header-buy.svg" alt="" class="buy-cart" /></a>
+                        <span class="cart-text"><a href="./cart.html">Cart</a></span>
+                        <span class="cart-quantity"></span>
+                    </div>
+                    <div class="group-history hide-on-tablet">
+                        <img src="./asset/images/header-list-order.png" alt="" class="icon-list-order">
+                        <span class="cart-text">Ordered</span>
+                    </div>
+    
+                    <!-- Mobile Navigation Menu -->
+                    <nav class="nav">
+                        <ul>
+                            <li><a href="#hello" class="btn-acer">Acer</a></li>
+                            <li><a href="#hello" class="btn-asus">Asus</a></li>
+                            <li><a href="#hello" class="btn-dell">Dell</a></li>
+                            <li><a href="#hello" class="btn-lenovo">Lenovo</a></li>
+                            <li><a href="#!">Msi</a></li>
+                            <li id="aboutLinkmobile"><a href="#!">About</a></li>
+                            <li><a href="#footer">Contact us</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <!-- Main -->
+        <main id="main" class="main">
+            <div class="container">
+                <!-- Search in Mobile -->
+                <div class="group-search hide-on-desktop hide-on-tablet">
+                    <input type="text" name="" id="" placeholder="Search for..." class="search-field search-field-mb" spellcheck="false" />
+                    <svg xmlns="" height="1em" viewBox="0 0 512 512" class="icon-delete-mb hidden">
+                        <path fill="currentColor"   
+                            d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z">
+                        </path>
+                    </svg>
+                    <button class="btn-search btn-search-Mb">
+                        <img src="./asset/images/header-search.svg" alt="" class="search-icon" />
+                    </button>
+                </div>
+                <!-- Banner -->
+                <div class="slider">
+                    <div class="slide">
+                        <img src="./asset/images/Banner/Banner_1.jpg" alt="" class="img-huge" />
+                    </div>
+                    <div class="slide">
+                        <img src="./asset/images/Banner/Banner_2.jpg" alt="" class="img-huge" />
+                    </div>
+                    <div class="slide">
+                        <img src="./asset/images/Banner/Banner_3.jpg" alt="" class="img-huge" />
+                    </div>
+                    <div class="slide">
+                        <img src="./asset/images/Banner/Banner_4.png" alt="" class="img-huge" />
+                    </div>
+                    <div class="slide">
+                        <img src="./asset/images/Banner/Banner_5.jpg" alt="" class="img-huge" />
+                    </div>
+                    <!-- Button left-right banner -->
+                    <button class="btn-left hide-on-mobile">&larr;</button>
+                    <button class="btn-right hide-on-mobile">&larr;</button>
+                    <div class="dots"></div>
+                </div>
+                <!-- Recommend -->
+                <div class="recommend" id="recommend">
+                    <h3 class="title">Recommend for you</h3>
+                    <div class="row">
+                        <div class="recommend-product">
+                            <img src="./asset/images/Product_Gaming/MSI/Laptop MSI Cyborg 15 A12UCX-281VN.webp" alt="" class="img-product" />
+                            <div class="recommend-product-right">
+                                <span class="price">15.490.000đ</span>
+                                <p class="desc">
+                                    Laptop MSI Cyborg 15 A12UCX-281VN
+                                </p>
+                            </div>
+                        </div>
+                        <div class="recommend-product">
+                            <img src="./asset/images/Product_Gaming/Lenovo/Laptop Lenovo Gaming Legion 5 16IRX9 83DG004YVN.webp" alt="" class="img-product" />
+                            <div class="recommend-product-right">
+                                <span class="price">39.990.000đ</span>
+                                <p class="desc">
+                                    Laptop Lenovo Legion 5 16IRX9-83DG004YVN
+                                </p>
+                            </div>
+                        </div>
+                        <div class="recommend-product">
+                            <img src="./asset/images/Product_Gaming/ASUS/Laptop ASUS ROG Strix G16 G614JU-N3135W.webp" alt="" class="img-product" />
+                            <div class="recommend-product-right">
+                                <span class="price">29.990.000đ</span>
+                                <p class="desc">
+                                    Laptop ASUS ROG Strix G16 G614JU-N3135W
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Hello and filter -->
+                <div class="row hello-filter" id="hello">
+                    <p class="hello">Hello <span class="hello-name">everybody</span> . Welcome our website</p>
+                    <!-- filter -->
+                    <div class="filter-toggle">
+                        <span class="filter-text">Filter</span>
+                        <img src="./asset/images/main-filter.svg" alt="" class="icon-filter" /> 
+                    </div>
+                    <form action="" class="form-filter">
+                        <h3 class="title-filter">Filter</h3>
+                        <div class="row-filter">
+                            <div class="group-form">
                                 <div class="form-item">
-                                    <label for="min">Min Price <span id="minPriceValue">5.000.000</span>₫ -</label>
-                                    <input type="range" id="min" min="5000000" max="100000000" value="5000000" step="100000"> 
+                                    <label for="type">Type</label>
+                                    <select name="type" id="type">
+                                        <option value="">---</option>
+                                        <option value="acer">Acer</option>
+                                        <option value="asus">Asus</option>
+                                        <option value="dell">Dell</option>
+                                        <option value="lenovo">Lenovo</option>
+                                        <option value="msi">Msi</option>
+                                    </select>
                                 </div>
                                 <div class="form-item">
-                                    <label for="max">Max Price <span id="maxPriceValue">100.000.000</span>₫</label>
-                                    <input type="range" id="max" min="5000000" max="100000000" value="100000000" step="100000">
+                                    <label for="style">Style</label>
+                                    <select name="style" id="style">
+                                        <option value="">---</option>
+                                        <option value="gaming">Gaming</option>
+                                        <option value="vanphong">Văn phòng</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" placeholder="Search name product">
+                                <svg xmlns="" height="1em" viewBox="0 0 512 512" class="icon-delete-advance hidden">
+                                    <path fill="currentColor"
+                                        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="group-form">
+                                <div class="filter-price">
+                                    <div class="values">
+                                        <label for="min-max">
+                                            Min Price <span id="minPriceValue">10.000.000</span>₫ - 
+                                            Max Price <span id="maxPriceValue">100.000.000</span>₫
+                                        </label>
+                                    </div>
+                                    <input type="range" id="minPrice" min="5000000" max="100000000" value="5000000" step="100000">
+                                    <input type="range" id="maxPrice" min="5000000" max="100000000" value="100000000" step="100000">
+                                </div>
+                                 <!-- <div class="filter-price">
+                                    <div class="form-item">
+                                        <label for="min">Min Price <span id="minPriceValue">5.000.000</span>₫ -</label>
+                                        <input type="range" id="min" min="5000000" max="100000000" value="5000000" step="100000"> 
+                                    </div>
+                                    <div class="form-item">
+                                        <label for="max">Max Price <span id="maxPriceValue">100.000.000</span>₫</label>
+                                        <input type="range" id="max" min="5000000" max="100000000" value="100000000" step="100000">
+                                    </div>
+                                </div> -->
+                                <!-- <div class="group-form">
+                                <div class="form-item">
+                                    <label for="min">Min Price</label>
+                                    <input type="number" name="" id="min">
+    
+                                </div>
+                                <div class="form-item">
+                                    <label for="max">Max Price</label>
+                                    <input type="number" name="" id="max">
                                 </div>
                             </div> -->
-                            <!-- <div class="group-form">
-                            <div class="form-item">
-                                <label for="min">Min Price</label>
-                                <input type="number" name="" id="min">
-
                             </div>
-                            <div class="form-item">
-                                <label for="max">Max Price</label>
-                                <input type="number" name="" id="max">
-                            </div>
-                        </div> -->
                         </div>
+                        <div class="group-btn"> 
+                            <button class="btn-cancel">Cancel</button>
+                            <button class="btn-show-result">Show Result</button>
+                        </div>
+                    </form>
+                </div>
+    
+                <!-- Display product -->
+                <div class="list-show-product"></div>
+                <div class="pagnigation">
+                    <ul class="pagnigation-ul"></ul>
+                </div>
+                <p class="no-product-search hidden">// No product for search</p>
+                <!-- Create account -->
+                <div class="create-acc">
+                    <div class="container">
+                        <div class="left">
+                            <h3 class="title">Ready to get Admit</h3>
+                            <p class="desc">
+                                Create your account and enjoy the moment shopping
+                            </p>
+                        </div>
+                        <button class="btn">Get start</button>
                     </div>
-                    <div class="group-btn"> 
-                        <button class="btn-cancel">Cancel</button>
-                        <button class="btn-show-result">Show Result</button>
-                    </div>
-                </form>
+                </div>
             </div>
-
-            <!-- Display product -->
-            <div class="list-show-product"></div>
-            <div class="pagnigation">
-                <ul class="pagnigation-ul"></ul>
-            </div>
-            <p class="no-product-search hidden">// No product for search</p>
-            <!-- Create account -->
-            <div class="create-acc">
-                <div class="container">
-                    <div class="left">
-                        <h3 class="title">Ready to get Admit</h3>
+            <!-- <div id="product-list"></div> -->
+        </main>
+        <footer class="footer" id="footer">
+            <div class="container">
+                <div class="row">
+                    <!-- column-1 -->
+                    <div class="column">
+                        <img src="./asset/images/Logo.svg" alt="wolfoxlaptops" class="logo" />
                         <p class="desc">
-                            Create your account and enjoy the moment shopping
+                            Need to help for your new look? trust us. With
+                            cloth, you becomes a lot confident with everybody.
                         </p>
-                    </div>
-                    <button class="btn">Get start</button>
-                </div>
-            </div>
-        </div>
-        <!-- <div id="product-list"></div> -->
-    </main>
-    <footer class="footer" id="footer">
-        <div class="container">
-            <div class="row">
-                <!-- column-1 -->
-                <div class="column">
-                    <img src="./asset/images/Logo.svg" alt="wolfoxlaptops" class="logo" />
-                    <p class="desc">
-                        Need to help for your new look? trust us. With
-                        cloth, you becomes a lot confident with everybody.
-                    </p>
-                    <div class="list-icon">
-                        <img src="./asset/images/facebook.svg" alt="" class="icon" />
-                        <img src="./asset/images/tiktok.svg" alt="" class="icon" />
-                        <img src="./asset/images/twitter.svg" alt="" class="icon" />
-                        <img src="./asset/images/instagram.svg" alt="" class="icon" />
-                    </div>
-                </div>
-                <!-- column-2 -->
-                <div class="column">
-                    <h3 class="title">Company</h3>
-                    <div class="separate"></div>
-                    <ul class="list-info">
-                        <li><a href="#!">About Us</a></li>
-                        <li><a href="#!">Features</a></li>
-                        <li><a href="#!">Our Pricing</a></li>
-                        <li><a href="#!">Latest News</a></li>
-                    </ul>
-                </div>
-                <!-- column-3 -->
-                <div class="column">
-                    <h3 class="title">Support</h3>
-                    <div class="separate"></div>
-                    <ul class="list-info">
-                        <li><a href="#!">FAQ’s</a></li>
-                        <li><a href="#!">Terms & Conditions</a></li>
-                        <li><a href="#!">Privacy Policy</a></li>
-                        <li><a href="#!">Contact Us</a></li>
-                    </ul>
-                </div>
-                <!-- column-4 -->
-                <div class="column">
-                    <h3 class="title">Address</h3>
-                    <div class="separate"></div>
-                    <ul class="list-info">
-                        <li><a href="#!"><strong>Location:</strong> 27 Division St, New York, NY 10002, USA</a></li>
-                        <li><a href="mailto:email@gmail.com"><strong>Email:</strong> email@gmail.com</a></li>
-                        <li><a href="tel:1234567890"><strong>Phone:</strong> 1234 567 890</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="separate-last"></div>
-            <p class="desc-last">Copyright ©2024 webdesign SGU. All rights reserved</p>
-        </div>
-    </footer>
-    <button class="backToTop">&uarr;</button>
-    <!-- Login tab -->
-    <div class="loginBackground">
-        <div class="loginBlock">
-            <div class="closeLoginBlock"><img src="./asset/images/bx-x.svg" alt=""></div>
-            <div class="loginLogo"><img src="./asset/images/Logo.svg" alt=""></div>
-            <div class="loginError"></div>
-            <div class="tab-form">
-                <!-- 2 cái nút để di chuyển qua lại đăng nhập, đăng kí -->
-                <div class="tabs">
-                    <div class="tab-item active">Đăng nhập</div>
-                    <div class="tab-item">Đăng kí</div>
-                    <div class="line"></div>
-                </div>
-                
-                <!-- tab content -->
-                <div class="tab-content">
-                    <form action="" method="POST" class="form" id="form-1">
-                        <div class="tab-pane active">
-                            <div class="form-group">
-                                <label for="email1" class="form-label">Email</label>
-                                <div class="div">
-                                    <input type="text" name="email1" id="email1" placeholder="VD: email@domain.com" class="form-control">
-                                </div>
-                                <span class="form-message"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password1" class="form-label">Mật khẩu</label>
-                                <div class="div">
-                                    <input type="password" name="password" id="password1" placeholder="Nhập mật khẩu" class="form-control">
-                                    <img src="./asset/images/hide.png" alt="" class="password1"> 
-                                </div>
-                                <span class="form-message"></span>
-                            </div>
-                            <button class="form-submit">Đăng nhập</button>
+                        <div class="list-icon">
+                            <img src="./asset/images/facebook.svg" alt="" class="icon" />
+                            <img src="./asset/images/tiktok.svg" alt="" class="icon" />
+                            <img src="./asset/images/twitter.svg" alt="" class="icon" />
+                            <img src="./asset/images/instagram.svg" alt="" class="icon" />
                         </div>
-                    </form>
-                    <form action="" method="POST" class="form" id="form-2">
-                        <div class="tab-pane">
-                            <div class="form-group">
-                                <label for="email2" class="form-label">Email</label>
-                                <div class="div">
-                                    <input type="text" name="email2" id="email2" placeholder="VD: email@domain.com" class="form-control">
+                    </div>
+                    <!-- column-2 -->
+                    <div class="column">
+                        <h3 class="title">Company</h3>
+                        <div class="separate"></div>
+                        <ul class="list-info">
+                            <li><a href="#!">About Us</a></li>
+                            <li><a href="#!">Features</a></li>
+                            <li><a href="#!">Our Pricing</a></li>
+                            <li><a href="#!">Latest News</a></li>
+                        </ul>
+                    </div>
+                    <!-- column-3 -->
+                    <div class="column">
+                        <h3 class="title">Support</h3>
+                        <div class="separate"></div>
+                        <ul class="list-info">
+                            <li><a href="#!">FAQ’s</a></li>
+                            <li><a href="#!">Terms & Conditions</a></li>
+                            <li><a href="#!">Privacy Policy</a></li>
+                            <li><a href="#!">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <!-- column-4 -->
+                    <div class="column">
+                        <h3 class="title">Address</h3>
+                        <div class="separate"></div>
+                        <ul class="list-info">
+                            <li><a href="#!"><strong>Location:</strong> 27 Division St, New York, NY 10002, USA</a></li>
+                            <li><a href="mailto:email@gmail.com"><strong>Email:</strong> email@gmail.com</a></li>
+                            <li><a href="tel:1234567890"><strong>Phone:</strong> 1234 567 890</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="separate-last"></div>
+                <p class="desc-last">Copyright ©2024 webdesign SGU. All rights reserved</p>
+            </div>
+        </footer>
+        <button class="backToTop">&uarr;</button>
+        <!-- Login tab -->
+        <div class="loginBackground">
+            <div class="loginBlock">
+                <div class="closeLoginBlock"><img src="./asset/images/bx-x.svg" alt=""></div>
+                <div class="loginLogo"><img src="./asset/images/Logo.svg" alt=""></div>
+                <div class="loginError"></div>
+                <div class="tab-form">
+                    <!-- 2 cái nút để di chuyển qua lại đăng nhập, đăng kí -->
+                    <div class="tabs">
+                        <div class="tab-item active">Đăng nhập</div>
+                        <div class="tab-item">Đăng kí</div>
+                        <div class="line"></div>
+                    </div>
+                    
+                    <!-- tab content -->
+                    <div class="tab-content">
+                        <form action="" method="POST" class="form" id="form-1">
+                            <div class="tab-pane active">
+                                <div class="form-group">
+                                    <label for="email1" class="form-label">Email</label>
+                                    <div class="div">
+                                        <input type="text" name="email1" id="email1" placeholder="VD: email@domain.com" class="form-control">
+                                    </div>
+                                    <span class="form-message"></span>
                                 </div>
-                                <span class="form-message"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="name" class="form-label">Name</label>
-                                <div class="div">
-                                    <input id="name" name="name" type="text" placeholder="VD: Nguyễn Văn A"
-                                        class="form-control">
+    
+                                <div class="form-group">
+                                    <label for="password1" class="form-label">Mật khẩu</label>
+                                    <div class="div">
+                                        <input type="password" name="password" id="password1" placeholder="Nhập mật khẩu" class="form-control">
+                                        <img src="./asset/images/hide.png" alt="" class="password1"> 
+                                    </div>
+                                    <span class="form-message"></span>
                                 </div>
-                                <span class="form-message"></span>
+                                <button class="form-submit">Đăng nhập</button>
                             </div>
-
-                            <div class="form-group">
-                                <label for="password2" class="form-label">Mật khẩu</label>
-                                <div class="div">
-                                    <input type="password" name="password" id="password2" placeholder="Nhập mật khẩu" class="form-control">
-                                    <img src="./asset/images/hide.png" alt="" class="password1"> 
+                        </form>
+                        <form action="" method="POST" class="form" id="form-2">
+                            <div class="tab-pane">
+                                <div class="form-group">
+                                    <label for="email2" class="form-label">Email</label>
+                                    <div class="div">
+                                        <input type="text" name="email2" id="email2" placeholder="VD: email@domain.com" class="form-control">
+                                    </div>
+                                    <span class="form-message"></span>
                                 </div>
-                                <span class="form-message"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
-                                <div class="div">
-                                    <input id="password_confirmation" name="password_confirmation"
-                                        placeholder="Nhập lại mật khẩu" type="password" class="form-control">
-                                    <img src="./asset/images/hide.png" alt="" class="password_confirmation">
+    
+                                <div class="form-group">
+                                    <label for="name" class="form-label">Name</label>
+                                    <div class="div">
+                                        <input id="name" name="name" type="text" placeholder="VD: Nguyễn Văn A"
+                                            class="form-control">
+                                    </div>
+                                    <span class="form-message"></span>
                                 </div>
-                                <span class="form-message"></span>
+    
+                                <div class="form-group">
+                                    <label for="password2" class="form-label">Mật khẩu</label>
+                                    <div class="div">
+                                        <input type="password" name="password" id="password2" placeholder="Nhập mật khẩu" class="form-control">
+                                        <img src="./asset/images/hide.png" alt="" class="password1"> 
+                                    </div>
+                                    <span class="form-message"></span>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+                                    <div class="div">
+                                        <input id="password_confirmation" name="password_confirmation"
+                                            placeholder="Nhập lại mật khẩu" type="password" class="form-control">
+                                        <img src="./asset/images/hide.png" alt="" class="password_confirmation">
+                                    </div>
+                                    <span class="form-message"></span>
+                                </div>
+                                <button class="form-submit">Đăng ký</button>
                             </div>
-                            <button class="form-submit">Đăng ký</button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+    
+        <!-- History order -->
+        <div id="historyOrder" class="historyOrder"></div>
+    
+        <!-- Popup hỗ trợ -->
+        <div id="supportPopup" class="popup" style="visibility: visible; animation-name: backgroundeffect1;"> 
+            <div class="popup-content">
+                <div><button class="btn-close-about">X</button></div>
+                <div class="about-container">
+                    <div class="row-1">
+                        <section id="faq">
+                            <h2 class="heading">Câu hỏi thường gặp</h2>
+                            <p class="desc">
+                                <strong>1. Tôi có thể đặt hàng như thế nào?</strong><br />
+                                Để đặt hàng, hãy chọn sản phẩm laptop bạn mong muốn và thêm vào giỏ hàng. Sau đó, hãy tiến hành thanh toán để hoàn tất.
+                            </p>
+                            <p class="desc">
+                                <strong>2. Thời gian bảo hành là bao lâu?</strong><br />
+                                Chúng tôi cung cấp thời gian bảo hành lên đến 12 tháng cho các sản phẩm của mình.
+                            </p>
+                            <p class="desc">
+                                <strong>3. Tôi có thể hủy đơn hàng đã đặt không?</strong><br />
+                                Bạn có thể hủy đơn hàng trước khi đơn hàng được xác nhận giao hàng.
+                            </p>
+                        </section>
+                        
+                        <section id="shipping">
+                            <h2 class="heading">Thông tin Vận chuyển</h2>
+                            <p class="desc">
+                                Chúng tôi cam kết cung cấp dịch vụ vận chuyển nhanh chóng và bảo đảm. Chi phí và thời gian giao hàng sẽ được hiển thị khi thanh toán.
+                            </p>
+                            <p class="desc">
+                                <strong>Phí Vận Chuyển:</strong> Phí vận chuyển sẽ phụ thuộc vào địa chỉ nhận hàng của bạn.
+                            </p>
+                            <p class="desc">
+                                <strong>Thời Gian Giao Hàng:</strong> Thời gian giao hàng ước tính là từ 3-5 ngày làm việc.
+                            </p>
+                        </section>
+                    </div>
+                    <div class="row-2">
+                        <section id="returns">
+                            <h2 class="heading">Chính sách Đổi trả và Hoàn tiền</h2>
+                            <p class="desc">
+                                Chúng tôi cho phép đổi trả trong vòng 14 ngày kể từ ngày nhận hàng. Để đổi trả sản phẩm, vui lòng liên hệ chúng tôi qua email hoặc số điện thoại hỗ trợ.
+                            </p>
+                            <p class="desc">
+                                <strong>Điều Kiện Đổi Trả:</strong> Sản phẩm phải còn nguyên vẹn, chưa qua sử dụng và có đủ hóa đơn mua hàng.
+                            </p>
+                            <p class="desc">
+                                <strong>Hoàn Tiền:</strong> Việc hoàn tiền sẽ được xử lý sau khi kiểm tra sản phẩm đổi trả trong 5-7 ngày làm việc.
+                            </p>
+                        </section>
+                        
+                        <section id="contact">
+                            <h2 class="heading">Liên hệ chúng tôi</h2>
+                            <p class="desc">
+                                Nếu bạn có bất kỳ câu hỏi nào hoặc cần hỗ trợ, vui lòng liên hệ với chúng tôi qua email:
+                                <a href="mailto:support@laptopstore.vn">support@laptopstore.vn</a>
+                            </p>
+                            <p class="desc">
+                                Hoặc gọi đến số điện thoại hỗ trợ khách hàng của chúng tôi:
+                                <strong>(0123) 456-789</strong>.
+                            </p>
+                        </section>
+                    </div>                             
+                </div>
+                <div class="fixed-footer">
+                    <div class="footer-popup">
+                        <p class="title">&copy; 2024 Laptops Fox. Bản quyền thuộc về chúng tôi.</p>
+                    </div>
+                </div>
+                <div id="supportContent"></div>
+            </div>
+        </div>             
     </div>
-
-    <!-- History order -->
-    <div id="historyOrder" class="historyOrder"></div>
-
-    <!-- Popup hỗ trợ -->
-    <div id="supportPopup" class="popup" style="visibility: visible; animation-name: backgroundeffect1;"> 
-        <div class="popup-content"  >
-            <div class="close" id="closeSupportPopup"><img src="./asset/img/bx-x.svg" alt=""></div>
-            <!-- Thêm nội dung chi tiết của trang hỗ trợ -->
-            <div id="supportContent">
-            </div>
-        </div>
-    </div>             
     <script src="./asset/js/script.js"></script>
     <!-- <script src="./asset/js/cartt.js"></script> -->
     <script src="./asset/js/form.js"></script>
