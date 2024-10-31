@@ -26,19 +26,18 @@ loginBlockModal.addEventListener('click', function(event) {
 
 const showForm = () => {
     const selectedItem = document.querySelectorAll('.tab-item');
-    const  selectedForm = document.querySelectorAll('.tab-pane')
-    selectedItem.forEach((selected, index) => {
-        selected.addEventListener('click', () => {
+    const  selectedForm = document.querySelectorAll('.tab-pane');
 
-            selectedItem.forEach((item) => item.classList.remove('active'))
+    selectedItem.forEach((selected, index) => {
+        selected.addEventListener('click', function(){
+            selectedItem.forEach((item) => item.classList.remove('active'));
+            selectedForm.forEach( (form) => form.classList.remove('active'));
 
             selected.classList.add('active')
-            
-            selectedForm.forEach( (form) => form.classList.remove('active'))
             selectedForm[index].classList.add('active');
         })
     }) 
 }
 document.addEventListener('DOMContentLoaded', () => {
-    showForm()
+    showForm();
 })

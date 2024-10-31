@@ -5,6 +5,7 @@
 :root {
     --text-color-dark: #1a162e;
     --background-header: #eeeeee;
+    --background-hover : #327ec4;
 }
 
 html {
@@ -25,12 +26,7 @@ body {
     margin: 0 auto;
 }
 
-.container h1 {
-    width: 100%;
-    margin: 10px;
-    font-size: 30px;
-    height: auto;
-}
+
 
 a {
     text-decoration: none;
@@ -392,9 +388,14 @@ a {
 
 .body-right {
     width: 50%;
-    padding: 20px;
     border-radius: 10px; 
     position: relative;
+}
+.body-right .name-laptop {
+    margin: 10px 0;
+    width: 100%;
+    font-size: 30px;
+    height: auto;
 }
 /* Body left */
 
@@ -406,6 +407,7 @@ a {
     font-size: 26px;
     display: block;
     color: red;
+    font-weight: 700;
     margin-bottom: 10px;
 }
 
@@ -420,31 +422,31 @@ a {
 
 .select-config .btn-config {
     padding: 20px 30px; 
-    margin: 4px;
+    margin: 4px 4px;
     background-color: #ffffff;
     color: #333;
     cursor: pointer;
     border: 1px solid #ddd;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
 .select-config .btn-config:hover {
-    background-color: #9e9da8;
+    background-color: var(--background-hover);
     color: white;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
 }
 
 .select-config .btn-config:active {
-    background-color: #7e7d87;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
     transform: translateY(1px);
 }
 /* js khi chọn cấu hình */
 .btn-config.active {
     font-weight: bold; 
-    background-color: #9e9da8; 
+    background-color: var(--background-hover); 
     color: white; 
 }
 /* detail config */
@@ -481,7 +483,6 @@ a {
     margin-top: 20px; 
 }
 
-.details-product .btn-buy,
 .details-product .btn-add {
     padding: 20px;
     background-color: #313737;
@@ -490,37 +491,129 @@ a {
     cursor: pointer;
     color: #f6f6f6;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
-.details-product .btn-buy:hover,
 .details-product .btn-add:hover {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
+    background-color: var(--background-hover);
 }
 
-.details-product .btn-buy:active,
 .details-product .btn-add:active {
     background-color: #7e7d87;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
     transform: translateY(1px);
 }
-
-.details-product .btn-buy {
-    flex: 2;
-}
-
 .details-product .btn-add {
     margin-left: 10px; 
     flex: 1;
 }
-/* kết thúc css nút mua hàng */
 
 
+ /**************CSS for New Sections *****************/
+/* reconmend */
+ .recommend{
+    margin-top: 10px;
+ }
+/* start description */
+ .product-description {
+    padding: 20px;
+    background-color: var(--background-header);
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
 
+.product-description h2 {
+    font-size: 2.4rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #201e42;
+}
 
+.description {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
 
+.description > li {
+    padding: 12px 0; 
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+ 
+}
 
+.nameLaptop {
+    font-weight: bold;
+    font-size: 18px;
+    color: #2c3e50;
+}
 
+.nameCpu {
+    font-weight: 500;
+    color: #34495e;
+}
+/* end description */
+/* start customer reviews*/
+.customer-reviews {
+    padding: 20px;
+    background-color:var(--background-header);
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.customer-reviews h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #201e42;
+    padding-bottom: 10px;
+}
+
+.review {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    transition: box-shadow 0.3s ease;
+}
+
+.review:hover {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); 
+}
+
+.review p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.review strong {
+    color: #333;
+}
+
+.review .rating {
+    display: inline-block;
+    font-size: 0.9em;
+    color: #666;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.review span {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* end customer reviews*/
 
 /* Right */

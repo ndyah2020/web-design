@@ -37,7 +37,7 @@
         <link rel="stylesheet" href="./asset/css/detail.css">
         <link rel="stylesheet" href="./asset/css/responsive.css" />
         <link rel="stylesheet" href="./asset/css/responsiveDetail.css" />
-
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
         <!-- Font -->
         <link rel="stylesheet" href="./asset/font/stylesheet.css" />
     </head>
@@ -53,26 +53,6 @@
     
                 <!-- Logo -->
                 <a href="#"><img src="./asset/images/Logo.svg" alt="" class="logo hide-on-tablet" /></a>
-    
-                <!-- Navigation Menu -->
-                <nav class="nav">
-                    <ul>
-                        <li class="header-product">
-                            <a href="#!">Product</a>
-                            <img src="./asset/images/header-arrown.svg" alt="" class="arrown" />
-                            <ul class="sub-menu">
-                                <li><a href="#recommend" class="btn-acer">Acer</a></li>
-                                <li><a href="#recommend" class="btn-asus">Asus</a></li>
-                                <li><a href="#recommend" class="btn-dell">Dell</a></li>
-                                <li><a href="#recommend" class="btn-lenovo">Lenovo</a></li>
-                                <li><a href="#recommend" class="btn-msi">Msi</a></li>
-                            </ul>
-                        </li>
-                        <li id="aboutLink"><a href="#!">About</a></li>
-                        <li><a href="#footer">Contact us</a></li>
-                    </ul>
-                </nav>
-    
                 <!-- Search, Cart, History Icons Desktop-->
                 <div class="last-icon">
                     <input type="text" placeholder="Search for..." class="search-field hide-on-mobile" spellcheck="false" />
@@ -184,15 +164,15 @@
             <!-- product detail -->
             <div class="product">
                 <div class="container">
-                    <h1 class="name-laptop">
-                        Laptop ASUS ROG Strix G16 G614JU-N3135W
-                    </h1>
                     <div class="body">
                         <div class="body-left">
                             <img src="./asset/images/Product_Gaming/Acer/group_509_22_.webp" class="product-image" alt="" />
                         </div>
 
-                        <div class="body-right">              
+                        <div class="body-right">         
+                                <h1 class="name-laptop">
+                                    Laptop ASUS ROG Strix G16 G614JU-N3135W
+                                </h1>     
                                 <div class="details-product">
                                     <!-- Details-product-left -->
                                     <div>
@@ -234,7 +214,6 @@
                                         </li>
                                     </ul>                                             
                                     <div class="btn"> 
-                                        <button class="btn-buy">Mua</button>
                                         <button class="btn-add">Thêm vào giỏ hàng</button>
                                     </div>
                                 
@@ -243,7 +222,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- modal login -->
             <div class="loginBackground">
                 <div class="loginBlock">
                     <div class="closeLoginBlock"><img src="./asset/images/bx-x.svg" alt=""></div>
@@ -305,7 +284,6 @@
                                         <label for="password2" class="form-label">Mật khẩu</label>
                                         <div class="div">
                                             <input type="password" name="password" id="password2" placeholder="Nhập mật khẩu" class="form-control">
-                                            <img src="./asset/images/hide.png" alt="" class="password1"> 
                                         </div>
                                         <span class="form-message"></span>
                                     </div>
@@ -315,7 +293,6 @@
                                         <div class="div">
                                             <input id="password_confirmation" name="password_confirmation"
                                                 placeholder="Nhập lại mật khẩu" type="password" class="form-control">
-                                            <img src="./asset/images/hide.png" alt="" class="password_confirmation">
                                         </div>
                                         <span class="form-message"></span>
                                     </div>
@@ -326,6 +303,126 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Product Description Section -->
+            <div class="container">
+                <div class="recommend" id="recommend">
+                    <h3 class="title">Recommend for you</h3>
+                    <div class="row">
+                        <div class="recommend-product">
+                            <img src="./asset/images/Product_Gaming/MSI/Laptop MSI Cyborg 15 A12UCX-281VN.webp" alt="" class="img-product" />
+                            <div class="recommend-product-right">
+                                <span class="price">15.490.000đ</span>
+                                <p class="desc">
+                                    Laptop MSI Cyborg 15 A12UCX-281VN
+                                </p>
+                            </div>
+                        </div>
+                        <div class="recommend-product">
+                            <img src="./asset/images/Product_Gaming/Lenovo/Laptop Lenovo Gaming Legion 5 16IRX9 83DG004YVN.webp" alt="" class="img-product" />
+                            <div class="recommend-product-right">
+                                <span class="price">39.990.000đ</span>
+                                <p class="desc">
+                                    Laptop Lenovo Legion 5 16IRX9-83DG004YVN
+                                </p>
+                            </div>
+                        </div>
+                        <div class="recommend-product">
+                            <img src="./asset/images/Product_Gaming/ASUS/Laptop ASUS ROG Strix G16 G614JU-N3135W.webp" alt="" class="img-product" />
+                            <div class="recommend-product-right">
+                                <span class="price">29.990.000đ</span>
+                                <p class="desc">
+                                    Laptop ASUS ROG Strix G16 G614JU-N3135W
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-description">
+                        <h2>Mô tả sản phẩm</h2>
+                        <div>
+                            <ul class="description">
+                                <li class="nameLaptop">ASUS ROG Strix G16 G614JU-N3135W </li>
+                                <li> Là máy tính xách tay chơi game hiệu năng cao được thiết kế dành cho game thủ và người sáng tạo</li>
+                                <li class="nameCpu"> Với bộ xử lý Intel Core i9-14900HX mới nhất</li>
+                                <li> Hệ thống làm mát tiên tiến, chiếc máy tính xách tay này đảm bảo chơi game mượt mà và hiệu quả. </li>
+                                <li> Ngoài ra, nó còn được trang bị đồ họa NVIDIA GeForce RTX cho hình ảnh sống động như thật và tốc độ khung hình nhanh.</li>
+                            </ul>
+                        </div>
+                </div>
+
+                <div class="customer-reviews">
+                    <h2>Customer Reviews</h2>
+                    <div class="review">
+                        <span class="rating">Rating: 4.5/5 ⭐ </span>
+                        <p><strong>Cap Hoàng Long: </strong>Thời lượng pin Cực khoẻ. Hiệu năng Mượt mà, đa nhiệm tốt. Chất lượng hiển thị của màn hình Siêu đẹp</p>            
+                    </div>
+                    <div class="review">
+                        <span class="rating">Rating: 4.5/5 ⭐ </span>
+                        <p><strong>Nguyễn Đức Phi: </strong>Ổn nv tư vấn nhiệt tình</p>
+                    </div>
+                </div>
+ 
+            </div>
+
+            <!-- Customer Reviews Section -->
+
+            <footer class="footer" id="footer">
+                <div class="container">
+                    <div class="row">
+                        <!-- column-1 -->
+                        <div class="column">
+                            <img src="./asset/images/Logo.svg" alt="wolfoxlaptops" class="logo" />
+                            <p class="desc">
+                                Need to help for your new look? trust us. With
+                                cloth, you becomes a lot confident with everybody.
+                            </p>
+                            <div class="list-icon">
+                                <img src="./asset/images/facebook.svg" alt="" class="icon" />
+                                <img src="./asset/images/tiktok.svg" alt="" class="icon" />
+                                <img src="./asset/images/twitter.svg" alt="" class="icon" />
+                                <img src="./asset/images/instagram.svg" alt="" class="icon" />
+                            </div>
+                        </div>
+                        <!-- column-2 -->
+                        <div class="column">
+                            <h3 class="title">Company</h3>
+                            <div class="separate"></div>
+                            <ul class="list-info">
+                                <li><a href="#!">About Us</a></li>
+                                <li><a href="#!">Features</a></li>
+                                <li><a href="#!">Our Pricing</a></li>
+                                <li><a href="#!">Latest News</a></li>
+                            </ul>
+                        </div>
+                        <!-- column-3 -->
+                        <div class="column">
+                            <h3 class="title">Support</h3>
+                            <div class="separate"></div>
+                            <ul class="list-info">
+                                <li><a href="#!">FAQ’s</a></li>
+                                <li><a href="#!">Terms & Conditions</a></li>
+                                <li><a href="#!">Privacy Policy</a></li>
+                                <li><a href="#!">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <!-- column-4 -->
+                        <div class="column">
+                            <h3 class="title">Address</h3>
+                            <div class="separate"></div>
+                            <ul class="list-info">
+                                <li><a href="#!"><strong>Location:</strong> 27 Division St, New York, NY 10002, USA</a></li>
+                                <li><a href="mailto:email@gmail.com"><strong>Email:</strong> email@gmail.com</a></li>
+                                <li><a href="tel:1234567890"><strong>Phone:</strong> 1234 567 890</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="separate-last"></div>
+                    <p class="desc-last">Copyright ©2024 webdesign SGU. All rights reserved</p>
+                </div>
+            </footer>
+               
         </main>
         <script src="./asset/js/form.js"></script>
         <script src="./asset/js/detail.js"></script>

@@ -14,7 +14,7 @@
 }
 
 /* ============ Tablet & mobile ============ */
-@media screen and (max-width: 991.98px) {
+@media screen and (max-width: 1025px) {
     /* header */
     .header .nav {
         display: none;
