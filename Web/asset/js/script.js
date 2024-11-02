@@ -38,6 +38,23 @@ const showForm = () => {
         })
     }) 
 }
+
+// Hiển thị và đóng about
+const showAndCloseAbout = () => {
+    const btnOpenAbout = document.getElementById('aboutLink')
+    const btnCloseAbout = document.querySelector('.btn-close-about')
+    const showAbout = document.querySelector('.popup').classList
+
+    btnOpenAbout.addEventListener('click', function(){
+        showAbout.add('active')
+    })
+
+    btnCloseAbout.addEventListener('click', function(){
+        showAbout.remove('active')
+    })
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     showForm();
+    showAndCloseAbout();
 })

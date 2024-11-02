@@ -143,6 +143,9 @@
         flex-wrap: wrap;
         justify-content: center;
     }
+    .recommend-product{
+        width: 100%;
+    }
 
     /* form tim kiem nang cao */
     .row-filer {
