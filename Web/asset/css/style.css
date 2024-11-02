@@ -1010,6 +1010,7 @@ a {
     height: 6px;
     border-radius: 15px;
     background-color: rgba(0, 217, 246, 1);
+    transition: all 0.5s ease;
 }
 
 .tab-item {
@@ -1026,6 +1027,7 @@ a {
     opacity: 0.6;
     cursor: pointer;
     user-select: none;
+    transition: all 0.7s ease;
 }
 
 .tab-item:hover,
