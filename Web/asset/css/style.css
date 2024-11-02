@@ -677,9 +677,15 @@ a {
 
 .filter-price input {
     margin-top: 20px;
-    width: 215px;
+    width: 220px;
     height: 37px;
     /* border: 1px solid var(--secondary-color-secondary-3, #d2d1d6); */
+}
+
+.values label span {
+    color: var(---text-color-dark);
+    font-size: 2rem;
+    font-weight: 450;
 }
 
 .form-filter .group-btn {
