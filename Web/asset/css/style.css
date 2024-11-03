@@ -105,6 +105,7 @@ a {
     top: 10px;
     right: -7px;
 }
+
 .header ul {
     display: flex; /*Căn ngang*/
     gap: 0 32px;
@@ -129,6 +130,7 @@ a {
     top: 30px;
     background-color: var(--background-header);
     list-style-type: none;
+    flex-direction: row;
 }
 
 .header .sub-menu li {
@@ -136,7 +138,24 @@ a {
 }
 
 .header-product:hover .sub-menu {
-    display: block;
+    display: flex;
+}
+
+.sub-menu-columns {
+    display: flex;
+    gap: 20px;
+}
+
+.sub-menu-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.sub-header {
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding-bottom: 8px;
+    color: #1ebfc1;
 }
 
 .header .search-field {
