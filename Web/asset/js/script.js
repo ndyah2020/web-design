@@ -4,218 +4,176 @@ let listProducts =
     : [
         {
             id: 1,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            name: "Acer Nitro 5",
+            img: "./asset/images/Product_Gaming/Acer/Acer Nitro 5.webp",
             rate: 5.0,
             brand: "Acer",
             type: "Gaming",
-            cpu: [
+            model: [
+                {
+                    cpu: "i5-13420H", 
+                    price: 20000000
 
+                },
+                {
+                    cpu: "i7-13700H", 
+                    price: 25000000
+                },
             ]
         },
         {
             id: 2,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            name: "Laptop ASUS Gaming ViviBook K3605ZU-RP296W",
+            img: "./asset/images/Product_Gaming/ASUS/Laptop ASUS Gaming ViviBook K3605ZU-RP296W.webp",
             rate: 5.0,
             brand: "ASUS",
             type: "Gaming",
-            cpu: [
+            model: [
+                {
+                    cpu: "i5-12500H", 
+                    price: 20000000
 
+                },
             ]
         },
         {
             id: 3,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
-            rate: 5.0,
-            brand: "Acer",
-            type: "Gaming",
-            cpu: [
+            name: "Laptop Dell Vostro 3520",
+            price: 18000000,
+            img: "./asset/images/Product_VP/Dell/Laptop Dell Vostro 3520.webp",
+            rate: 4.0,
+            brand: "Dell",
+            type: "Office",
+            model: [
+                {
+                    cpu: "i7-1255U", 
+                    price: 18000000
 
+                },
             ]
         },
         {
             id: 4,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            name: "Laptop ASUS Gaming VivoBook K3605ZC-RP564W",
+            img: "./asset/images/Product_Gaming/ASUS/Laptop ASUS Gaming VivoBook K3605ZC-RP564W.webp",
             rate: 5.0,
-            brand: "Acer",
+            brand: "ASUS",
             type: "Gaming",
-            cpu: [
+            model: [
+                {
+                    cpu: "i5-12500H", 
+                    price: 21000000
 
+                },
             ]
         },
         {
             id: 5,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
-            rate: 5.0,
-            brand: "Acer",
-            type: "Gaming",
-            cpu: [
-
+            name: "Laptop ASUS ROG Zephyrus G16 GA605WI-QR090WS",
+            img: "./asset/images/Product_VP/ASUS/Laptop ASUS ROG Zephyrus G16 GA605WI-QR090WS.webp",
+            rate: 4.0,
+            brand: "ASUS",
+            type: "Office",
+            model: [
+                {
+                    cpu: "R9-HX370", 
+                    price: 26500000
+                },
             ]
         },
         {
             id: 6,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            name: "Laptop ASUS Gaming ViviBook K3605ZU-RP296W",
+            img: "./asset/images/Product_Gaming/ASUS/Laptop ASUS Gaming ViviBook K3605ZU-RP296W.webp",
             rate: 5.0,
-            brand: "Acer",
+            brand: "ASUS",
             type: "Gaming",
-            cpu: [
+            model: [
+                {
+                    cpu: "i5-12500H", 
+                    price: 20000000
 
+                },
             ]
         },
         {
             id: 7,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            name: "Laptop Gaming Acer Nitro 5 Tiger AN515-58-50D2",
+            img: "./asset/images/Product_Gaming/Acer/Laptop Gaming Acer Nitro 5 Tiger AN515-58-50D2.webp",
             rate: 5.0,
             brand: "Acer",
             type: "Gaming",
-            cpu: [
+            model: [
+                {
+                    cpu: "i5-12500H", 
+                    price: 22990000
 
+                },
+                {
+                    cpu: "i7-12700H", 
+                    price: 21790000
+
+                },
             ]
         },
         {
             id: 8,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            name: "Laptop Lenovo IdeaPad Slim 3 14IAH8 83EQ0009VN",
+            img: "./asset/images/Product_VP/Lenovo/Laptop Lenovo IdeaPad Slim 3 14IAH8 83EQ0009VN.webp",
             rate: 5.0,
-            brand: "Acer",
-            type: "Gaming",
-            cpu: [
+            brand: "Lenovo",
+            type: "Office",
+            model: [
+                {
+                    cpu: "i5-12450H", 
+                    price: 15290000
 
+                },
+                {
+                    cpu: "i7-13620H", 
+                    price: 18000000
+
+                },
             ]
         },
         {
             id: 9,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
-            rate: 5.0,
+            name: "Laptop Acer Aspire 3 A315-59-381E",
+            img: "./asset/images/Product_VP/Acer/Laptop Acer Aspire 3 A315-59-381E.webp",
+            rate: 4.0,
             brand: "Acer",
-            type: "Gaming",
-            cpu: [
+            type: "Office",
+            model: [
+                {
+                    cpu: "i3-1215U", 
+                    price: 9490000
 
+                },
+                {
+                    cpu: "R7-5700U", 
+                    price: 11990000
+
+                },
             ]
         },
         {
             id: 10,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            name: "Laptop ASUS TUF Gaming A15 FA506NF-HN005W",
+            img: "./asset/images/Product_Gaming/ASUS/Laptop ASUS TUF Gaming A15 FA506NF-HN005W.webp",
             rate: 5.0,
-            brand: "Acer",
+            brand: "ASUS",
             type: "Gaming",
-            cpu: [
+            model: [
+                {
+                    cpu: "R5-7535HS", 
+                    price: 16000000
 
-            ]
-        },
-        {
-            id: 11,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
-            rate: 5.0,
-            brand: "Acer",
-            type: "Gaming",
-            cpu: [
+                },
+                {
+                    cpu: "R7-7435HS", 
+                    price: 21000000
 
-            ]
-        },
-        {
-            id: 12,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
-            rate: 5.0,
-            brand: "Acer",
-            type: "Gaming",
-            cpu: [
-
-            ]
-        },
-        {
-            id: 13,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
-            rate: 5.0,
-            brand: "Acer",
-            type: "Gaming",
-            cpu: [
-
-            ]
-        },
-        {
-            id: 14,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
-            rate: 5.0,
-            brand: "Acer",
-            type: "Gaming",
-            cpu: [
-
-            ]
-        },
-        {
-            id: 15,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
-            rate: 5.0,
-            brand: "Acer",
-            type: "Gaming",
-            cpu: [
-
-            ]
-        },
-        {
-            id: 16,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
-            rate: 5.0,
-            brand: "Acer",
-            type: "Gaming",
-            cpu: [
-
-            ]
-        },
-        {
-            id: 17,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
-            rate: 5.0,
-            brand: "Acer",
-            type: "Gaming",
-            cpu: [
-
-            ]
-        },
-        {
-            id: 18,
-            name: "Acer nitro 5",
-            price: 49000000,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
-            rate: 5.0,
-            brand: "Acer",
-            type: "Gaming",
-            cpu: [
-
+                },
             ]
         },
     ]
