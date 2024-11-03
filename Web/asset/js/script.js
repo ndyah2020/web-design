@@ -1,3 +1,239 @@
+// khởi tạo list sản phẩm
+let listProducts = 
+    localStorage.getItem("listProducts") ? JSON.parse(localStorage.getItem("listProducts")) 
+    : [
+        {
+            id: 1,
+            name: "Acer nitro 5",
+            price: 50,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 2,
+            name: "Acer nitro 5",
+            price: 50,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 3,
+            name: "Acer nitro 5",
+            price: 50,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 4,
+            name: "Acer nitro 5",
+            price: 50,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 5,
+            name: "Acer nitro 5",
+            price: 50,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 6,
+            name: "Acer nitro 5",
+            price: 50,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 7,
+            name: "Acer nitro 5",
+            price: 50,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 8,
+            name: "Acer nitro 5",
+            price: 50,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 9,
+            name: "Acer nitro 5",
+            price: 50,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 10,
+            name: "Acer nitro 5",
+            price: 50,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+    ]
+
+// lọc sản phẩm theo hãng
+let acerProducts = [],
+    asusProducts = [],
+    lenovoProducts = [],
+    msiProducts = [],
+    dellProducts = [];
+
+function fillProducts() {
+    listProducts.forEach(function(product) {
+        if (product.brand === "Acer") {
+            acerProducts.push(product);
+        }
+        else if (product.brand === "Asus") {
+            asusProducts.push(product);
+        }
+        else if (product.brand === "Lenovo") {
+            lenovoProducts.push(product);
+        }
+        else if (product.brand === "MSI") {
+            msiProducts.push(product);
+        }
+        else if (product.brand === "Dell") {
+            dellProducts.push(product);
+        }
+    })
+}
+
+fillProducts();
+
+// phân trang
+var currentPage = 1,
+    perPage = 8,
+    totalPage = 0;
+
+function renderProduct(products) {
+    var productList = document.querySelector(".list-show-product");
+    if (productList) {
+        productList.innerHTML = "";
+
+        products.forEach(function(product) {
+            var productSection = document.createElement("div");
+            productSection.classList.add("cart");
+
+            productSection.innerHTML = `
+                <div class="wrap-img-cart">
+                    <img src="${product.img}" alt="${product.name}" class="img-cart" 
+                    onclick="window.location = './details.html?id=${product.id}'"/>
+                </div>
+                <h3 class="title">${product.name}</h3>
+                <span class="brand">${product.brand}</span>
+                <span class="type">${product.type}</span>
+                <div class="row">
+                    <span class="price">$${product.price.toFixed(2)}</span>
+                    <div class="row-price-star">
+                        <img src="./asset/images/main-star.svg" alt="" class="star" />
+                        <span class="star-num">${product.rate}</span>
+                    </div>
+                    <button class="add-to-cart-button" onclick = "addToCar(${product.id})">
+                        Add to Cart
+                    </button>
+                </div>
+            `;
+
+            productList.appendChild(productSection);
+        })
+    }
+}
+
+let perProduct = [];
+function getProduct(arr) {
+    perProduct = arr.slice(
+        (currentPage - 1) * perPage,
+        (currentPage - 1) * perPage + perPage
+    );
+    renderProduct(perProduct);
+    currentPage = 1;
+}
+
+getProduct(listProducts);
+function renderPageNumber(arr, perPage) {
+    totalPage = Math.ceil(arr.length / perPage); 
+
+    document.querySelector(".pagination-ul").innerHTML = "";
+    for (let i = 1; i <= totalPage; i++) {
+        document.querySelector(
+            ".pagination-ul"
+        ).innerHTML += `
+        <a href="#recommend"><li class="li li${i}" onclick="handlePageNumber(event, ${i})">${i}</li></a>
+        `;
+    }
+    if (totalPage > 1) {
+        document.querySelector(".li1").classList.add("active");
+    } else if (totalPage <= 1) {
+        document.querySelector(".li1").style.display = "none";
+    }
+}
+
+let currentProductList = listProducts;
+function handlePageNumber(event, num) {
+    listLi = document.querySelectorAll(".li");
+    for (li of listLi) {
+        li.classList.remove("active");
+    }
+    event.target.classList.add("active");
+    currentPage = num;
+
+    getProduct(currentProductList);
+}
+
+renderPageNumber(listProducts, perPage);
 
 // Login behavior
 function showLogin() {
@@ -172,3 +408,18 @@ btnForm.addEventListener("click", function () {
     }
 });
 
+// var maincolor = document.querySelector('.main');
+
+// function getRandomColor() {
+//     var letters = '0123456789ABCDEF';
+//     var color = '#';
+//     for (var i = 0; i < 6; i++) {
+//       color += letters[Math.floor(Math.random() * 16)];
+//     }
+//     return color;
+// }
+
+// setInterval(() => {
+//     iconLogin.style.backgroundColor = getRandomColor();
+//     maincolor.style.backgroundColor = getRandomColor();
+// }, 100);
