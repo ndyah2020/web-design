@@ -5,7 +5,7 @@ let listProducts =
         {
             id: 1,
             name: "Acer nitro 5",
-            price: 50,
+            price: 49000000,
             img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
             rate: 5.0,
             brand: "Acer",
@@ -16,9 +16,9 @@ let listProducts =
         },
         {
             id: 2,
-            name: "Laptop ASUS Gaming ViviBook K3605ZU-RP296W",
-            price: 50,
-            img: "./asset/images/Product_Gaming/ASUS/Laptop ASUS Gaming ViviBook K3605ZU-RP296W.webp",
+            name: "Acer nitro 5",
+            price: 49000000,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
             rate: 5.0,
             brand: "ASUS",
             type: "Gaming",
@@ -29,7 +29,7 @@ let listProducts =
         {
             id: 3,
             name: "Acer nitro 5",
-            price: 50,
+            price: 49000000,
             img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
             rate: 5.0,
             brand: "Acer",
@@ -41,7 +41,7 @@ let listProducts =
         {
             id: 4,
             name: "Acer nitro 5",
-            price: 50,
+            price: 49000000,
             img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
             rate: 5.0,
             brand: "Acer",
@@ -53,7 +53,7 @@ let listProducts =
         {
             id: 5,
             name: "Acer nitro 5",
-            price: 50,
+            price: 49000000,
             img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
             rate: 5.0,
             brand: "Acer",
@@ -65,7 +65,7 @@ let listProducts =
         {
             id: 6,
             name: "Acer nitro 5",
-            price: 50,
+            price: 49000000,
             img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
             rate: 5.0,
             brand: "Acer",
@@ -77,7 +77,7 @@ let listProducts =
         {
             id: 7,
             name: "Acer nitro 5",
-            price: 50,
+            price: 49000000,
             img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
             rate: 5.0,
             brand: "Acer",
@@ -89,7 +89,7 @@ let listProducts =
         {
             id: 8,
             name: "Acer nitro 5",
-            price: 50,
+            price: 49000000,
             img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
             rate: 5.0,
             brand: "Acer",
@@ -101,7 +101,7 @@ let listProducts =
         {
             id: 9,
             name: "Acer nitro 5",
-            price: 50,
+            price: 49000000,
             img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
             rate: 5.0,
             brand: "Acer",
@@ -113,7 +113,103 @@ let listProducts =
         {
             id: 10,
             name: "Acer nitro 5",
-            price: 50,
+            price: 49000000,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 11,
+            name: "Acer nitro 5",
+            price: 49000000,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 12,
+            name: "Acer nitro 5",
+            price: 49000000,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 13,
+            name: "Acer nitro 5",
+            price: 49000000,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 14,
+            name: "Acer nitro 5",
+            price: 49000000,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 15,
+            name: "Acer nitro 5",
+            price: 49000000,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 16,
+            name: "Acer nitro 5",
+            price: 49000000,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 17,
+            name: "Acer nitro 5",
+            price: 49000000,
+            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Gaming",
+            cpu: [
+
+            ]
+        },
+        {
+            id: 18,
+            name: "Acer nitro 5",
+            price: 49000000,
             img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
             rate: 5.0,
             brand: "Acer",
@@ -166,6 +262,7 @@ function renderProduct(products) {
         products.forEach(function(product) {
             var productSection = document.createElement("div");
             productSection.classList.add("cart");
+            var formattedPrice = product.price.toLocaleString("vi-VN") + "đ";
 
             productSection.innerHTML = `
                 <div class="wrap-img-cart">
@@ -176,7 +273,7 @@ function renderProduct(products) {
                 <span class="brand">${product.brand}</span>
                 <span class="type">${product.type}</span>
                 <div class="row">
-                    <span class="price">$${product.price.toFixed(2)}</span>
+                    <span class="price">${formattedPrice}</span>
                     <div class="row-price-star">
                         <img src="./asset/images/main-star.svg" alt="" class="star" />
                         <span class="star-num">${product.rate}</span>
@@ -199,7 +296,6 @@ function getProduct(arr) {
         (currentPage - 1) * perPage + perPage
     );
     renderProduct(perProduct);
-    currentPage = 1;
 }
 
 getProduct(listProducts);
@@ -207,13 +303,26 @@ function renderPageNumber(arr, perPage) {
     totalPage = Math.ceil(arr.length / perPage); 
 
     document.querySelector(".pagination-ul").innerHTML = "";
+    document.querySelector(".pagination-ul").innerHTML += `
+        <a href="#recommend">
+            <li class="move-btn" onclick="prevPage()"><</li>
+        </a>
+    `;
+
     for (let i = 1; i <= totalPage; i++) {
-        document.querySelector(
-            ".pagination-ul"
-        ).innerHTML += `
-        <a href="#recommend"><li class="li li${i}" onclick="handlePageNumber(event, ${i})">${i}</li></a>
+        document.querySelector(".pagination-ul").innerHTML += `
+            <a href="#recommend">
+                <li class="list-index li${i}" onclick="activePageIndex(event, ${i})">${i}</li>
+            </a>
         `;
     }
+
+    document.querySelector(".pagination-ul").innerHTML += `
+        <a href="#recommend">
+            <li class="move-btn" onclick="nextPage()">></li>
+        </a>
+    `;
+
     if (totalPage > 1) {
         document.querySelector(".li1").classList.add("active");
     } else if (totalPage <= 1) {
@@ -222,15 +331,41 @@ function renderPageNumber(arr, perPage) {
 }
 
 let currentProductList = listProducts;
-function handlePageNumber(event, num) {
-    listLi = document.querySelectorAll(".li");
-    for (li of listLi) {
-        li.classList.remove("active");
+function activePageIndex(event, num) {
+    let listPageIndex = document.querySelectorAll(".list-index");
+    for (l of listPageIndex) {
+        l.classList.remove("active");
     }
     event.target.classList.add("active");
     currentPage = num;
 
     getProduct(currentProductList);
+}
+
+function prevPage() {
+    let listPageIndex = document.querySelectorAll(".list-index");
+    if (currentPage > 1) {
+        for (l of listPageIndex) {
+            l.classList.remove("active");
+        }
+        currentPage = currentPage - 1;
+        console.log(currentPage);
+        listPageIndex[currentPage-1].classList.add("active");
+        getProduct(currentProductList);
+    }
+}
+
+function nextPage() {
+    let listPageIndex = document.querySelectorAll(".list-index");
+    if (currentPage < totalPage) {
+        for (l of listPageIndex) {
+            l.classList.remove("active");
+        }
+        currentPage = currentPage + 1;
+        console.log(currentPage);
+        listPageIndex[currentPage-1].classList.add("active");
+        getProduct(currentProductList);
+    }
 }
 
 renderPageNumber(listProducts, perPage);
