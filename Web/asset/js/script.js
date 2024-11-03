@@ -6,7 +6,6 @@ let listProducts =
             id: 1,
             name: "Acer Nitro 5",
             img: "./asset/images/Product_Gaming/Acer/Acer Nitro 5.webp",
-            price: 20000000,
             rate: 5.0,
             brand: "Acer",
             type: "Gaming",
@@ -26,7 +25,6 @@ let listProducts =
             id: 2,
             name: "Laptop ASUS Gaming ViviBook K3605ZU-RP296W",
             img: "./asset/images/Product_Gaming/ASUS/Laptop ASUS Gaming ViviBook K3605ZU-RP296W.webp",
-            price: 20000000,
             rate: 5.0,
             brand: "ASUS",
             type: "Gaming",
@@ -58,7 +56,6 @@ let listProducts =
             id: 4,
             name: "Laptop ASUS Gaming VivoBook K3605ZC-RP564W",
             img: "./asset/images/Product_Gaming/ASUS/Laptop ASUS Gaming VivoBook K3605ZC-RP564W.webp",
-            price: 21000000,
             rate: 5.0,
             brand: "ASUS",
             type: "Gaming",
@@ -74,7 +71,6 @@ let listProducts =
             id: 5,
             name: "Laptop ASUS ROG Zephyrus G16 GA605WI-QR090WS",
             img: "./asset/images/Product_VP/ASUS/Laptop ASUS ROG Zephyrus G16 GA605WI-QR090WS.webp",
-            price: 26500000,
             rate: 4.0,
             brand: "ASUS",
             type: "Office",
@@ -82,7 +78,6 @@ let listProducts =
                 {
                     cpu: "R9-HX370", 
                     price: 26500000
-
                 },
             ]
         },
@@ -90,7 +85,6 @@ let listProducts =
             id: 6,
             name: "Laptop ASUS Gaming ViviBook K3605ZU-RP296W",
             img: "./asset/images/Product_Gaming/ASUS/Laptop ASUS Gaming ViviBook K3605ZU-RP296W.webp",
-            price: 20000000,
             rate: 5.0,
             brand: "ASUS",
             type: "Gaming",
@@ -106,7 +100,6 @@ let listProducts =
             id: 7,
             name: "Laptop Gaming Acer Nitro 5 Tiger AN515-58-50D2",
             img: "./asset/images/Product_Gaming/Acer/Laptop Gaming Acer Nitro 5 Tiger AN515-58-50D2.webp",
-            price: 22990000,
             rate: 5.0,
             brand: "Acer",
             type: "Gaming",
@@ -127,7 +120,6 @@ let listProducts =
             id: 8,
             name: "Laptop Lenovo IdeaPad Slim 3 14IAH8 83EQ0009VN",
             img: "./asset/images/Product_VP/Lenovo/Laptop Lenovo IdeaPad Slim 3 14IAH8 83EQ0009VN.webp",
-            price: 15290000,
             rate: 5.0,
             brand: "Lenovo",
             type: "Office",
@@ -148,7 +140,6 @@ let listProducts =
             id: 9,
             name: "Laptop Acer Aspire 3 A315-59-381E",
             img: "./asset/images/Product_VP/Acer/Laptop Acer Aspire 3 A315-59-381E.webp",
-            price: 9490000,
             rate: 4.0,
             brand: "Acer",
             type: "Office",
@@ -169,7 +160,6 @@ let listProducts =
             id: 10,
             name: "Laptop ASUS TUF Gaming A15 FA506NF-HN005W",
             img: "./asset/images/Product_Gaming/ASUS/Laptop ASUS TUF Gaming A15 FA506NF-HN005W.webp",
-            price: 16000000,
             rate: 5.0,
             brand: "ASUS",
             type: "Gaming",
@@ -230,6 +220,7 @@ function renderProduct(products) {
         products.forEach(function(product) {
             var productSection = document.createElement("div");
             productSection.classList.add("cart");
+            var formattedPrice = product.price.toLocaleString("vi-VN") + "đ";
 
             productSection.innerHTML = `
                 <div class="wrap-img-cart">
@@ -240,7 +231,7 @@ function renderProduct(products) {
                 <span class="brand">${product.brand}</span>
                 <span class="type">${product.type}</span>
                 <div class="row">
-                    <span class="price">$${product.price.toFixed(2)}</span>
+                    <span class="price">${formattedPrice}</span>
                     <div class="row-price-star">
                         <img src="./asset/images/main-star.svg" alt="" class="star" />
                         <span class="star-num">${product.rate}</span>
@@ -263,7 +254,6 @@ function getProduct(arr) {
         (currentPage - 1) * perPage + perPage
     );
     renderProduct(perProduct);
-    currentPage = 1;
 }
 
 getProduct(listProducts);
@@ -271,13 +261,26 @@ function renderPageNumber(arr, perPage) {
     totalPage = Math.ceil(arr.length / perPage); 
 
     document.querySelector(".pagination-ul").innerHTML = "";
+    document.querySelector(".pagination-ul").innerHTML += `
+        <a href="#recommend">
+            <li class="move-btn" onclick="prevPage()"><</li>
+        </a>
+    `;
+
     for (let i = 1; i <= totalPage; i++) {
-        document.querySelector(
-            ".pagination-ul"
-        ).innerHTML += `
-        <a href="#recommend"><li class="li li${i}" onclick="handlePageNumber(event, ${i})">${i}</li></a>
+        document.querySelector(".pagination-ul").innerHTML += `
+            <a href="#recommend">
+                <li class="list-index li${i}" onclick="activePageIndex(event, ${i})">${i}</li>
+            </a>
         `;
     }
+
+    document.querySelector(".pagination-ul").innerHTML += `
+        <a href="#recommend">
+            <li class="move-btn" onclick="nextPage()">></li>
+        </a>
+    `;
+
     if (totalPage > 1) {
         document.querySelector(".li1").classList.add("active");
     } else if (totalPage <= 1) {
@@ -286,15 +289,41 @@ function renderPageNumber(arr, perPage) {
 }
 
 let currentProductList = listProducts;
-function handlePageNumber(event, num) {
-    listLi = document.querySelectorAll(".li");
-    for (li of listLi) {
-        li.classList.remove("active");
+function activePageIndex(event, num) {
+    let listPageIndex = document.querySelectorAll(".list-index");
+    for (l of listPageIndex) {
+        l.classList.remove("active");
     }
     event.target.classList.add("active");
     currentPage = num;
 
     getProduct(currentProductList);
+}
+
+function prevPage() {
+    let listPageIndex = document.querySelectorAll(".list-index");
+    if (currentPage > 1) {
+        for (l of listPageIndex) {
+            l.classList.remove("active");
+        }
+        currentPage = currentPage - 1;
+        console.log(currentPage);
+        listPageIndex[currentPage-1].classList.add("active");
+        getProduct(currentProductList);
+    }
+}
+
+function nextPage() {
+    let listPageIndex = document.querySelectorAll(".list-index");
+    if (currentPage < totalPage) {
+        for (l of listPageIndex) {
+            l.classList.remove("active");
+        }
+        currentPage = currentPage + 1;
+        console.log(currentPage);
+        listPageIndex[currentPage-1].classList.add("active");
+        getProduct(currentProductList);
+    }
 }
 
 renderPageNumber(listProducts, perPage);
