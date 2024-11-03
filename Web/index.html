@@ -40,23 +40,34 @@
                 <a href="#"><img src="./asset/images/Logo.svg" alt="" class="logo hide-on-tablet" /></a>
     
                 <!-- Navigation Menu -->
-                <nav class="nav">
+                <nav class="nav"> 
                     <ul>
                         <li class="header-product">
                             <a href="#!">Product</a>
-                            <img src="./asset/images/header-arrown.svg" alt="" class="arrown" />
+                            <img src="./asset/images/header-arrown.svg" alt="Dropdown arrow" class="arrown" />
                             <ul class="sub-menu">
-                                <li><a href="/Web/details.html#" class="btn-acer">Acer</a></li>
-                                <li><a href="#recommend" class="btn-asus">Asus</a></li>
-                                <li><a href="#recommend" class="btn-dell">Dell</a></li>
-                                <li><a href="#recommend" class="btn-lenovo">Lenovo</a></li>
-                                <li><a href="#recommend" class="btn-msi">Msi</a></li>
+                                <div class="sub-menu-columns">
+                                    <div class="sub-menu-column">
+                                        <li class="sub-header">Brand</li>
+                                        <li><a href="/Web/details.html#" class="btn-acer">Acer</a></li>
+                                        <li><a href="#recommend" class="btn-asus">Asus</a></li>
+                                        <li><a href="#recommend" class="btn-dell">Dell</a></li>
+                                        <li><a href="#recommend" class="btn-lenovo">Lenovo</a></li>
+                                        <li><a href="#recommend" class="btn-msi">Msi</a></li>
+                                    </div>
+                                    <div class="sub-menu-column">
+                                        <li class="sub-header">Type</li>
+                                        <li><a href="#office" class="btn-office">Office</a></li>
+                                        <li><a href="#gaming" class="btn-gaming">Gaming</a></li>
+                                    </div>
+                                </div>
                             </ul>
                         </li>
                         <li id="aboutLink"><a href="#!">About</a></li>
                         <li><a href="#footer">Contact us</a></li>
                     </ul>
                 </nav>
+                
     
                 <!-- Search, Cart, History Icons Desktop-->
                 <div class="last-icon">
@@ -261,8 +272,8 @@
                                 <div class="filter-price">
                                     <div class="values">
                                         <label for="min-max">
-                                            Min Price <span id="minPriceValue">10.000.000</span>₫ - 
-                                            Max Price <span id="maxPriceValue">100.000.000</span>₫
+                                            Min <span id="minPriceValue">10.000.000 VNĐ</span> - 
+                                            Max <span id="maxPriceValue">100.000.000 VNĐ</span>
                                         </label>
                                     </div>
                                     <input type="range" id="minPrice" min="0" max="100000000" value="0" step="100000">

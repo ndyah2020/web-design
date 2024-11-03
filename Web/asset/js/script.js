@@ -20,7 +20,7 @@ let listProducts =
             price: 49000000,
             img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
             rate: 5.0,
-            brand: "Acer",
+            brand: "ASUS",
             type: "Gaming",
             cpu: [
 
