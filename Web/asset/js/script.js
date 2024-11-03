@@ -16,11 +16,11 @@ let listProducts =
         },
         {
             id: 2,
-            name: "Acer nitro 5",
+            name: "Laptop ASUS Gaming ViviBook K3605ZU-RP296W",
             price: 50,
-            img: "./asset/images/Product_Gaming/Acer/group_509_7__1.webp",
+            img: "./asset/images/Product_Gaming/ASUS/Laptop ASUS Gaming ViviBook K3605ZU-RP296W.webp",
             rate: 5.0,
-            brand: "Acer",
+            brand: "ASUS",
             type: "Gaming",
             cpu: [
 
