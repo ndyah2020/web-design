@@ -83,14 +83,14 @@ let listProducts =
         },
         {
             id: 6,
-            name: "Laptop ASUS Gaming ViviBook K3605ZU-RP296W",
-            img: "./asset/images/Product_Gaming/ASUS/Laptop ASUS Gaming ViviBook K3605ZU-RP296W.webp",
+            name: "Laptop ASUS TUF Gaming A15 FA506NC-HN011W",
+            img: "./asset/images/Product_Gaming/ASUS/Laptop ASUS TUF Gaming A15 FA506NC-HN011W.webp",
             rate: 5.0,
             brand: "ASUS",
             type: "Gaming",
             model: [
                 {
-                    cpu: "i5-12500H", 
+                    cpu: "R7-7535HS", 
                     price: 20000000
 
                 },
@@ -172,6 +172,362 @@ let listProducts =
                 {
                     cpu: "R7-7435HS", 
                     price: 21000000
+
+                },
+            ]
+        },
+        {
+            id: 11,
+            name: "Laptop MSI Cyborg 15 A12UCX-281VN",
+            img: "./asset/images/Product_Gaming/MSI/Laptop MSI Cyborg 15 A12UCX-281VN.webp",
+            rate: 5.0,
+            brand: "MSI",
+            type: "Gaming",
+            model: [
+                {
+                    cpu: "i5-12450H", 
+                    price: 15490000
+
+                },
+            ]
+        },
+        {
+            id: 12,
+            name: "Laptop Lenovo Legion 5 16IRX9-83DG004YVN",
+            img: "./asset/images/Product_Gaming/Lenovo/Laptop Lenovo Gaming Legion 5 16IRX9 83DG004YVN.webp",
+            rate: 5.0,
+            brand: "Lenovo",
+            type: "Gaming",
+            model: [
+                {
+                    cpu: "i7-13650HX", 
+                    price: 39990000
+
+                },
+            ]
+        },
+        {
+            id: 13,
+            name: "Laptop ASUS ROG Strix G16 G614JU-N3135W",
+            img: "./asset/images/Product_Gaming/Asus/Laptop ASUS ROG Strix G16 G614JU-N3135W.webp",
+            rate: 5.0,
+            brand: "ASUS",
+            type: "Gaming",
+            model: [
+                {
+                    cpu: "i5-13450HX", 
+                    price: 29990000
+
+                },
+            ]
+        },
+        {
+            id: 14,
+            name: "Laptop Acer Gaming Aspire 5 A515-58GM-53PZ",
+            img: "./asset/images/Product_Gaming/Acer/Laptop Acer Gaming Aspire 5 A515-58GM-53PZ.webp",
+            rate: 4.0,
+            brand: "Acer",
+            type: "Gaming",
+            model: [
+                {
+                    cpu: "i5-13420H", 
+                    price: 15490000
+
+                },
+            ]
+        },
+        {
+            id: 15,
+            name: "Laptop Acer gaming Aspire 7 A715-76G-73FM",
+            img: "./asset/images/Product_Gaming/Acer/Laptop Acer gaming Aspire 7 A715-76G-73FM.webp",
+            rate: 4.0,
+            brand: "Acer",
+            type: "Gaming",
+            model: [
+                {
+                    cpu: "i7-12650H", 
+                    price: 17790000
+
+                },
+                {
+                    cpu: "i5-12450H", 
+                    price: 18490000
+
+                },
+
+            ]
+        },
+        {
+            id: 16,
+            name: "Laptop Lenovo LOQ 15IAX9 83GS001RVN",
+            img: "./asset/images/Product_Gaming/Lenovo/Laptop Lenovo LOQ 15IAX9 83GS001RVN.webp",
+            rate: 5.0,
+            brand: "Lenovo",
+            type: "Gaming", 
+            model: [
+                {
+                    cpu: "i5-12450HX", 
+                    price: 21490000
+
+                },
+                {
+                    cpu: "R5-7235HS", 
+                    price: 20990000
+
+                },
+                {
+                    cpu: "i7-13650HX", 
+                    price: 32990000
+
+                },
+            ]
+        },
+        {
+            id: 17,
+            name: "Laptop MSI Gaming Thin 15 B13UC-1411VN",
+            img: "./asset/images/Product_Gaming/MSI/Laptop MSI Gaming Thin 15 B13UC-1411VN.webp",
+            rate: 5.0,
+            brand: "MSI",
+            type: "Gaming",
+            model: [
+                {
+                    cpu: "i7-13620H", 
+                    price: 18990000
+
+                },
+                {
+                    cpu: "i5-12450H", 
+                    price: 15490000
+
+                },
+            ]
+        },
+        {
+            id: 18,
+            name: "Laptop MSI Gaming Bravo 15 C7VFK-275VN",
+            img: "./asset/images/Product_Gaming/MSI/Laptop MSI Gaming Bravo 15 C7VFK-275VN.webp",
+            rate: 5.0,
+            brand: "MSI",
+            type: "Gaming",
+            model: [
+                {
+                    cpu: "R7-7735HS", 
+                    price: 24490000
+
+                },
+                {
+                    cpu: "R5-7535HS", 
+                    price: 15490000
+
+                },
+            ]
+        },
+        {
+            id: 19,
+            name: "Laptop Acer Aspire 5 Spin 14 A5SP14-51MTN-78JHZ",
+            img: "./asset/images/Product_VP/Acer/Laptop Acer Aspire 5 Spin 14 A5SP14-51MTN-78JH.webp",
+            rate: 5.0,
+            brand: "Acer",
+            type: "Office",
+            model: [
+                {
+                    cpu: "i7-1355U", 
+                    price: 16990000
+
+                },
+            ]
+        },
+        {
+            id: 20,
+            name: "Laptop ASUS Vivobook S 15 S5507QA-MA089WS Copilot+ X Elite",
+            img: "./asset/images/Product_VP/Asus/Laptop ASUS Vivobook S 15 S5507QA-MA089WS Copilot+ X Elite.webp",
+            rate: 5.0,
+            brand: "ASUS",
+            type: "Office",
+            model: [
+                {
+                    cpu: "Snapdragon X1E 78 100", 
+                    price: 32990000
+
+                },
+            ]
+        },
+        {
+            id: 21,
+            name: "Laptop ASUS Vivobook 15 X1504ZA-NJ582W",
+            img: "./asset/images/Product_VP/Asus/Laptop ASUS Vivobook 15 X1504ZA-NJ582W.webp",
+            rate: 5.0,
+            brand: "ASUS",
+            type: "Office",
+            model: [
+                {
+                    cpu: "i3-1215U", 
+                    price: 10190000
+
+                },
+                {
+                    cpu: "i3-1315U", 
+                    price: 10690000
+
+                },
+                {
+                    cpu: "i5-1335U", 
+                    price: 15790000
+
+                },
+            ]
+        },
+        {
+            id: 22,
+            name: "Laptop Dell Inspiron 15 3520 6HD73",
+            img: "./asset/images/Product_VP/Dell/Laptop Dell Inspiron 15 3520 6HD73.webp",
+            rate: 4.0,
+            brand: "Dell",
+            type: "Office",
+            model: [
+                {
+                    cpu: "i7-1255U", 
+                    price: 17990000
+
+                },
+                {
+                    cpu: "i5-1235U", 
+                    price: 13990000
+
+                },
+            ]
+        },
+        {
+            id: 23,
+            name: "Laptop Dell Latitude 5550 71047019",
+            img: "./asset/images/Product_VP/Dell/Laptop Dell Latitude 5550 71047019.webp",
+            rate: 5.0,
+            brand: "Dell",
+            type: "Office",
+            model: [
+                {
+                    cpu: "U7-165U", 
+                    price: 31490000
+
+                },
+            ]
+        },
+        {
+            id: 24,
+            name: "Laptop Dell Inspiron 7506-5903SLV",
+            img: "./asset/images/Product_VP/Dell/Laptop Dell Inspiron 7506-5903SLV.webp",
+            rate: 5.0,
+            brand: "Dell",
+            type: "Office",
+            model: [
+                {
+                    cpu: "i5-1135G7", 
+                    price: 17990000
+
+                },
+            ]
+        },
+        {
+            id: 25,
+            name: "Laptop Dell Inspiron 5425",
+            img: "./asset/images/Product_VP/Dell/Laptop Dell Inspiron 5425.webp",
+            rate: 5.0,
+            brand: "Dell",
+            type: "Office",
+            model: [
+                {
+                    cpu: "R5-5625U", 
+                    price: 18000000
+
+                },
+            ]
+        },
+        {
+            id: 26,
+            name: "Laptop Lenovo ThinkPad E14 GEN 5 21JK00H5VN",
+            img: "./asset/images/Product_VP/Lenovo/Laptop Lenovo ThinkPad E14 GEN 5 21JK00H5VN.webp",
+            rate: 5.0,
+            brand: "Lenovo",
+            type: "Office",
+            model: [
+                {
+                    cpu: "i5-13420H", 
+                    price: 19490000
+
+                },
+            ]
+        },
+        {
+            id: 27,
+            name: "Laptop Lenovo IdeaPad Flex 5 14IAU7 82R700JQVN",
+            img: "./asset/images/Product_VP/Lenovo/Laptop Lenovo IdeaPad Flex 5 14IAU7 82R700JQVN.webp",
+            rate: 4.0,
+            brand: "Lenovo",
+            type: "Office",
+            model: [
+                {
+                    cpu: "i3-1215U", 
+                    price: 11490000
+
+                },
+                {
+                    cpu: "i5-1235U", 
+                    price: 16990000
+
+                },
+            ]
+        },
+        {
+            id: 28,
+            name: "Laptop Lenovo Yoga Slim 7 14IMH9 83CV001UVN",
+            img: "./asset/images/Product_VP/Lenovo/Laptop Lenovo Yoga Slim 7 14IMH9 83CV001UVN.webp",
+            rate: 5.0,
+            brand: "Lenovo",
+            type: "Office",
+            model: [
+                {
+                    cpu: "U7-155H", 
+                    price: 29990000
+
+                },
+            ]
+        },
+        {
+            id: 29,
+            name: "Laptop Lenovo Yoga 9 2IN1 14IMH9 83AC000SVN",
+            img: "./asset/images/Product_VP/Lenovo/Laptop Lenovo Yoga 9 2IN1 14IMH9 83AC000SVN.webp",
+            rate: 5.0,
+            brand: "Lenovo",
+            type: "Office",
+            model: [
+                {
+                    cpu: "U7-155H", 
+                    price: 43990000
+
+                },
+            ]
+        },
+        {
+            id: 30,
+            name: "Laptop Lenovo ThinkBook 14 G6 ABP 21KJ005HVN",
+            img: "./asset/images/Product_VP/Lenovo/Laptop Lenovo ThinkBook 14 G6 ABP 21KJ005HVN.webp",
+            rate: 5.0,
+            brand: "Lenovo",
+            type: "Office",
+            model: [
+                {
+                    cpu: "R7-7730U", 
+                    price: 18490000
+
+                },
+                {
+                    cpu: "i5-13420H", 
+                    price: 17990000
+
+                },
+                {
+                    cpu: "i7-1355U", 
+                    price: 20490000
 
                 },
             ]
