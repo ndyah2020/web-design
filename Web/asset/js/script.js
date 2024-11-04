@@ -5,7 +5,7 @@ let listProducts =
         {
             id: 1,
             name: "Acer Nitro 5",
-            img: "./asset/images/Product_Gaming/Acer/Acer Nitro 5.webp",
+            img: "./asset/images/Product_Gaming/Acer/Acer_Nitro_5.webp",
             rate: 5.0,
             brand: "Acer",
             type: "Gaming",
@@ -220,7 +220,7 @@ function renderProduct(products) {
         products.forEach(function(product) {
             var productSection = document.createElement("div");
             productSection.classList.add("cart");
-            var formattedPrice = product.price.toLocaleString("vi-VN") + "đ";
+            var formattedPrice = product.model[0].price.toLocaleString("vi-VN") + "đ";
 
             productSection.innerHTML = `
                 <div class="wrap-img-cart">
@@ -307,7 +307,6 @@ function prevPage() {
             l.classList.remove("active");
         }
         currentPage = currentPage - 1;
-        console.log(currentPage);
         listPageIndex[currentPage-1].classList.add("active");
         getProduct(currentProductList);
     }
@@ -320,7 +319,6 @@ function nextPage() {
             l.classList.remove("active");
         }
         currentPage = currentPage + 1;
-        console.log(currentPage);
         listPageIndex[currentPage-1].classList.add("active");
         getProduct(currentProductList);
     }
@@ -501,7 +499,16 @@ btnForm.addEventListener("click", function () {
     }
 });
 
-// var maincolor = document.querySelector('.main');
+// tìm kiếm nâng cao
+const productName = document.querySelector("#product-name");
+const brand = document.querySelector("#product-brand");
+const type = document.querySelector("#product-type");
+const minPrice = document.querySelector("#minPrice");
+const maxPrice = document.querySelector("#maxPrice");
+
+
+
+// nghiên cứu em yêu khoa học
 
 // function getRandomColor() {
 //     var letters = '0123456789ABCDEF';
@@ -512,7 +519,36 @@ btnForm.addEventListener("click", function () {
 //     return color;
 // }
 
+// var isInterval;
+// iconLogin.addEventListener('mouseover', function() {
+//     isInterval = setInterval(() => {
+//         iconLogin.style.backgroundColor = getRandomColor();
+//     }, 100);
+// })
+
+// iconLogin.addEventListener('mouseout', function() {
+//     clearInterval(isInterval);
+//     iconLogin.style.backgroundColor = "#fff";
+//     // setInterval(() => {
+//     //     iconLogin.style.backgroundColor = "#fff";
+//     // }, 100);
+// })
+
+// var cart = document.querySelectorAll(".cart");
+// for (c of cart) {
+//     c.addEventListener('mouseover', function() {
+//         setInterval(() => {
+//             c.style.boxShadow = getRandomColor() + " 0px 5px 15px";
+//         }, 100)
+//     })
+// }
+
+// for (c of cart) {
+//     c.addEventListener('mouseout', function() {
+//         c.style.boxShadow = "none";
+//     })
+// }
+
 // setInterval(() => {
 //     iconLogin.style.backgroundColor = getRandomColor();
-//     maincolor.style.backgroundColor = getRandomColor();
 // }, 100);

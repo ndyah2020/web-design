@@ -780,7 +780,6 @@ a {
 
 .list-show-product .cart:hover {
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-    /* box-shadow: 0px 16px 40px 0px rgba(0, 0, 0, 0.18); */
 }
 
 .cart .title {
