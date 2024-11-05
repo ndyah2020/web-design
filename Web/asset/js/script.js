@@ -541,12 +541,16 @@ let acerProducts = [],
     msiProducts = [],
     dellProducts = [];
 
+// lọc sản phẩm theo loại
+let gamingProducts = [],
+    officeProducts = [];
+
 function fillProducts() {
     listProducts.forEach(function(product) {
         if (product.brand === "Acer") {
             acerProducts.push(product);
         }
-        else if (product.brand === "Asus") {
+        else if (product.brand === "ASUS") {
             asusProducts.push(product);
         }
         else if (product.brand === "Lenovo") {
@@ -558,10 +562,61 @@ function fillProducts() {
         else if (product.brand === "Dell") {
             dellProducts.push(product);
         }
+        if (product.type === "Gaming") {
+            gamingProducts.push(product);
+        }
+        else if (product.type === "Office") {
+            officeProducts.push(product);
+        }
     })
 }
 
 fillProducts();
+
+// render sản phẩm theo loại, hãng
+
+var acerBtn = document.querySelector(".btn-acer");
+var asusBtn = document.querySelector(".btn-asus");
+var lenovoBtn = document.querySelector(".btn-lenovo");
+var msiBtn = document.querySelector(".btn-msi");
+var dellBtn = document.querySelector(".btn-dell");
+var gamingBtn = document.querySelector(".btn-gaming");
+var officeBtn = document.querySelector(".btn-office");
+
+acerBtn.addEventListener("click", function() {
+    getProduct(acerProducts);
+    renderPageNumber(acerProducts, perPage);
+});
+
+asusBtn.addEventListener("click", function() {
+    getProduct(asusProducts);
+    renderPageNumber(asusProducts, perPage);
+});
+
+lenovoBtn.addEventListener("click", function() {
+    getProduct(lenovoProducts);
+    renderPageNumber(lenovoProducts, perPage);
+});
+
+msiBtn.addEventListener("click", function() {
+    getProduct(msiProducts);
+    renderPageNumber(msiProducts, perPage);
+});
+
+dellBtn.addEventListener("click", function() {
+    getProduct(dellProducts);
+    renderPageNumber(dellProducts, perPage);
+});
+
+gamingBtn.addEventListener("click", function() {
+    getProduct(gamingProducts);
+    renderPageNumber(gamingProducts, perPage);
+});
+
+officeBtn.addEventListener("click", function() {
+    getProduct(officeProducts);
+    renderPageNumber(officeProducts, perPage);
+});
 
 // phân trang
 var currentPage = 1,
@@ -855,6 +910,49 @@ btnForm.addEventListener("click", function () {
     }
 });
 
+// tìm kiếm cơ bản
+var searchField = document.querySelector(".search-field");
+
+function search() {
+    var noProduct = document.querySelector(".no-product-search");
+    if (searchField.value.trim() === "") {
+        getProduct(listProducts);
+        renderPageNumber(listProducts, perPage);
+        return;
+    }
+
+    let productSearch = listProducts.filter((value) => {
+        return value.name
+            .toLowerCase()
+            .trim()
+            .includes(searchField.value.trim().toLowerCase());
+    });
+
+    getProduct(productSearch);
+        renderPageNumber(productSearch, perPage);
+        return;
+
+    // if (productSearch.length == 0) {
+    //     // noProduct.classList.remove("hidden");
+    //     getProduct(productSearch);
+    //     renderPageNumber(productSearch, perPage);
+    //     return;
+    // }
+    // else if (productSearch.length > 0) {
+    //     // noProduct.classList.add("hidden");
+    //     getProduct(productSearch);
+    //     renderPageNumber(productSearch, perPage);
+    //     return;
+    // }
+
+}
+
+searchField.addEventListener("keyup", function(e) {
+    if (e.key === "Enter") {
+        search();
+    }
+});
+
 // tìm kiếm nâng cao
 const productName = document.querySelector("#product-name");
 const brand = document.querySelector("#product-brand");
@@ -862,6 +960,52 @@ const type = document.querySelector("#product-type");
 const minPrice = document.querySelector("#minPrice");
 const maxPrice = document.querySelector("#maxPrice");
 
+var minPriceValue = document.querySelector("#minPriceValue");
+var maxPriceValue = document.querySelector("#maxPriceValue");
+
+minPrice.addEventListener("input", function() {
+    var minValue = Number(minPrice.value).toLocaleString("vi-VN") + " Đ";
+    minPriceValue.textContent = minValue;
+})
+
+maxPrice.addEventListener("input", function() {
+    var maxValue = Number(maxPrice.value).toLocaleString("vi-VN") + " Đ";
+    maxPriceValue.textContent = maxValue;
+})
+
+function searchAdvanced(productName, brand, type, minPrice, maxPrice) {
+    let productSearch = listProducts.filter((product) => {
+        if (productName && !product.name.trim().toLowerCase().includes(productName.trim().toLowerCase())) {
+            return false;
+        }
+        if (brand && product.brand !== brand) {
+            return false;
+        }
+        if (type && product.type !== type) {
+            return false;
+        }
+        if (minPrice > product.model[0].price || maxPrice < product.model[product.model.length - 1].price) {
+            return false;
+        }
+        return true;
+    });
+
+    if (productSearch) {
+        getProduct(productSearch);
+        renderPageNumber(productSearch, perPage);
+    }
+    
+    return;
+}
+
+const searchAdvancedBtn = document.querySelector(".btn-show-result");
+
+searchAdvancedBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    searchAdvanced(
+        productName.value, brand.value, type.value, minPrice.value, maxPrice.value
+    );
+});
 
 
 // nghiên cứu em yêu khoa học
