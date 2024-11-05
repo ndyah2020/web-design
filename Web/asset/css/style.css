@@ -197,6 +197,7 @@ a {
 
 .header .btn-search:hover {
     background-color: #e7e1e1;
+    cursor: pointer;
 }
 
 .header .btn-search:focus ~ .search-field {
@@ -727,7 +728,7 @@ a {
 }
 
 .form-filter .group-btn .btn-show-result {
-    color: var(---text-color-dark);
+    color: #fff;
     font-size: 1.5rem;
     border: none;
     font-weight: 550;
@@ -739,6 +740,7 @@ a {
 .form-filter .group-btn .btn-show-result:hover {
     background-color: #27b6b9;
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 .form-item > svg {
@@ -780,7 +782,6 @@ a {
 
 .list-show-product .cart:hover {
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-    /* box-shadow: 0px 16px 40px 0px rgba(0, 0, 0, 0.18); */
 }
 
 .cart .title {
