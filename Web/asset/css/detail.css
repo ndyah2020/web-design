@@ -403,7 +403,7 @@ a {
     display: flex;
 }
 /* css giá  */
-.details-product .price {
+.details-product .product-price {
     font-size: 26px;
     display: block;
     color: red;

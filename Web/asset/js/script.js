@@ -533,7 +533,10 @@ let listProducts =
             ]
         },
     ]
-
+ //Lưu mảng vào localStore để các file js khác có thể sử dụng không cần coppy sang
+ if (!localStorage.getItem("listProducts")) {
+    localStorage.setItem("listProducts", JSON.stringify(listProducts));
+}
 // lọc sản phẩm theo hãng
 let acerProducts = [],
     asusProducts = [],
@@ -572,6 +575,7 @@ function fillProducts() {
 }
 
 fillProducts();
+ 
 
 // render sản phẩm theo loại, hãng
 
