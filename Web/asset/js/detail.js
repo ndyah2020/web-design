@@ -24,7 +24,8 @@ const showProductDetail = () => {
     const productRating = document.querySelector('.product-rating')
     const producConfig = document.querySelector('.select-config')
     const productPrice = document.querySelector('.product-price')
-
+    const descriptionName = document.querySelector('.descriptionName')
+    const descriptionCpu = document.querySelector('.descriptionCpu')
     const product = getListProduct().find(product => idProduct === product.id);
     productImg.src = product.img
     productName.textContent = product.name
@@ -35,7 +36,8 @@ const showProductDetail = () => {
         
     })
     productPrice.textContent = product.model[0].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
-
+    descriptionName.textContent = product.name
+    descriptionCpu.textContent = `Với bộ xử lý ${product.model[0].cpu} mới nhất`
     selectConfig(product)
 }
 
