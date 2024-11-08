@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="background-color: rgb(230, 229, 229)" lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,7 @@
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="theme-color" content="#ffffff" />
 
-    <link rel="stylesheet" href="./asset/css/style.css">
+    <link rel="stylesheet" href="./asset/css/style.css" />
     <link rel="stylesheet" href="./asset/css/reset.css" />
     <link rel="stylesheet" href="./asset/css/cart.css" />
     <link rel="stylesheet" href="./asset/css/responsive.css">
@@ -27,12 +27,12 @@
             <!-- Hamburger Menu Icon -->
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" class="bar hide-on-desktop">
                 <path fill="currentColor"
-                    d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32 <H3>2C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+                    d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32<H3>2C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
             </svg>
 
             <!-- Logo -->
             <a href="#"><img src="./asset/images/Logo.svg" alt="" class="logo hide-on-tablet" /></a>
-
+    
             <div class="last-icon">
                 <div class="iconUser">
                     <img src="./asset/images/header-user.svg" alt="" class="icon-user">
@@ -40,16 +40,19 @@
             </div>
         </div>
     </header>
-    
     <header class="header-mobile hide-on-desktop">
         <div class="menu-overlay"></div>
         <div class="menu-content">
             <div class="container">
-                <a href="#"><img src="./asset/img/header-logo.svg" alt="" class="logo hide-on-mobile" /></a>
+                <a>
+                    <img src="./asset/images/header-logo.svg" alt="" class="logo hide-on-mobile" />
+                </a>
                 <div class="group-cart hide-on-tablet">
-                    <img src="./asset/img/header-buy.svg" alt="" class="buy-cart" />
-                    <span class="cart-text">cart</span>
-                    <span class="cart-quantity">5</span>
+                    <a href="./index.html">
+                        <img  src="./asset/images/header-buy.svg" alt="" class="buy-cart" />
+                    </a>
+                    <span class="cart-text">Cart</span>
+                    <span class="cart-quantity">1</span>
                 </div>
                 <nav class="nav">
                     <ul>
@@ -57,7 +60,7 @@
                         <li><a href="#hello" class="btn-asus">Asus</a></li>
                         <li><a href="#hello" class="btn-dell">Dell</a></li>
                         <li><a href="#hello" class="btn-lenovo">Lenovo</a></li>
-                        <li><a href="#!">Msi</a></li>
+                        <li><a href="#!" class="btn-msi">Msi</a></li>
                         <li><a href="#!">About</a></li>
                         <li><a href="#!">Contact us</a></li>
                     </ul>
@@ -65,15 +68,15 @@
             </div>
         </div>
     </header>
-    
-    <!-- filter -->
+
+    <!-- Filter -->
     <div class="filter">
         <div class="container">
             <div class="body">
                 <div class="body-filter">
-                    <a href="./index.html" class="title">Home</a>
+                    <a class="title" href="./index.html">Home</a>
                     <img src="./asset/images/arrow-right.svg" alt="" />
-                    <a href="#!" class="title">Checkout</a>
+                    <a class="title" href="#!">Checkout</a>
                 </div>
             </div>
         </div>
@@ -84,38 +87,23 @@
             <div class="body-main">
                 <!-- left -->
                 <div class="main-left">
-                    <div class="main-left-product">
-                        <!-- Product 1 -->
+                    <div class="main-left__product">
+                        <!-- Product 1  -->
                         <div class="main-product">
-                            <img 
-                            class="image"
-                            src="./asset/images/Product_Gaming/ASUS/Laptop ASUS Gaming ViviBook K3605ZU-RP296W.webp" 
-                            alt=""
-                            />
+                            <img class="image" src="./asset/images/Product_Gaming/Acer/Acer_Nitro_5.webp" alt="" />
                             <div class="info-product">
-                                <div class="info-product-title">
-                                    <h3 class="heading">
-                                        Coffee Beans
-                                    </h3>
-                                    <div class="price">$47.00</div>
+                                <div class="info-product__title">
+                                    <h3 class="heading-name"> Acer Nitro 5 <span>i7-13700H</span></h3>
+                                    <div class="price">25.000.000 VND</div>
                                 </div>
-                                <div class="info-product-action">
-                                    <div class="amount-action">
-                                        <button class="up-and-down">
-                                            -
-                                        </button>
+                                <div class="info-product__action">
+                                    <div class="amount-aciton">
+                                        <button class="up-and-down"> - </button>
                                         <div class="amount">1</div>
-                                        <button class="up-and-down">
-                                            +
-                                        </button>
+                                        <button class="up-and-down"> + </button>
                                     </div>
                                     <div class="delete-action">
-                                        <a>
-                                            <img 
-                                                src="./asset/images/Delete.svg" 
-                                                alt="Delete"
-                                            />
-                                        </a>
+                                        <a><img src="./asset/images/Delete.svg" alt="Delete" /></a>
                                         <div class="title">Delete</div>
                                     </div>
                                 </div>
@@ -124,63 +112,51 @@
                     </div>
 
                     <div class="continue">
-                        <img 
-                            src="./asset/images/Arrow - Left 2.svg" 
-                            alt=""
-                            class="image-continue"
-                        />
+                        <img src="./asset/images/Arrow - Left 2.svg" alt="" class="image-continue" />
                         <a href="./index.html" class="title">Continue Shopping</a>
                     </div>
                 </div>
 
                 <!-- right -->
                 <div class="main-sidebar">
-                    <div class="main-sidebar-checkout">
+                    <div class="main-sidebar__checkout">
                         <div class="show-info">
                             <div class="title">
-                                <strong>Subtotal</strong> (Items)
+                                <strong>Subtotal</strong> (items)
                             </div>
-                            <div class="show-number total-quantity">3</div>
+                            <div class="show-number total-quantity">1</div>
                         </div>
 
                         <div class="show-info">
                             <div class="title">
                                 <strong>Price</strong> (Total)
                             </div>
-                            <div class="show-number price-checkout">
-                                $191.65
-                            </div>
+                            <div class="show-number price-checkout">25.000.000 VND</div>
                         </div>
 
                         <div class="show-info">
                             <div class="title">
                                 <strong>Shipping</strong>
                             </div>
-                            <div class="show-number price-ship">$10.00</div>
+                            <div class="show-number price-ship">0.000 VND</div>
                         </div>
 
                         <div class="show-info total">
                             <div class="title">
                                 <strong>Estimated Total</strong>
                             </div>
-                            <div class="show-number total-price-full">
-                                $201.65
-                            </div>
+                            <div class="show-number total-price-full">25.000.000 VND</div>
                         </div>
                         <button class="action-checkout">
                             <div class="title">Continue to checkout</div>
                         </button>
                     </div>
 
-                    <div class="main-sidebar-gift">
+                    <div class="main-sidebar__gift">
                         <img src="./asset/images/gift.svg" alt="" />
-                        <div class="main-sidebar-gift-info">
-                            <div class="title">
-                                Send this order as a gift.
-                            </div>
-                            <div class="desc line-clamp break-all">
-                                Available items will be shipped to your gift recipient. 
-                            </div>
+                        <div class="main-sidebar__gift-info">
+                            <div class="title">Send this order as a gift.</div>
+                            <div class="desc line-clamp break-all">Available items will be shipped to your giftrecipient.</div>
                         </div>
                     </div>
                 </div>
@@ -189,7 +165,6 @@
     </main>
     <script src="./asset/js/responsive.js"></script>
     <script src="./asset/js/form.js"></script>
-    <script src="./asset/js/cart.js"></script>
-    <script src="./asset/js/script.js"></script>
+    <script src="./asset/js/cartt.js"></script>
 </body>
 </html>
