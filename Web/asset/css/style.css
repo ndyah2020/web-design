@@ -431,6 +431,7 @@ a {
     width: 100%;
     overflow: hidden;
     position: relative;
+    border-radius: 20px;
 }
 
 .main .slider .btn-left, .btn-right {
@@ -780,9 +781,9 @@ a {
     border-radius: 7px;
 }
 
-.list-show-product .cart:hover {
+/* .list-show-product .cart:hover {
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-}
+} */
 
 .cart .title {
     font-size: 18px;
