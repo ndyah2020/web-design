@@ -660,7 +660,7 @@ function renderProduct(products) {
             productList.appendChild(productSection);
         })
     }
-    cartHover();
+    // cartHover();
 }
 
 let perProduct = [];
@@ -742,46 +742,6 @@ function nextPage() {
 
 renderPageNumber(listProducts, perPage);
 
-// Login behavior
-function showLogin() {
-    loginModal.classList.add('open');
-}
-
-function hideLogin() {
-    loginModal.classList.remove('open');
-}
-
-var iconLogin = document.querySelector('.icon-user');
-var loginModal = document.querySelector('.loginBackground');
-var loginBlockModal = document.querySelector('.loginBlock');
-var closeBtn = document.querySelector('.closeLoginBlock img');
-
-iconLogin.addEventListener('click', showLogin);
-closeBtn.addEventListener('click', hideLogin);
-
-loginModal.addEventListener('click', hideLogin);
-loginBlockModal.addEventListener('click', function(event) {
-    event.stopPropagation();
-})
-
-
-// hiển thị form login và đăng ký khi chọn
-
-const showForm = () => {
-    const selectedItem = document.querySelectorAll('.tab-item');
-    const  selectedForm = document.querySelectorAll('.tab-pane');
-
-    selectedItem.forEach((selected, index) => {
-        selected.addEventListener('click', function(){
-            selectedItem.forEach((item) => item.classList.remove('active'));
-            selectedForm.forEach( (form) => form.classList.remove('active'));
-
-            selected.classList.add('active')
-            selectedForm[index].classList.add('active');
-        })
-    }) 
-}
-
 // Hiển thị và đóng about
 const showAndCloseAbout = () => {
     const btnOpenAbout = document.getElementById('aboutLink')
@@ -798,9 +758,9 @@ const showAndCloseAbout = () => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    showForm();
     showAndCloseAbout();
 })
+
 //_________________________Chuyển động banner_______________________//
 // Khai báo phần tử
 const slides = document.querySelectorAll(".slide"); // Chứa tất cả phần tử của class slide
@@ -1015,46 +975,46 @@ searchAdvancedBtn.addEventListener("click", function(e) {
 
 // nghiên cứu em yêu khoa học
 
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
+// function getRandomColor() {
+//     var letters = '0123456789ABCDEF';
+//     var color = '#';
+//     for (var i = 0; i < 6; i++) {
+//       color += letters[Math.floor(Math.random() * 16)];
+//     }
+//     return color;
+// }
 
-const slider = document.querySelector(".slider");
-setInterval(() => {
-    slider.style.boxShadow = getRandomColor() + " 0px 20px 40px";
-}, 100)
+// const slider = document.querySelector(".slider");
+// setInterval(() => {
+//     slider.style.boxShadow = getRandomColor() + " 0px 20px 40px";
+// }, 100)
 
-let isIntervalIcon;
-iconLogin.addEventListener('mouseover', function() {
-    isIntervalIcon = setInterval(() => {
-        iconLogin.style.backgroundColor = getRandomColor();
-    }, 200);
-})
+// let isIntervalIcon;
+// iconLogin.addEventListener('mouseover', function() {
+//     isIntervalIcon = setInterval(() => {
+//         iconLogin.style.backgroundColor = getRandomColor();
+//     }, 200);
+// })
         
-iconLogin.addEventListener('mouseout', function() {
-    clearInterval(isIntervalIcon);
-    iconLogin.style.backgroundColor = "#fff";
-})
+// iconLogin.addEventListener('mouseout', function() {
+//     clearInterval(isIntervalIcon);
+//     iconLogin.style.backgroundColor = "#fff";
+// })
      
-function cartHover() {
-    var cart = document.querySelectorAll(".cart");
-    for (let c of cart) {
-        c.addEventListener('mouseover', function() {
-            isInterval = setInterval(() => {
-                c.style.boxShadow = getRandomColor() + " 0px 5px 15px";
-            }, 100)
-        })
-    }
-    for (let c of cart) {
-        c.addEventListener('mouseout', function() {
-            clearInterval(isInterval);
-            c.style.boxShadow = "";
-        })
-    }
-}
+// function cartHover() {
+//     var cart = document.querySelectorAll(".cart");
+//     for (let c of cart) {
+//         c.addEventListener('mouseover', function() {
+//             isInterval = setInterval(() => {
+//                 c.style.boxShadow = getRandomColor() + " 0px 5px 15px";
+//             }, 100)
+//         })
+//     }
+//     for (let c of cart) {
+//         c.addEventListener('mouseout', function() {
+//             clearInterval(isInterval);
+//             c.style.boxShadow = "";
+//         })
+//     }
+// }
 
