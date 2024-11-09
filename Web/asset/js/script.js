@@ -660,6 +660,7 @@ function renderProduct(products) {
             productList.appendChild(productSection);
         })
     }
+    cartHover();
 }
 
 let perProduct = [];
@@ -1014,45 +1015,46 @@ searchAdvancedBtn.addEventListener("click", function(e) {
 
 // nghiên cứu em yêu khoa học
 
-// function getRandomColor() {
-//     var letters = '0123456789ABCDEF';
-//     var color = '#';
-//     for (var i = 0; i < 6; i++) {
-//       color += letters[Math.floor(Math.random() * 16)];
-//     }
-//     return color;
-// }
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 
-// var isInterval;
-// iconLogin.addEventListener('mouseover', function() {
-//     isInterval = setInterval(() => {
-//         iconLogin.style.backgroundColor = getRandomColor();
-//     }, 100);
-// })
+const slider = document.querySelector(".slider");
+setInterval(() => {
+    slider.style.boxShadow = getRandomColor() + " 0px 20px 40px";
+}, 100)
 
-// iconLogin.addEventListener('mouseout', function() {
-//     clearInterval(isInterval);
-//     iconLogin.style.backgroundColor = "#fff";
-//     // setInterval(() => {
-//     //     iconLogin.style.backgroundColor = "#fff";
-//     // }, 100);
-// })
+let isIntervalIcon;
+iconLogin.addEventListener('mouseover', function() {
+    isIntervalIcon = setInterval(() => {
+        iconLogin.style.backgroundColor = getRandomColor();
+    }, 200);
+})
+        
+iconLogin.addEventListener('mouseout', function() {
+    clearInterval(isIntervalIcon);
+    iconLogin.style.backgroundColor = "#fff";
+})
+     
+function cartHover() {
+    var cart = document.querySelectorAll(".cart");
+    for (let c of cart) {
+        c.addEventListener('mouseover', function() {
+            isInterval = setInterval(() => {
+                c.style.boxShadow = getRandomColor() + " 0px 5px 15px";
+            }, 100)
+        })
+    }
+    for (let c of cart) {
+        c.addEventListener('mouseout', function() {
+            clearInterval(isInterval);
+            c.style.boxShadow = "";
+        })
+    }
+}
 
-// var cart = document.querySelectorAll(".cart");
-// for (c of cart) {
-//     c.addEventListener('mouseover', function() {
-//         setInterval(() => {
-//             c.style.boxShadow = getRandomColor() + " 0px 5px 15px";
-//         }, 100)
-//     })
-// }
-
-// for (c of cart) {
-//     c.addEventListener('mouseout', function() {
-//         c.style.boxShadow = "none";
-//     })
-// }
-
-// setInterval(() => {
-//     iconLogin.style.backgroundColor = getRandomColor();
-// }, 100);
