@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+
+    <link rel="apple-touch-icon" sizes="76x76" href="./asset/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./asset/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./asset/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="./asset/favicon/site.webmanifest" />
+    <link rel="mask-icon" href="./asset/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    
+    <link rel="stylesheet" href="./asset/css/reset.css" />
+    <link rel="stylesheet" href="./asset/css/admin.css" />
+    
+    <link rel="stylesheet" href="./asset/font/stylesheet.css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <img src="./asset/images/Logo.svg" class="logo" alt="" />
+            <div class="div-title">
+                <!-- render sau -->
+            </div>
+            <div class="iconUser">
+                <img src="./asset/images/header-user.svg" alt="" class="icon-user">
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="container">
+            <nav class="navbar">
+                <ul>
+                    <li class="productManagement">
+                        <img src="./asset/images/admin-box.svg" alt="" class="product-icon icon" />
+                        <p>Product Management</p>
+                    </li>
+                    <li class="orderManagement">
+                        <img src="./asset/images/admin-cart.svg" alt="" class="order-icon icon" />
+                        <p>Order Management</p>
+                    </li>
+                    <li class="userManagement">
+                        <img src="./asset/images/admin-people.svg" alt="" class="user-icon icon" />
+                        <p>User Management</p>
+                    </li>
+                    <li class="orderStartictis">
+                        <img src="./asset/images/admin-chart.svg" alt="" class="order-icon icon" />
+                        <p>Order Startictis</p>
+                    </li>
+                    <li class="logout">
+                        <img src="./asset/images/admin-logout-icon.svg" alt="" class="logout-icon icon" />
+                        <p>Log out</p>
+                    </li>
+                </ul>
+            </nav>
+            <div class="main-content">
+                <div class="contain-add-product-search">
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="add-edit-product-background-form">
+        <div class="add-edit-product-form">
+            <div class="head-form">
+                <h2 class="title">Product</h2>
+                <img src="./asset/images/bx-x.svg" alt="" class="closeImg" />
+            </div>
+            
+            <form action="" method="post" autocomplete="off" id="add-form">
+                <input type="hidden" id="idProduct" value="" />
+                <div class="form-group">
+                    <label for="nameProduct" class="form-label">Name Product</label>
+                    <div class="div">
+                        <input type="text" id="nameProduct" name="nameProduct" class="form-input" placeholder="Enter name product" />
+                    </div>
+                    <p class="form-error"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="price" class="form-label">Price</label>
+                    <div class="div">
+                        <input type="number" id="price" name="price" class="form-input" placeholder="Enter price" />
+                    </div>
+                    <p class="form-error"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="type" class="form-label">Brand</label>
+                    <div class="div">
+                        <select name="type" id="type" class="form-select">
+                            <option value="" hidden>Choose type product</option>
+                            <option value="Acer">Acer</option>
+                            <option value="ASUS">Asus</option>
+                            <option value="Dell">Dell</option>
+                            <option value="Lenovo">Lenovo</option>
+                            <option value="MSI">MSI</option>
+                        </select>
+                    </div>
+                    <p class="form-error"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="type" class="form-label">Type</label>
+                    <div class="div">
+                        <select name="type" id="type" class="form-select">
+                            <option value="" hidden>Choose type product</option>
+                            <option value="Gaming">Gaming</option>
+                            <option value="Office">Office</option>
+                        </select>
+                    </div>
+                    <p class="form-error"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="linkImage" class="form-label">Link image</label>
+                    <div class="div">
+                        <input type="file" name="linkImage" id="linkImage" class="form-input">
+                    </div>
+                    <p class="form-error"></p>
+                </div>
+                <button class="btn-save">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast">
+        <div class="toast-content">
+            <!-- dau tich (check) -->
+            <span class="check">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+                    <path
+                        d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                </svg>
+            </span>
+
+            <div class="message">
+                <span class="text text-1">Success</span>
+                <span class="text text-2">Your changes has been saved</span>
+            </div>
+        </div>
+        <!-- dau x de tat (xmark) -->
+        <span class="close">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">
+                <path
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+            </svg>
+        </span>
+
+        <div class="progress"></div>
+    </div>
+    <script src="./asset/js/admin.js" async></script>
+    <script src="./asset/js/script.js"></script>
+</body>
+</html>
