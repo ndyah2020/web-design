@@ -1,6 +1,5 @@
 
 //Lấy danh sách sản phẩm từ localStore
-var indexModel = 0;
 
 const getListProduct = () => {
 
@@ -41,6 +40,8 @@ const showProductDetail = () => {
     selectConfig(product)
 }
 
+
+
 const selectConfig = (product) => {
     const buttonConfig = document.querySelectorAll('.btn-config')
     const productPrice = document.querySelector('.product-price')
@@ -62,6 +63,30 @@ const selectConfig = (product) => {
 
 }
 
+const getUserFromLocalStorage = (listData) => {
+    const dataUser = JSON.parse(localStorage.getItem(listData));
+    if (!dataUser) {
+        return null;
+    }
+    return dataUser;
+}
+var currentLogin = getUserFromLocalStorage('currentLogin');
+
+const addCard = () => {
+    const btnAddCard = document.querySelector('.btn-add')
+    const iconLogin = document.querySelector('.icon-user');
+    const loginModal = document.querySelector('.loginBackground');
+    const showLogin = () => loginModal.classList.add('open');
+
+    if(btnAddCard) {
+        btnAddCard.addEventListener('click', () => {
+            if(!currentLogin){
+                alert('Đăng Nhập để thêm sản phẩm vào giỏ hàng')
+            }
+        })
+    }
+}
 document.addEventListener('DOMContentLoaded', () => {
     showProductDetail()
+    addCard()
 })

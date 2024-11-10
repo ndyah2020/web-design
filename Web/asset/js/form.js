@@ -1,4 +1,3 @@
-
 let DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getItem('DataUsers')) : [
     {
         id:         1,
@@ -24,6 +23,7 @@ let DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
 const showLoginAndRegister = () => {
     const iconLogin = document.querySelector('.icon-user');
     const loginModal = document.querySelector('.loginBackground');
+    const inconLoginStart = document.querySelector('.btn-start');
     const loginBlockModal = document.querySelector('.loginBlock');
     const closeBtn = document.querySelector('.closeLoginBlock img');
     
@@ -32,6 +32,8 @@ const showLoginAndRegister = () => {
         const hideLogin = () => loginModal.classList.remove('open');
 
         iconLogin.addEventListener('click', showLogin);
+        inconLoginStart.addEventListener('click', showLogin);
+
         closeBtn.addEventListener('click', hideLogin);
 
         loginModal.addEventListener('click', hideLogin);
@@ -176,18 +178,18 @@ const checkInputs = () => {
         rules: [
             Validator.isRequired('#name'),
 
-            Validator.isEmail('#email2'),
             Validator.isRequired('#email2'),
+            Validator.isEmail('#email2'),
 
-            Validator.isPassword('#password2', 6),
             Validator.isRequired('#password2'),
+            Validator.isPassword('#password2', 6),
             
+            Validator.isRequired('#password_confirmation'),
             Validator.isComfimer(
                 '#password_confirmation', 
                 () => document.querySelector('#form-2 #password2').value, 
                 'Mật khẩu không trùng khớp'
             ),
-            Validator.isRequired('#password_confirmation'),
         ],
         onSubmit: (data) => {
             console.log(data)
@@ -205,7 +207,7 @@ const checkInputs = () => {
             Validator.isPassword('#password1', 6),
         ],
         onSubmit: (data) => {
-            console.log(data)
+            checkLogin(data)
         }
     })
     // form thêm sản phẩm của admin
@@ -223,8 +225,74 @@ const checkInputs = () => {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
+const saveUserInToLocalStorage = (key, data) => 
+    localStorage.setItem(key, JSON.stringify(data));
+
+
+
+const getUserFromLocalStorage = (listData) => {
+    const dataUser = JSON.parse(localStorage.getItem(listData));
+    if (!dataUser) {
+        return null;
+    }
+    return dataUser;
+}
+var currentLogin = getUserFromLocalStorage('currentLogin');
+
+saveUserInToLocalStorage('DataUsers', DataUsers)
+
+
+
+const checkLogin = (dataFromInputLogin) =>{
+    // currentLogin = null; 
+    const getDataUser = getUserFromLocalStorage('DataUsers');
+
+    if(getDataUser){
+        getDataUser.forEach((data) => {
+            if(dataFromInputLogin.email1 === data.email && dataFromInputLogin.password === data.password){
+                currentLogin = data
+            }
+            if(currentLogin){
+                saveUserInToLocalStorage('currentLogin', currentLogin)
+                return;
+            }
+        });
+        if(!currentLogin)
+           document.querySelector('.loginError').innerHTML = `Tài khoản hoặc mật khẩu không chính xác!`
+        else{
+            alert('Đăng nhập thành công')
+            currentLogin.isAdmin ? window.location = "./admin.html" : window.location = "./index.html"
+        }
+    }
+}
+
+const logoutUser = () => {
+    const iconUser = document.querySelector('.iconUser');
+    iconUser.innerHTML = `<img src="./asset/images/header-user.svg" alt="" class="icon-user" />`
+    saveUserInToLocalStorage('currentLogin', null)
+    window.location = "./index.html"
+}
+
+const setIcon = () => {
+    const iconUser = document.querySelector('.iconUser');
+    if (currentLogin) {
+        iconUser.innerHTML = `<img src="./asset/images/admin-logout-icon.svg" alt="" class="icon-logout" onclick="logoutUser()"/>`;
+    }
+};
+const checkAdmin = () => {
+    if (window.location.pathname.endsWith("admin.html")) {
+        if (!currentLogin || currentLogin.isAdmin !== 1) {
+            window.location.href = "./*";
+        }
+    }   
+}
+
+const App = () => {
     showForm();
     showLoginAndRegister();
     checkInputs();
-})
+    setIcon();
+    checkAdmin();
+}
+
+document.addEventListener('DOMContentLoaded', () => App())

@@ -948,6 +948,7 @@ a {
 }
 
 .create-acc .btn {
+    cursor: pointer;
     padding: 22px 50px;
     color: #fff;
     text-align: center;
