@@ -22,63 +22,74 @@ let DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
 
 //Hiển thị login khi ấn vào icon
 const showLoginAndRegister = () => {
-    const showLogin = () => loginModal.classList.add('open');
-    const hideLogin = () => loginModal.classList.remove('open');
+    const iconLogin = document.querySelector('.icon-user');
+    const loginModal = document.querySelector('.loginBackground');
+    const loginBlockModal = document.querySelector('.loginBlock');
+    const closeBtn = document.querySelector('.closeLoginBlock img');
     
-    
-    var iconLogin = document.querySelector('.icon-user');
-    var loginModal = document.querySelector('.loginBackground');
-    var loginBlockModal = document.querySelector('.loginBlock');
-    var closeBtn = document.querySelector('.closeLoginBlock img');
-    
-    iconLogin.addEventListener('click', showLogin);
-    closeBtn.addEventListener('click', hideLogin);
-    
-    loginModal.addEventListener('click', hideLogin);
-    loginBlockModal.addEventListener('click', function(event) {
-        event.stopPropagation();
-    })
-}
+    if (iconLogin && loginModal && loginBlockModal && closeBtn) {
+        const showLogin = () => loginModal.classList.add('open');
+        const hideLogin = () => loginModal.classList.remove('open');
+
+        iconLogin.addEventListener('click', showLogin);
+        closeBtn.addEventListener('click', hideLogin);
+
+        loginModal.addEventListener('click', hideLogin);
+        loginBlockModal.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+    }
+};
 
 // hiển thị form login và đăng ký khi chọn
 const showForm = () => {
     const selectedItem = document.querySelectorAll('.tab-item');
     const  selectedForm = document.querySelectorAll('.tab-pane');
-
-    selectedItem.forEach((selected, index) => {
-        selected.addEventListener('click', function(){
-            selectedItem.forEach((item) => item.classList.remove('active'));
-            selectedForm.forEach((form) => form.classList.remove('active'));
-
-            selected.classList.add('active')
-            selectedForm[index].classList.add('active');
-        })
-    }) 
+    if(selectedItem && selectedForm)
+    {
+        selectedItem.forEach((selected, index) => {
+            selected.addEventListener('click', function(){
+                selectedItem.forEach((item) => item.classList.remove('active'));
+                selectedForm.forEach((form) => form.classList.remove('active'));
+    
+                selected.classList.add('active')
+                selectedForm[index].classList.add('active');
+            })
+        }) 
+    }
 }
 
 const checkInputs = () => {
+    const selectorRules = new Map();
     
     function Validator(options) {
 
         const validate = (inputElement, rule) => {
 
             const errorElement = inputElement.parentElement.parentElement.querySelector(options.errorSelector);
-            const errorMessage = rule.test(inputElement.value);
 
+            const rules = selectorRules.get(rule.selector) || [];
+            let errorMessage;
+    
+            for (const test of rules) {
+                errorMessage = test(inputElement.value);
+                if (errorMessage) break;
+            }
+            
             if (errorMessage) {
 
                 errorElement.innerText = errorMessage;
-                inputElement.classList.add('errorInput');
+                inputElement.style.border = '1px solid red'; 
             } else {
 
                 errorElement.innerText = '';
-                inputElement.classList.remove('errorInput');
+                inputElement.style.border = ''; 
             }
         
             inputElement.addEventListener('input', () => {
                 
                 errorElement.innerText = '';
-                inputElement.classList.remove('errorInput');    
+                inputElement.style.border = ''; 
             });
         };
 
@@ -86,6 +97,10 @@ const checkInputs = () => {
         if(formElement){
     
             options.rules.forEach((rule) => {
+                if(!selectorRules.has(rule.selector)){
+                    selectorRules.set(rule.selector, [])
+                }
+                selectorRules.get(rule.selector).push(rule.test)
 
                 const inputEmlement = formElement.querySelector(rule.selector)
                 
@@ -96,6 +111,7 @@ const checkInputs = () => {
                 }
     
             })
+            
         }
     }
     
@@ -116,7 +132,7 @@ const checkInputs = () => {
     //Kiểm tra password phải trên 6 ký tự
     Validator.isPassword = (selector, min, message) => ({
         selector: selector,
-        test: (value) => value.length >= min ? undefined : message || `Password phải ${min} trở lên`
+        test: (value) => value.length >= min ? undefined : message || `Password phải ${min} chữ số trở lên`
     })
     //Kiểm tra password Comfime phải giống với password
     Validator.isComfimer = (selector, getComfirmValue, message) => ({
@@ -130,8 +146,14 @@ const checkInputs = () => {
         errorSelector: '.form-message',
         rules: [
             Validator.isRequired('#name'),
+
+            Validator.isRequired('#email2'),
             Validator.isEmail('#email2'),
+
+            Validator.isRequired('#password2'),
             Validator.isPassword('#password2', 6),
+            
+            Validator.isRequired('#password_confirmation'),
             Validator.isComfimer(
                 '#password_confirmation', 
                 () => document.querySelector('#form-2 #password2').value, 
@@ -139,13 +161,25 @@ const checkInputs = () => {
             )
         ]
     })
-    //Kiểm tra input đăng nhập
+    // Kiểm tra input đăng nhập
     Validator({
         form: '#form-1',
         errorSelector: '.form-message',
         rules: [
+            Validator.isRequired('#email1'),
             Validator.isEmail('#email1'),
-            Validator.isPassword('#password1'),
+
+            Validator.isRequired('#password1'),
+            Validator.isPassword('#password1', 6),
+        ]
+    })
+    //form thêm sản phẩm của admin
+    Validator({
+        form: '#add-form',
+        errorSelector: '.form-error',
+        rules: [
+            Validator.isRequired('#nameProduct'),
+            Validator.isRequired('#price'),
         ]
     })
 }

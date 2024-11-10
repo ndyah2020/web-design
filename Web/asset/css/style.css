@@ -1282,9 +1282,6 @@ a {
 }
 
 /* Thông báo lỗi bỏ trống */
-.errorInput {
-    border: 1px solid red;
-}
 .form-message {
     margin-top: 2px;
     color: red;
