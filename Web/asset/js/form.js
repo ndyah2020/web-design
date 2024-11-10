@@ -64,48 +64,67 @@ const checkInputs = () => {
     
     function Validator(options) {
 
-        const validate = (inputElement, rule) => {
-
+        const showError = (errorMessage, inputElement) =>{
             const errorElement = inputElement.parentElement.parentElement.querySelector(options.errorSelector);
+            errorElement.innerText = errorMessage;
+            inputElement.style.border = '1px solid red'; 
+        }   
 
+        const clearError = (inputElement) => {
+            const errorElement = inputElement.parentElement.parentElement.querySelector(options.errorSelector);
+            errorElement.innerText = '';
+            inputElement.style.border = ''; 
+        }
+
+        const validate = (inputElement, rule) => {
             const rules = selectorRules.get(rule.selector) || [];
-            let errorMessage;
+            var errorMessage;
+
+            for (var i = 0; i < rules.length; ++i) {
+                errorMessage = rules[i](inputElement.value);
+               if (errorMessage) break;
+            }
     
-            for (const test of rules) {
-                errorMessage = test(inputElement.value);
-                if (errorMessage) break;
-            }
-            
             if (errorMessage) {
-
-                errorElement.innerText = errorMessage;
-                inputElement.style.border = '1px solid red'; 
+                showError(errorMessage, inputElement);
             } else {
-
-                errorElement.innerText = '';
-                inputElement.style.border = ''; 
+                clearError(inputElement);
             }
-        
-            inputElement.addEventListener('input', () => {
-                
-                errorElement.innerText = '';
-                inputElement.style.border = ''; 
-            });
+            inputElement.addEventListener('input', () => clearError(inputElement));
+            return !!errorMessage;
         };
 
         const formElement = document.querySelector(options.form)
         if(formElement){
-            formElement.addEventListener("submit", (event) => {
 
+            formElement.addEventListener("submit", (event) => {
                 event.preventDefault();
-                
+                var isFormValid = false
+
                 options.rules.forEach((rule) => {
                     const inputEmlement = formElement.querySelector(rule.selector)
-                    validate(inputEmlement,rule)
-                })
+                    var isValid = validate(inputEmlement,rule)
+                
+                    if(isValid){
+                        isFormValid = true
+                    }
+                })  
+                if(!isFormValid){
+                    if(typeof options.onSubmit === 'function'){
+                        const enableInputs = formElement.querySelectorAll('[name]')
+                        const ArrayFormValues = Array.from(enableInputs).reduce((object, valuesInput) =>{
+                            object[valuesInput.name] = valuesInput.value
+                            return object;
+                        },{})
+                        options.onSubmit(ArrayFormValues)
+                    }else{
+                        options.onSubmit()
+                    }
+                }
 
             });
             
+       
             options.rules.forEach((rule) => {
                 if(!selectorRules.has(rule.selector)){
                     selectorRules.set(rule.selector, [])
@@ -121,7 +140,7 @@ const checkInputs = () => {
                 }
     
             })
-            
+           
         }
     }
     
@@ -157,19 +176,22 @@ const checkInputs = () => {
         rules: [
             Validator.isRequired('#name'),
 
-            Validator.isRequired('#email2'),
             Validator.isEmail('#email2'),
+            Validator.isRequired('#email2'),
 
-            Validator.isRequired('#password2'),
             Validator.isPassword('#password2', 6),
+            Validator.isRequired('#password2'),
             
-            Validator.isRequired('#password_confirmation'),
             Validator.isComfimer(
                 '#password_confirmation', 
                 () => document.querySelector('#form-2 #password2').value, 
                 'Mật khẩu không trùng khớp'
-            )
-        ]
+            ),
+            Validator.isRequired('#password_confirmation'),
+        ],
+        onSubmit: (data) => {
+            console.log(data)
+        }
     })
     // Kiểm tra input đăng nhập
     Validator({
@@ -181,17 +203,23 @@ const checkInputs = () => {
 
             Validator.isRequired('#password1'),
             Validator.isPassword('#password1', 6),
-        ]
+        ],
+        onSubmit: (data) => {
+            console.log(data)
+        }
     })
-    //form thêm sản phẩm của admin
-    Validator({
-        form: '#add-form',
-        errorSelector: '.form-error',
-        rules: [
-            Validator.isRequired('#nameProduct'),
-            Validator.isRequired('#price'),
-        ]
-    })
+    // form thêm sản phẩm của admin
+    // Validator({
+    //     form: '#add-form',
+    //     errorSelector: '.form-error',
+    //     rules: [
+    //         Validator.isRequired('#nameProduct'),
+    //         Validator.isRequired('#price'),
+    //     ],
+    //     onSubmit: (data) => {
+    //         console.log(data)
+    //     }
+    // })
 }
 
 
