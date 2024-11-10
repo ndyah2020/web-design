@@ -95,7 +95,17 @@ const checkInputs = () => {
 
         const formElement = document.querySelector(options.form)
         if(formElement){
-    
+            formElement.addEventListener("submit", (event) => {
+
+                event.preventDefault();
+                
+                options.rules.forEach((rule) => {
+                    const inputEmlement = formElement.querySelector(rule.selector)
+                    validate(inputEmlement,rule)
+                })
+
+            });
+            
             options.rules.forEach((rule) => {
                 if(!selectorRules.has(rule.selector)){
                     selectorRules.set(rule.selector, [])
