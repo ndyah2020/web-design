@@ -1,22 +1,17 @@
-// Hàm lấy danh sách sản phẩm từ localStorage
-const getListProduct = () => {
-    const listProducts = JSON.parse(localStorage.getItem('listProducts'));
-    if (!listProducts) {
-        console.log("Không tìm thấy `listProducts` trong `localStorage`");
-        return [];
-    }
-    return listProducts;
-}
+
+let listProducts = localStorage.getItem("listProducts")
+    ? JSON.parse(localStorage.getItem('listProducts'))
+    : [];
 
 // Lấy danh sách người dùng từ localStorage
 let listUsers = localStorage.getItem("DataUsers")
-  ? JSON.parse(localStorage.getItem("DataUsers"))
-  : [];
+    ? JSON.parse(localStorage.getItem("DataUsers"))
+    : [];
 
 // Lấy danh sách đơn hàng từ localStorage
 let listOrders = localStorage.getItem("listOrders")
-  ? JSON.parse(localStorage.getItem("listOrders"))
-  : [];
+    ? JSON.parse(localStorage.getItem("listOrders"))
+    : [];
 
 renderAdmin();
 
@@ -41,7 +36,6 @@ function renderAdmin() {
 }
 
 function renderProductManagement() {
-    const listProducts = getListProduct();
     document.querySelector(".div-title").innerHTML = `
         <h1 class="title">Product Management</h1>
     `;
@@ -75,11 +69,12 @@ function renderProducts(arr) {
     arr.forEach((product) => {
         const productDiv = document.createElement("div");
         productDiv.classList.add("product");
+        let formattedPrice = product.model[0].price.toLocaleString("vi-VN") + " đ"
 
         productDiv.innerHTML = `
             <img src="${product.img}" alt="" class="img-product" />
             <h2 class="name">${product.name}</h2>
-            <span class="price">${product.model[0].price}</span>
+            <span class="price">${formattedPrice}</span>
             <div class="group-btn">
                 <button class="edit-btn" onclick="openEditForm(${product.id})">   
                     Edit
@@ -399,40 +394,13 @@ function renderTopSales() {
     </table>`;
 }
 
-
-// Add product
-function addProduct(data) {
-    const productId = setId();
-    const productName = data.nameProduct;
-    const productPrice = parseFloat(data.price);
-    const productType = data.type;
-    const productImg = data.linkImage;
-    const product = {
-      id: productId,
-      name: productName,
-      price: productPrice,
-      image: productImg,
-      star: 5.0,
-    //   nature: {
-    //     color: ["white", "black"],
-    //     size: ["S", "M", "L"],
-    //     type: productType,
-    //   },
-    };
-    listProducts.unshift(product);
-    clearForm();
-    localStorage.setItem("listProducts", JSON.stringify(listProducts));
-    console.log(listProducts);
-    renderProducts(listProducts);
-    rmvAnimate();
-}
-
 // Xử lý ẩn hiện:
 function addAnimate() {
     addEditProductBackgroundForm.classList.add("animate");
     addEditProductForm.classList.add("animate");
-  }
-  function rmvAnimate() {
+}
+  
+function rmvAnimate() {
     if (checkEdit == 1) clearForm();
     addEditProductBackgroundForm.classList.remove("animate");
     addEditProductForm.classList.remove("animate");
@@ -448,14 +416,17 @@ function addAnimate() {
         allFormError[j].innerText = "";
     }
 }
+
+function clearForm() {
+    document.getElementById("nameProduct").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("type").value = "";
+    document.getElementById("linkImage").value = "";
+}
   
 let checkEdit = 0;
 const btnCloseForm = document.querySelector(".closeImg");
 const btnAddProduct = document.querySelector(".add-btn");
-function openAddForm() {
-    addAnimate();
-    btnCloseForm.addEventListener("click", rmvAnimate);
-}
 
 const addEditProductBackgroundForm = document.querySelector(".add-edit-product-background-form");
 
@@ -465,3 +436,300 @@ addEditProductForm.onclick = function (event) {
     // Ngăn chặn sự kiện khi ấn vào form mà bị mất
     event.stopPropagation();
 };
+
+// quan ly san pham
+function setId() {
+    let max = listProducts[0].id;
+    for (let i = 1; i < listProducts.length; i++) {
+      if (listProducts[i].id > max) max = listProducts[i].id;
+    }
+    return max + 1;
+}
+
+function openAddForm() {
+    addAnimate();
+    btnCloseForm.addEventListener("click", rmvAnimate);
+}
+
+function addProduct(data) {
+    const productId = setId();
+    const productName = data.nameProduct;
+    const productCpu = data.cpu;
+    const productPrice = parseFloat(data.price);
+    const productBrand = data.brand;
+    const productType = data.type;
+    const productImg = data.linkImage;
+    console.log(productImg);
+    const product = {
+        id: productId,
+        name: productName,
+        brand: productBrand,
+        type: productType,
+        image: productImg,
+        star: 5.0,
+        model: [
+            {
+                cpu: productCpu,
+                price: productPrice,
+            }
+        ]
+    };
+    listProducts.unshift(product);
+    clearForm();
+    localStorage.setItem("listProducts", JSON.stringify(listProducts));
+    console.log(listProducts);
+    renderProducts(listProducts);
+    rmvAnimate();
+}
+
+function addSuccessForm() {
+    const toast = document.querySelector(".toast");
+    const closeIcon = document.querySelector(".close");
+    const progress = document.querySelector(".progress");
+    let timer1, timer2;
+  
+    toast.classList.add("active");
+    progress.classList.add("active");
+  
+    timer1 = setTimeout(() => {
+      toast.classList.remove("active");
+    }, 2500); //1s = 1000 milliseconds
+  
+    timer2 = setTimeout(() => {
+      progress.classList.remove("active");
+    }, 2800);
+  
+    closeIcon.addEventListener("click", () => {
+      toast.classList.remove("active");
+  
+      setTimeout(() => {
+        progress.classList.remove("active");
+      }, 300);
+  
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    });
+}
+
+function openEditForm(productId) {
+    document.getElementById("idProduct").value = productId;
+    checkEdit = 1;
+    const productName = document.getElementById("nameProduct");
+    const productCpu = document.getElementById("cpu");
+    const productPrice = document.getElementById("price");
+    const productBrand = document.getElementById("brand");
+    const productType = document.getElementById("type");
+  
+    for (let i = 0; i < listProducts.length; i++) {
+      if (listProducts[i].id === productId) {
+        const product = listProducts[i];
+        productName.value = product.name;
+        productCpu.value = product.model[0].cpu;
+        productPrice.value = product.model[0].price;
+        productBrand.value = product.brand;
+        productType.value = product.type;
+        // productImg.value = product.image;
+      }
+    }
+    addAnimate();
+    btnCloseForm.addEventListener("click", rmvAnimate);
+}
+
+function editProduct() {
+    const productId = parseInt(document.getElementById("idProduct").value);
+    const productName = document.getElementById("nameProduct").value;
+    const productPrice = parseFloat(document.getElementById("price").value);
+    const productType = document.getElementById("type").value;
+    const productImg = document.getElementById("linkImage").value;
+    const productToEdit = listProducts.find(
+      (product) => product.id === productId
+    );
+    if (productToEdit) {
+      productToEdit.name = productName;
+      productToEdit.price = productPrice;
+      productToEdit.nature.type = productType;
+      productToEdit.image = productImg;
+      localStorage.setItem("listProducts", JSON.stringify(listProducts));
+      renderProducts(listProducts);
+      rmvAnimate();
+    } else {
+      console.log("Product not found for editing with ID " + productId);
+    }
+}
+
+function deleteProduct(productId) {
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this product"
+    );
+    for (let i = 0; i < listProducts.length; i++) {
+      if (listProducts[i].id === productId && shouldDelete) {
+        console.log("da xoa  " + listProducts[i].id);
+        console.log(listProducts);
+        listProducts.splice(i, 1);
+        
+      }
+    }
+    localStorage.setItem("listProducts", JSON.stringify(listProducts));
+    renderProducts(listProducts);
+}
+
+// validate form
+function Validator(options) {
+    function getParent(element, selector) {
+      while (element.parentElement) {
+        if (element.parentElement.matches(selector)) {
+          return element.parentElement;
+        }
+        element = element.parentElement;
+      }
+    }
+  
+    var selectorRules = {};
+    // Hàm thực hiện validate
+    function validate(inputElement, rule) {
+      var errorElement = getParent(
+        inputElement,
+        options.formGroupSelector
+      ).querySelector(options.errorSelector);
+      var errorMessage;
+      // Lấy ra các rules của selector
+      var rules = selectorRules[rule.selector];
+      // Lặp qua từng rule & kiểm tra
+      // Nếu có lỗi thì dừng việc kiểm
+      for (var i = 0; i < rules.length; ++i) {
+        errorMessage = rules[i](inputElement.value);
+        if (errorMessage) break;
+      }
+      if (errorMessage) {
+        errorElement.innerText = errorMessage;
+        var validateElement = getParent(
+            inputElement,
+            options.formGroupSelector
+        ).querySelector(".div");
+        Object.assign(validateElement.style, {
+            "border-color": "red",
+        });
+      } else {
+        errorElement.innerText = "";
+        var validateElement = getParent(
+          inputElement,
+          options.formGroupSelector
+        ).querySelector(".div");
+        Object.assign(validateElement.style, {
+          "border-color": "#b3b3b3",
+        });
+      }
+      return !errorMessage;
+    }
+  
+    // Lấy element của form cần validate
+    var formElement = document.querySelector(options.form);
+    if (formElement) {
+      // Khi submit form
+      formElement.onsubmit = function (e) {
+        e.preventDefault();
+        var isFormValid = true;
+        // Lặp qua từng rules và validate
+        options.rules.forEach(function (rule) {
+          var inputElement = formElement.querySelector(rule.selector);
+          var isValid = validate(inputElement, rule);
+          if (!isValid) {
+            isFormValid = false;
+          }
+        });
+  
+        if (isFormValid) {
+          // Trường hợp submit với javascript
+          if (typeof options.onSubmit === "function") {
+            var enableInputs = formElement.querySelectorAll("[name]");
+            var formValues = Array.from(enableInputs).reduce(function (
+              values,
+              input
+            ) {
+              values[input.name] = input.value;
+              return values;
+            },
+            {});
+            options.onSubmit(formValues);
+          }
+          // Trường hợp submit với hành vi mặc định
+          else {
+            formElement.submit();
+          }
+        }
+      };
+  
+      // Lặp qua mỗi rule và xử lý (lắng nghe sự kiện blur, input, ...)
+      options.rules.forEach(function (rule) {
+        // Lưu lại các rules cho mỗi input
+        if (Array.isArray(selectorRules[rule.selector])) {
+          selectorRules[rule.selector].push(rule.test);
+        } else {
+          selectorRules[rule.selector] = [rule.test];
+        }
+  
+        var inputElement = formElement.querySelector(rule.selector);
+  
+        if (inputElement) {
+          // Xử lý trường hợp blur khỏi input
+          inputElement.onblur = function () {
+            validate(inputElement, rule);
+          };
+  
+          // Xử lý mỗi khi người dùng nhập vào input
+          inputElement.oninput = function () {
+            var errorElement = getParent(
+              inputElement,
+              options.formGroupSelector
+            ).querySelector(options.errorSelector);
+            errorElement.innerText = "";
+            var validateElement = getParent(
+              inputElement,
+              options.formGroupSelector
+            ).querySelector(".div");
+            Object.assign(validateElement.style, {
+              "border-color": "#b3b3b3",
+            });
+            document.querySelector(".form-error").innerHTML = "";
+          };
+        }
+      });
+    }
+}
+
+Validator.isRequired = function (selector, message) {
+    return {
+        selector: selector,
+        test: function (value) {
+            return value.trim() ? undefined : message || "Vui lòng nhập trường này";
+        },
+    };
+};
+
+function runValidatorForm() {
+    Validator({
+        form: "#add-form",
+        formGroupSelector: ".form-group",
+        errorSelector: ".form-error",
+        rules: [
+            Validator.isRequired("#nameProduct", "Vui lòng nhập tên sản phẩm"),
+            Validator.isRequired("#cpu", "Vui lòng nhập tên CPU"),
+            Validator.isRequired("#price", "Vui lòng nhập đơn giá"),
+            Validator.isRequired("#brand", "Vui lòng chọn hãng sản phẩm"),
+            Validator.isRequired("#type", "Vui lòng chọn loại sản phẩm"),
+            Validator.isRequired("#linkImage", "Vui lòng chọn link hình ảnh"),
+        ],
+        onSubmit: function (data) {
+        if (checkEdit === 0) {
+            addSuccessForm();
+            console.log(data);
+            clearForm();
+            addProduct(data);
+        } else {
+            editProduct();
+        }
+        },
+    });
+}
+
+runValidatorForm();
