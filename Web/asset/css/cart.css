@@ -192,10 +192,9 @@ body {
     font-weight: 500;
     line-height: 1.44; /* 144.444% */
 }
-
+.info-product .info-product__title .cpu,
 .info-product .info-product__title .price {
     color: #1a162e;
-    font-size: 2.2rem;
     font-weight: 700;
     line-height: 1.45; /* 145.455% */
 }
@@ -304,6 +303,11 @@ body {
 .main-sidebar__checkout .total {
     margin-top: 28px;
     position: relative;
+  
+}
+.info-product__title{
+    display: flex;
+    flex-direction: column;
 }
 
 .main-sidebar__checkout .total::after {
