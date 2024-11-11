@@ -81,8 +81,16 @@ const CheckRegisterForm = new Validator({
             'Mật khẩu không trùng khớp'
         ),
     ],
-    onSubmit: (data) => {
-        console.log(data)
+    onSubmit: (dataFromClinet) => {
+        const getDataUser = getUserFromLocalStorage('DataUsers');
+
+        const isMail = getDataUser.find((data) => dataFromClinet.email2 === data.email)
+
+        if(isMail){
+            document.querySelector('.loginError').innerText = "Email này đã được sử dụng";
+        }else{
+            registerUserFromClinet(dataFromClinet)
+        }
     }
 });
 //Kiểm tra input đăng nhập
@@ -97,14 +105,22 @@ const CheckLoginForm = new Validator({
         Validator.isRequired('#password1','Vui lòng nhập password'),
     ],
     onSubmit: (data) => {
-        checkLogin(data)
+        const dataUser = {
+            id: data.id,
+            isAdmin:    0,
+            name: data.name,
+            email: data.email1,
+            password:  data.password,
+            cartItems: [
+            ],
+        }
+        checkLogin(dataUser)
     }
 });
   
 
 const saveUserInToLocalStorage = (key, data) => 
     localStorage.setItem(key, JSON.stringify(data));
-
 
 
 const getUserFromLocalStorage = (listData) => {
@@ -121,11 +137,11 @@ saveUserInToLocalStorage('DataUsers', DataUsers)
 
 const checkLogin = (dataFromInputLogin) => {
     const getDataUser = getUserFromLocalStorage('DataUsers');
-    currentLogin = getDataUser.find((data) => dataFromInputLogin.email1 === data.email && dataFromInputLogin.password === data.password);
-
+    currentLogin = getDataUser.find((data) => dataFromInputLogin.email === data.email && dataFromInputLogin.password === data.password);
+    
     if (currentLogin) {
         saveUserInToLocalStorage('currentLogin', currentLogin);
-        alert('Đăng nhập thành công');
+        isRegister ?  alert('Đăng Ký thành thành công') : alert('Đăng nhập thành công');
 
         if (currentLogin.isAdmin) {
             window.location = "./admin.html";
@@ -160,6 +176,33 @@ const checkAdmin = () => {
             window.location.href = "./*";
         }
     }   
+}
+//đăng ký tài khoản 
+var isRegister = false
+
+function setIdUser() {
+    let max = DataUsers[0].id;
+    for (let i = 1; i < DataUsers.length; i++) {
+      if (DataUsers[i].id > max) max = DataUsers[i].id;
+    }
+    return max + 1;
+}
+
+
+const registerUserFromClinet = (dataFromClinet) => {
+    const user = {
+        id: setIdUser(),
+        isAdmin:    0,
+        name: dataFromClinet.name,
+        email: dataFromClinet.email2,
+        password:  dataFromClinet.password,
+        cartItems: [
+        ],
+    }
+    isRegister = true
+    DataUsers.push(user)
+    saveUserInToLocalStorage('DataUsers', DataUsers)
+    checkLogin(user)
 }
 
 const App = () => {
