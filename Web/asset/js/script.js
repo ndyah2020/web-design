@@ -754,9 +754,7 @@ const showAndCloseAbout = () => {
     })
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    showAndCloseAbout();
-})
+
 
 //_________________________Chuyển động banner_______________________//
 // Khai báo phần tử
@@ -969,6 +967,11 @@ searchAdvancedBtn.addEventListener("click", function(e) {
     );
 });
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    showAndCloseAbout();
+    renderCartUI();
+})
 
 // nghiên cứu em yêu khoa học
 

@@ -64,7 +64,7 @@ const selectConfig = (product) => {
                 name: product.name,
                 price: product.model[index].price,
                 cpu : product.model[index].cpu,
-                image: product.image,
+                img: product.img,
                 type: product.type,
                 quantity: 1,
                 check: 0,
@@ -76,52 +76,8 @@ const selectConfig = (product) => {
     })
 }
 
-
-const addCard = () => {
-    const btnAddCard = document.querySelector('.btn-add');
-    const loginModal = document.querySelector('.loginBackground');
-    const showLogin = () => loginModal.classList.add('open');
-    
-    const addToCart = (productConfig) => {
-        const productIndex = currentLogin.cartItems.findIndex(item => item.id === productConfig.id);
-
-        productIndex === -1
-            ?currentLogin.cartItems.push(productConfig)
-
-            :currentLogin.cartItems[productIndex].quantity++;
-
-        saveItemInToLocalStorage('currentLogin',currentLogin)
-    };
-
-    const updateUserData = () => {
-        console.log(currentLogin)
-        const userIndex = DataUsers.findIndex(user => user.id === currentLogin.id);
-
-        if (userIndex !== -1) {
-            DataUsers[userIndex] = currentLogin;
-            saveItemInToLocalStorage('DataUsers', DataUsers);
-        }
-    };
-
-    if (btnAddCard) {
-        btnAddCard.addEventListener('click', () => {
-            if (!currentLogin) {
-                alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng');
-                showLogin();
-                return;
-            }
-
-            if (!configOfTheSelectedProduct) {
-                alert('Vui lòng chọn cấu hình sản phẩm');
-            } else {
-                addToCart(configOfTheSelectedProduct);
-                updateUserData();
-            }
-        });
-    }
-};
-
 document.addEventListener('DOMContentLoaded', () => {
     showProductDetail()
-    addCard()
+    addCart()
+    renderCartUI();
 })
