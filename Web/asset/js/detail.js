@@ -26,6 +26,7 @@ const showProductDetail = () => {
     const descriptionName = document.querySelector('.descriptionName')
     const descriptionCpu = document.querySelector('.descriptionCpu')
     const product = getListProduct().find(product => idProduct === product.id);
+
     productImg.src = product.img
     productName.textContent = product.name
     productRating.textContent = `( ${product.rate} )`
@@ -41,6 +42,7 @@ const showProductDetail = () => {
 }
 
 
+let configOfTheSelectedProduct = null
 
 const selectConfig = (product) => {
     const buttonConfig = document.querySelectorAll('.btn-config')
@@ -56,29 +58,69 @@ const selectConfig = (product) => {
             productPrice.textContent = product.model[index].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});;
 
             event.stopPropagation()
-            console.log(this.textContent)
-            console.log(product.model[index].price)
+
+            configOfTheSelectedProduct = {
+                id:`LapTop-${product.id}-${product.model[index].cpu}`,
+                name: product.name,
+                price: product.model[index].price,
+                cpu : product.model[index].cpu,
+                image: product.image,
+                type: product.type,
+                quantity: 1,
+                check: 0,
+                time: new Date().toLocaleString("en-US", {
+                    timeZone: "Asia/Ho_Chi_Minh",
+                }),
+            }
         })
     })
-
 }
 
 
 const addCard = () => {
-    const btnAddCard = document.querySelector('.btn-add')
-    
+    const btnAddCard = document.querySelector('.btn-add');
     const loginModal = document.querySelector('.loginBackground');
     const showLogin = () => loginModal.classList.add('open');
+    
+    const addToCart = (productConfig) => {
+        const productIndex = currentLogin.cartItems.findIndex(item => item.id === productConfig.id);
 
-    if(btnAddCard) {
+        productIndex === -1
+            ?currentLogin.cartItems.push(productConfig)
+
+            :currentLogin.cartItems[productIndex].quantity++;
+
+        saveItemInToLocalStorage('currentLogin',currentLogin)
+    };
+
+    const updateUserData = () => {
+        console.log(currentLogin)
+        const userIndex = DataUsers.findIndex(user => user.id === currentLogin.id);
+
+        if (userIndex !== -1) {
+            DataUsers[userIndex] = currentLogin;
+            saveItemInToLocalStorage('DataUsers', DataUsers);
+        }
+    };
+
+    if (btnAddCard) {
         btnAddCard.addEventListener('click', () => {
-            if(!currentLogin){
-                alert('Đăng Nhập để thêm sản phẩm vào giỏ hàng')
-                showLogin()
+            if (!currentLogin) {
+                alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng');
+                showLogin();
+                return;
             }
-        })
+
+            if (!configOfTheSelectedProduct) {
+                alert('Vui lòng chọn cấu hình sản phẩm');
+            } else {
+                addToCart(configOfTheSelectedProduct);
+                updateUserData();
+            }
+        });
     }
-}
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     showProductDetail()
     addCard()

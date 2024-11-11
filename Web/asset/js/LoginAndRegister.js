@@ -82,7 +82,7 @@ const CheckRegisterForm = new Validator({
         ),
     ],
     onSubmit: (dataFromClinet) => {
-        const getDataUser = getUserFromLocalStorage('DataUsers');
+        const getDataUser = getItemFromLocalStorage('DataUsers');
 
         const isMail = getDataUser.find((data) => dataFromClinet.email2 === data.email)
 
@@ -119,29 +119,29 @@ const CheckLoginForm = new Validator({
 });
   
 
-const saveUserInToLocalStorage = (key, data) => 
+const saveItemInToLocalStorage = (key, data) => 
     localStorage.setItem(key, JSON.stringify(data));
 
 
-const getUserFromLocalStorage = (listData) => {
+const getItemFromLocalStorage = (listData) => {
     const dataUser = JSON.parse(localStorage.getItem(listData));
     if (!dataUser) {
         return null;
     }
     return dataUser;
 }
-var currentLogin = getUserFromLocalStorage('currentLogin');
+var currentLogin = getItemFromLocalStorage('currentLogin');
 
-saveUserInToLocalStorage('DataUsers', DataUsers)
+saveItemInToLocalStorage('DataUsers', DataUsers)
 
 
 const checkLogin = (dataFromInputLogin) => {
-    const getDataUser = getUserFromLocalStorage('DataUsers');
+    const getDataUser = getItemFromLocalStorage('DataUsers');
     currentLogin = getDataUser.find((data) => dataFromInputLogin.email === data.email && dataFromInputLogin.password === data.password);
     
     if (currentLogin) {
-        saveUserInToLocalStorage('currentLogin', currentLogin);
-        isRegister ?  alert('Đăng Ký thành thành công') : alert('Đăng nhập thành công');
+        saveItemInToLocalStorage('currentLogin', currentLogin);
+        isRegister ?  alert('Đăng ký thành thành công') : alert('Đăng nhập thành công');
 
         if (currentLogin.isAdmin) {
             window.location = "./admin.html";
@@ -159,7 +159,7 @@ const checkLogin = (dataFromInputLogin) => {
 const logoutUser = () => {
     const iconUser = document.querySelector('.iconUser');
     iconUser.innerHTML = `<img src="./asset/images/header-user.svg" alt="" class="icon-user" />`
-    saveUserInToLocalStorage('currentLogin', null)
+    saveItemInToLocalStorage('currentLogin', null)
     window.location = "./index.html"
 }
 
@@ -201,7 +201,7 @@ const registerUserFromClinet = (dataFromClinet) => {
     }
     isRegister = true
     DataUsers.push(user)
-    saveUserInToLocalStorage('DataUsers', DataUsers)
+    saveItemInToLocalStorage('DataUsers', DataUsers)
     checkLogin(user)
 }
 

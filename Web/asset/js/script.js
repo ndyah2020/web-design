@@ -651,9 +651,6 @@ function renderProduct(products) {
                         <img src="./asset/images/main-star.svg" alt="" class="star" />
                         <span class="star-num">${product.rate}</span>
                     </div>
-                    <button class="add-to-cart-button" onclick = "addToCard(${product.id})">
-                        Add to Cart
-                    </button>
                 </div>
             `;
 
@@ -973,14 +970,6 @@ searchAdvancedBtn.addEventListener("click", function(e) {
 });
 
 
-const addToCard = () => {
-    const loginModal = document.querySelector('.loginBackground');
-    const showLogin = () => loginModal.classList.add('open');
-    if(!currentLogin){
-        alert('Đăng Nhập để thêm sản phẩm vào giỏ hàng')
-        showLogin()
-    }
-} 
 // nghiên cứu em yêu khoa học
 
 // function getRandomColor() {
