@@ -32,7 +32,8 @@ const showLoginAndRegister = () => {
         const hideLogin = () => loginModal.classList.remove('open');
 
         iconLogin.addEventListener('click', showLogin);
-        inconLoginStart.addEventListener('click', showLogin);
+        if(inconLoginStart)
+            inconLoginStart.addEventListener('click', showLogin);
 
         closeBtn.addEventListener('click', hideLogin);
 
@@ -61,19 +62,19 @@ const showForm = () => {
     }
 }
 //Kiểm tra input đăng ký
-const CheckRegister = new Validator({
+const CheckRegisterForm = new Validator({
     form: '#form-2',
     errorSelector: '.form-message',
     rules: [
-        Validator.isRequired('#name'),
+        Validator.isRequired('#name','Vui lòng nhập thông tin tên tài khoản'),
 
-        Validator.isRequired('#email2'),
-        Validator.isEmail('#email2'),
+        Validator.isRequired('#email2','Vui lòng nhập thông tin email'),
+        Validator.isEmail('#email2','Vui lòng nhập vào là email'),
 
-        Validator.isRequired('#password2'),
+        Validator.isRequired('#password2','Vui lòng nhập password'),
         Validator.isPassword('#password2', 6),
         
-        Validator.isRequired('#password_confirmation'),
+        Validator.isRequired('#password_confirmation','Vui lòng xác nhận password'),
         Validator.isComfimer(
             '#password_confirmation', 
             () => document.querySelector('#form-2 #password2').value, 
@@ -86,15 +87,14 @@ const CheckRegister = new Validator({
 });
 //Kiểm tra input đăng nhập
 
-const CheckLogin = new Validator({
+const CheckLoginForm = new Validator({
     form: '#form-1',
     errorSelector: '.form-message',
     rules: [
-        Validator.isRequired('#email1'),
-        Validator.isEmail('#email1'),
+        Validator.isRequired('#email1','Vui lòng nhập email để đăng nhập'),
+        Validator.isEmail('#email1','Vui lòng nhập vào là email'),
     
-        Validator.isRequired('#password1'),
-        Validator.isPassword('#password1', 6),
+        Validator.isRequired('#password1','Vui lòng nhập password'),
     ],
     onSubmit: (data) => {
         checkLogin(data)
@@ -119,29 +119,26 @@ var currentLogin = getUserFromLocalStorage('currentLogin');
 saveUserInToLocalStorage('DataUsers', DataUsers)
 
 
-
-const checkLogin = (dataFromInputLogin) =>{
-    // currentLogin = null; 
+const checkLogin = (dataFromInputLogin) => {
     const getDataUser = getUserFromLocalStorage('DataUsers');
+    currentLogin = getDataUser.find((data) => dataFromInputLogin.email1 === data.email && dataFromInputLogin.password === data.password);
 
-    if(getDataUser){
-        getDataUser.forEach((data) => {
-            if(dataFromInputLogin.email1 === data.email && dataFromInputLogin.password === data.password){
-                currentLogin = data
-            }
-            if(currentLogin){
-                saveUserInToLocalStorage('currentLogin', currentLogin)
-                return;
-            }
-        });
-        if(!currentLogin)
-           document.querySelector('.loginError').innerHTML = `Tài khoản hoặc mật khẩu không chính xác!`
-        else{
-            alert('Đăng nhập thành công')
-            currentLogin.isAdmin ? window.location = "./admin.html" : window.location = "./index.html"
+    if (currentLogin) {
+        saveUserInToLocalStorage('currentLogin', currentLogin);
+        alert('Đăng nhập thành công');
+
+        if (currentLogin.isAdmin) {
+            window.location = "./admin.html";
+        }else{
+            window.location.pathname.endsWith("details.html")
+                ?window.location.reload()
+                :window.location = "./index.html"   
         }
+        
+    } else {
+        document.querySelector('.loginError').innerText = "Mật khẩu không chính xác";
     }
-}
+};
 
 const logoutUser = () => {
     const iconUser = document.querySelector('.iconUser');
@@ -156,6 +153,7 @@ const setIcon = () => {
         iconUser.innerHTML = `<img src="./asset/images/admin-logout-icon.svg" alt="" class="icon-logout" onclick="logoutUser()"/>`;
     }
 };
+
 const checkAdmin = () => {
     if (window.location.pathname.endsWith("admin.html")) {
         if (!currentLogin || currentLogin.isAdmin !== 1) {

@@ -63,18 +63,10 @@ const selectConfig = (product) => {
 
 }
 
-const getUserFromLocalStorage = (listData) => {
-    const dataUser = JSON.parse(localStorage.getItem(listData));
-    if (!dataUser) {
-        return null;
-    }
-    return dataUser;
-}
-var currentLogin = getUserFromLocalStorage('currentLogin');
 
 const addCard = () => {
     const btnAddCard = document.querySelector('.btn-add')
-    const iconLogin = document.querySelector('.icon-user');
+    
     const loginModal = document.querySelector('.loginBackground');
     const showLogin = () => loginModal.classList.add('open');
 
@@ -82,6 +74,7 @@ const addCard = () => {
         btnAddCard.addEventListener('click', () => {
             if(!currentLogin){
                 alert('Đăng Nhập để thêm sản phẩm vào giỏ hàng')
+                showLogin()
             }
         })
     }
