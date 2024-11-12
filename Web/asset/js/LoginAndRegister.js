@@ -123,12 +123,12 @@ const saveItemInToLocalStorage = (key, data) =>
     localStorage.setItem(key, JSON.stringify(data));
 
 
-const getItemFromLocalStorage = (listData) => {
-    const dataUser = JSON.parse(localStorage.getItem(listData));
-    if (!dataUser) {
+const getItemFromLocalStorage = (listItem) => {
+    const item = JSON.parse(localStorage.getItem(listItem));
+    if (!item) {
         return null;
     }
-    return dataUser;
+    return item;
 }
 var currentLogin = getItemFromLocalStorage('currentLogin');
 

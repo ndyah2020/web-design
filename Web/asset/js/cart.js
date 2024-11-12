@@ -122,32 +122,30 @@ const checkOut = () =>{
     }
 }
 
-var listOrders = []
+let listOrders = getItemFromLocalStorage('listOrders') || [];
 
 const setId = () => {
-    let max=0
-    for(let i=0;i<listOrders.length;i++){
-        if(listOrders[i].id > max) max=listOrders[i].id
-    }
-    return max+1;
- }
+    let maxId = 0;
+    listOrders.forEach(order => {
+        if (order.id > maxId) maxId = order.id;
+    });
+    return maxId + 1; 
+};
 
+const updateListOrders = (data) => {
+    const listOrdersObject = {
+        id: setId(), 
+        userId: data.id,
+        email: data.email,
+        nameCustomer: data.name,
+        order: data.cartItems,
+    };
 
-const updateListOrders = (data) =>{
-    const listOrdersObject = (
-        {
-            id: setId(),
-            userId: data.id,
-            email: data.email,
-            nameCustomer: data.name,
-            order: data.cartItems,
-        }
-    )
-    listOrders = getItemFromLocalStorage('listOrders')
-    listOrders.push(listOrdersObject)
-    saveItemInToLocalStorage('listOrders',listOrders)
-    afterUpdate()
-}
+    listOrders.push(listOrdersObject); 
+
+    saveItemInToLocalStorage('listOrders', listOrders);
+    afterUpdate();
+};
 
 const afterUpdate = () => {
     alert("Thank you!")
