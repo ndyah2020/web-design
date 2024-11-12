@@ -200,7 +200,6 @@ body {
 }
 
 .info-product__action {
-    margin-top: 58px;
     display: flex;
     justify-content: space-between;
     padding-top: 25px;

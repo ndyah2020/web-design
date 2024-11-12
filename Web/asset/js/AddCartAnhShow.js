@@ -17,7 +17,6 @@ const addCart = () => {
     };
 
     const updateUserData = () => {
-        console.log(currentLogin)
         const userIndex = DataUsers.findIndex(user => user.id === currentLogin.id);
 
         if (userIndex !== -1) {
