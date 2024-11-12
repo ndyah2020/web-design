@@ -273,8 +273,8 @@ function renderOrderItem(arr, orderid) {
         const orderTr = document.createElement("tr");
         orderTr.innerHTML = `
                 <td>${number}</td>
-                <td><img class="img-history" src="${item.image}" alt=""></td>
-                <td>${item.nameProduct}</td>
+                <td><img class="img-history" src="${item.img}" alt=""></td>
+                <td>${item.name}</td>
                 <td>${item.quantity}</td>
                 <td>$${item.price}</td>
                 <td>${item.time}</td>
@@ -315,9 +315,35 @@ function renderUserManagement() {
     `;
     renderUser(listUsers);
 }
-
 // Lấy thông tin login //
+function renderUser(arr) {
+  const userManagementTbody = document.querySelector(".userTable tbody");
+  userManagementTbody.innerHTML = "";
 
+  arr.forEach((user) => {
+    const userTr = document.createElement("tr");
+    userTr.innerHTML = `
+                <td>${user.id}</td>
+                <td>${user.email}</td>
+                <td>${user.password}</td>
+                <td>
+                  <!--  <button class="delete-btn product delete-user" onclick = "deleteUser(${user.id})">
+                    Delete User
+                </button> -->
+                </td>
+        `;
+    userManagementTbody.appendChild(userTr);
+  });
+}
+const deleteUser = (userId) => {
+    const index = listUsers.findIndex(user => user.id === userId);
+    if (index !== -1) {
+        listUsers.splice(index, 1);
+        console.log(listUsers);
+        localStorage.setItem('DataUsers', JSON.stringify(listUsers));
+        renderUser(listUsers); 
+    }
+}
 function renderOrderStartictis() {
     document.querySelector(".div-title").innerHTML = `
         <h1 class="title">Order Statistics</h1>
