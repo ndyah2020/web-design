@@ -15,7 +15,6 @@
     
     <link rel="stylesheet" href="./asset/css/reset.css" />
     <link rel="stylesheet" href="./asset/css/admin.css" />
-    
     <link rel="stylesheet" href="./asset/font/stylesheet.css" />
 </head>
 
@@ -160,6 +159,46 @@
 
         <div class="progress"></div>
     </div>
+
+    <div class="loginBackground">
+        <div class="loginBlock">
+            <div class="closeLoginBlock"><img src="./asset/images/bx-x.svg" alt=""></div>
+            <div class="loginLogo"><img src="./asset/images/Logo.svg" alt=""></div>
+            <div class="loginError"></div>
+            <div class="tab-form">
+                <!-- 2 cái nút để di chuyển qua lại đăng nhập, đăng kí -->
+                <div class="tabs">
+                    <div class="tab-item active">Đăng nhập</div>
+                    <div class="line"></div>
+                </div>
+                
+                <!-- tab content -->
+                <div class="tab-content">
+                    <form action="" method="POST" class="form" id="form-1">
+                        <div class="tab-pane active">
+                            <div class="form-group">
+                                <label for="email1" class="form-label">Email</label>
+                                <div class="div">
+                                    <input type="text" name="email1" id="email1" placeholder="VD: email@domain.com" class="form-control">
+                                </div>
+                                <span class="form-message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password1" class="form-label">Mật khẩu</label>
+                                <div class="div">
+                                    <input type="password" name="password" id="password1" placeholder="Nhập mật khẩu" class="form-control">
+                                </div>
+                                <span class="form-message"></span>
+                            </div>
+                            <button class="form-submit">Đăng nhập</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="./asset/js/admin.js" async></script>
     <script src="./asset/js/validator.js"></script>

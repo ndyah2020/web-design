@@ -1262,7 +1262,7 @@ a {
     height: 100%;
     padding: 8px 12px;
     border: none;
-    border-radius: 6px;
+    border-radius: 6px; 
     outline: none;
     font-size: 1.4rem;
 }

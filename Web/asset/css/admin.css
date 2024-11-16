@@ -734,3 +734,170 @@ td {
    vertical-align: middle;
    text-align: center;
 }
+.loginBackground {
+   width: 100%;
+   height: 100%;
+   position: fixed;
+   z-index: 30;
+   animation-duration: 0.3s;
+   background-color: #fff;
+   left: 0;
+   right: 0;
+   top: 0;
+   bottom: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.loginBackground.active {
+   display: none;
+}
+@keyframes backgroundeffect1 {
+   0% {
+       opacity: 0;
+   }
+
+   100% {
+       opacity: 1;
+   }
+}
+@keyframes backgroundefffect2 {
+   0% {
+       opacity: 1;
+   }
+
+   100% {
+       opacity: 0;
+   }
+}
+/* @keyframes fadeIn {
+   from {
+       opacity: 0;
+       transform: translateY(-150px);
+   }
+   to {
+       opacity: 1;
+       transform: translateY(0px);
+   }
+} */
+.loginBackground .loginBlock {
+   background: #fff;
+   width: 550px;
+   padding: 25px 30px;
+   border-radius: 20px;
+   max-width: calc(100% - 32px);
+   min-height: 200px;
+   position: relative;
+   animation: fadeIn ease 1s;
+
+}
+.closeLoginBlock {
+   text-align: right;
+}
+.closeLoginBlock img {
+   width: 30px;
+   user-select: none;
+   cursor: pointer;
+}
+.loginLogo {
+   text-align: center;
+   font-size: 24px;
+}
+.tabs {
+   display: flex;
+   justify-content: center;
+   position: relative;
+   margin: 20px 0px;
+   font-size: 20px;
+   text-align: center;
+   color: rgba(0, 217, 246, 0.25);
+   opacity: 0.6;
+   cursor: pointer;
+}
+.tabs .line {
+   position: absolute;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   height: 6px;
+   border-radius: 15px;
+   background-color: rgba(0, 217, 246, 1);
+   transition: all 0.5s ease;
+}
+.tab-item {
+   width: 50%;
+   padding: 16px 20px 11px 20px;
+   margin: auto;
+   font-size: 20px;
+   text-align: center;
+   color:  rgba(0, 217, 246, 1);
+   background-color: #fff;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+   border-bottom: 5px solid transparent;
+   opacity: 0.6;
+   cursor: pointer;
+   user-select: none;
+   transition: all 0.7s ease;
+}
+.tab-item:hover,
+.tab-item.active {
+   opacity: 1;
+   width: 100%;
+   background-color:rgba(0, 217, 246, 0.25);
+   border-color: rgba(0, 217, 246, 0.3);
+}
+.tab-pane {
+   display: none;
+}
+.tab-pane.active {
+   display: block;
+}
+.form-group {
+   display: flex;
+   margin-bottom: 16px;
+   flex-direction: column;
+}
+.form-label {
+   font-weight: 700;
+   margin-bottom: 7px;
+   line-height: 1.8rem;
+   font-size: 1.6rem;
+   user-select: none;
+}
+.div {
+   width: 100%;
+   display: flex; /*ngang*/
+   align-items: center;
+   border: 1px solid #b3b3b3;
+   border-radius: 6px;
+}
+.div img {
+   position: relative;
+   left: -10px;
+   width: 25px;
+   height: 25px;
+}
+.form-control {
+   width: 100%;
+   height: 100%;
+   padding: 8px 12px;
+   border: none;
+   border-radius: 6px;
+   outline: none;
+   font-size: 1.4rem;
+}
+.form-submit {
+   cursor: pointer;
+   margin-top: 20px;
+   width: 100%;
+   border-radius: 6px;
+   font-size: 1.4rem;
+   height: 40px;
+   background-color: #1ebfc1;
+   border: none;
+   user-select: none;
+}
+.form-submit:hover {
+   background-color: #0ba1a3;
+}
