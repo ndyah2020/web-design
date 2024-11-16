@@ -5,6 +5,7 @@ let DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         name: "",
         email:      'admin123@gmail.com',
         password:   'admin123',
+        status :   true,
         cartItems: [
         ],
     },
@@ -14,6 +15,7 @@ let DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         name: "",
         email:      'client@gmail.com',
         password:   '123123',
+        status:    true,
         cartItems: [
         ],
     },
@@ -61,6 +63,22 @@ const showForm = () => {
         }) 
     }
 }
+
+
+const saveItemInToLocalStorage = (key, data) => 
+    localStorage.setItem(key, JSON.stringify(data));
+
+
+const getItemFromLocalStorage = (listItem) => {
+    const item = JSON.parse(localStorage.getItem(listItem));
+    if (!item) {
+        return null;
+    }
+    return item;
+}
+var currentLogin = getItemFromLocalStorage('currentLogin');
+
+saveItemInToLocalStorage('DataUsers', DataUsers)
 //Kiểm tra input đăng ký
 const CheckRegisterForm = new Validator({
     form: '#form-2',
@@ -81,7 +99,7 @@ const CheckRegisterForm = new Validator({
             'Mật khẩu không trùng khớp'
         ),
     ],
-    onSubmit: (dataFromClinet) => {
+    onSubmit: (dataFromClinet) =>{
         const getDataUser = getItemFromLocalStorage('DataUsers');
 
         const isMail = getDataUser.find((data) => dataFromClinet.email2 === data.email)
@@ -119,27 +137,18 @@ const CheckLoginForm = new Validator({
 });
   
 
-const saveItemInToLocalStorage = (key, data) => 
-    localStorage.setItem(key, JSON.stringify(data));
-
-
-const getItemFromLocalStorage = (listItem) => {
-    const item = JSON.parse(localStorage.getItem(listItem));
-    if (!item) {
-        return null;
-    }
-    return item;
-}
-var currentLogin = getItemFromLocalStorage('currentLogin');
-
-saveItemInToLocalStorage('DataUsers', DataUsers)
 
 
 const checkLogin = (dataFromInputLogin) => {
     const getDataUser = getItemFromLocalStorage('DataUsers');
     currentLogin = getDataUser.find((data) => dataFromInputLogin.email === data.email && dataFromInputLogin.password === data.password);
-    
     if (currentLogin) {
+
+        if(!currentLogin.status){
+            document.querySelector('.loginError').innerText = "Tài khoản đã bị vô hiệu hóa";
+            return;
+        }
+
         saveItemInToLocalStorage('currentLogin', currentLogin);
         isRegister ?  alert('Đăng ký thành thành công') : alert('Đăng nhập thành công');
 
@@ -196,11 +205,13 @@ const registerUserFromClinet = (dataFromClinet) => {
         name: dataFromClinet.name,
         email: dataFromClinet.email2,
         password:  dataFromClinet.password,
+        status : true,
         cartItems: [
         ],
     }
     isRegister = true
     DataUsers.push(user)
+    console.log(currentLogin)
     saveItemInToLocalStorage('DataUsers', DataUsers)
     checkLogin(user)
 }
