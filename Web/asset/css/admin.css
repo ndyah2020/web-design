@@ -30,9 +30,7 @@ body {
 a {
    text-decoration: none;
 }
-.hidden {
-   display: none;
-}
+
 
 /* ========= Header ========= */
 .header {
@@ -164,6 +162,7 @@ a {
    margin: 55px 0px 0px 280px;
    padding: 0px 30px;
    width: calc(100% - 310px);
+   position: relative;
 }
 
 .main-content .add-btn {
@@ -178,7 +177,20 @@ a {
    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
    transition: all 0.3s ease;
 }
-
+.main-content .add-btn-user {
+   position: absolute;
+   right: 50px;
+   padding: 5px 10px;
+   background-color: #313737;
+   border-radius: 5px;
+   border: none;
+   color: #fff;
+   font-size: 19px;
+   max-width: 200px;
+   cursor: pointer;
+   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+   transition: all 0.3s ease;
+}
 .add-product-search {
    display: flex;
    justify-content: space-between;
@@ -231,7 +243,9 @@ a {
 }
 
 .main-content .product {
-   padding: 30px;
+   cursor: pointer;
+   padding: 20px;
+   margin: 4px;
    display: flex;
    justify-content: space-between;
    align-items: center;
@@ -517,6 +531,22 @@ transition: all 0.3s ease;
 .form-error {
    color: red;
 }
+.select-view-users {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   margin-bottom: 6px;
+   label {
+     margin-bottom: 10px; 
+   }
+   
+   select {
+     padding: 10px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+   }
+ }
+
 .userTable {
    text-align: center;
    width: 100%;
@@ -734,6 +764,7 @@ td {
    vertical-align: middle;
    text-align: center;
 }
+/* login admin */
 .loginBackground {
    width: 100%;
    height: 100%;
@@ -749,9 +780,24 @@ td {
    align-items: center;
    justify-content: center;
 }
-.loginBackground.active {
+.form-message {
+   margin-top: 2px;
+   color: red;
+   font-size: 1.4rem;
+   height: 10px;
+   user-select: none;
+}
+
+.loginError {
+   text-align: center;
+   color: red;
+   margin: 10px;
+   padding: 5px 0px;
+}
+.hidden {
    display: none;
 }
+/* login admin */
 @keyframes backgroundeffect1 {
    0% {
        opacity: 0;

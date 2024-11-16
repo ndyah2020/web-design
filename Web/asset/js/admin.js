@@ -4,10 +4,12 @@ let listProducts = localStorage.getItem("listProducts")
     : [];
 
 // Lấy danh sách người dùng từ localStorage
-let listUsers = localStorage.getItem("DataUsers")
+let listUsersClient = localStorage.getItem("DataUsers")
     ? JSON.parse(localStorage.getItem("DataUsers"))
     : [];
-
+let listUsersAdmin = localStorage.getItem("DataUsersAdmin")
+    ? JSON.parse(localStorage.getItem("DataUsersAdmin"))
+    : [];
 // Lấy danh sách đơn hàng từ localStorage
 let listOrders = localStorage.getItem("listOrders")
     ? JSON.parse(localStorage.getItem("listOrders"))
@@ -31,7 +33,7 @@ function renderAdmin() {
         renderOrderStartictis();
     };
     document.querySelector(".logout").onclick = function () {
-        window.location = "./index.html";
+        logOutAdmin();
     };
 }
 
@@ -301,10 +303,21 @@ function renderUserManagement() {
             <h1 class="title">User Management</h1>
     `;
     document.querySelector(".contain-add-product-search").innerHTML = `
+            <button class="add-btn-user" onclick="openAddForm()">Add User</button>
+
+            <div class="select-view-users">
+                <label for="cars">Chọn loại tài khoản cần xem</label>
+                <select name="cars" id="cars">
+                    <option value="0">Admin</option>
+                    <option value="1">Client</option>
+                </select>
+            </div>
+
             <table class="userTable">
                 <thead>
                     <tr>
                         <th>Id</th>
+                        <th>Name</th>
                         <th>Email</th>
                         <th>Password</th>
                         <th></th>
@@ -313,7 +326,12 @@ function renderUserManagement() {
                 <tbody></tbody>
             </table>
     `;
-    renderUser(listUsers);
+    renderUser(listUsersAdmin)
+    const selectElement = document.getElementById('cars');
+    selectElement.addEventListener('change', () => {
+        const selectedValue = selectElement.value;
+        selectedValue == 1 ? renderUser(listUsersClient) : renderUser(listUsersAdmin)
+    });
 }
 // Lấy thông tin login //
 function renderUser(arr) {
@@ -324,24 +342,28 @@ function renderUser(arr) {
     const userTr = document.createElement("tr");
     userTr.innerHTML = `
                 <td>${user.id}</td>
+                <td>${user.name}</td>
                 <td>${user.email}</td>
                 <td>${user.password}</td>
-                <td>
-                  <!--  <button class="delete-btn product delete-user" onclick = "deleteUser(${user.id})">
-                    Delete User
-                </button> -->
+                <td style="display: flex">
+                    <button class="delete-btn product delete-user" onclick = "BlockUser(${user.id})">
+                        Block
+                    </button> 
+                    <button class="delete-btn product delete-user" onclick = "BlockUser(${user.id})">
+                        Edit
+                    </button> 
                 </td>
         `;
     userManagementTbody.appendChild(userTr);
   });
 }
-const deleteUser = (userId) => {
-    const index = listUsers.findIndex(user => user.id === userId);
+const BlockUser = (userId) => {
+    const index = listUsersClient.findIndex(user => user.id === userId);
     if (index !== -1) {
-        listUsers.splice(index, 1);
-        console.log(listUsers);
-        localStorage.setItem('DataUsers', JSON.stringify(listUsers));
-        renderUser(listUsers); 
+        listUsersClient.splice(index, 1);
+        console.log(listUsersClient);
+        localStorage.setItem('DataUsers', JSON.stringify(listUsersClient));
+        renderUser(listUsersClient); 
     }
 }
 function renderOrderStartictis() {

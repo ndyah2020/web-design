@@ -1,16 +1,6 @@
-let DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getItem('DataUsers')) : [
+var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getItem('DataUsers')) : [
     {
         id:         1,
-        isAdmin:    1,
-        name: "",
-        email:      'admin123@gmail.com',
-        password:   'admin123',
-        status :   true,
-        cartItems: [
-        ],
-    },
-    {
-        id:         2,
         isAdmin:    0,
         name: "",
         email:      'client@gmail.com',
@@ -20,7 +10,6 @@ let DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         ],
     },
 ];
-
 //Hiển thị login khi ấn vào icon
 const showLoginAndRegister = () => {
     const iconLogin = document.querySelector('.icon-user');
@@ -76,9 +65,10 @@ const getItemFromLocalStorage = (listItem) => {
     }
     return item;
 }
-var currentLogin = getItemFromLocalStorage('currentLogin');
 
+var currentLogin = getItemFromLocalStorage('currentLogin');
 saveItemInToLocalStorage('DataUsers', DataUsers)
+
 //Kiểm tra input đăng ký
 const CheckRegisterForm = new Validator({
     form: '#form-2',
@@ -152,14 +142,9 @@ const checkLogin = (dataFromInputLogin) => {
         saveItemInToLocalStorage('currentLogin', currentLogin);
         isRegister ?  alert('Đăng ký thành thành công') : alert('Đăng nhập thành công');
 
-        if (currentLogin.isAdmin) {
-            window.location = "./admin.html";
-        }else{
-            window.location.pathname.endsWith("details.html")
+        window.location.pathname.endsWith("details.html")
                 ?window.location.reload()
                 :window.location = "./index.html"   
-        }
-        
     } else {
         document.querySelector('.loginError').innerText = "Mật khẩu không chính xác";
     }
@@ -179,13 +164,6 @@ const setIcon = () => {
     }
 };
 
-const checkAdmin = () => {
-    if (window.location.pathname.endsWith("admin.html")) {
-        if (!currentLogin || currentLogin.isAdmin !== 1) {
-            window.location.href = "./*";
-        }
-    }   
-}
 //đăng ký tài khoản 
 var isRegister = false
 
@@ -220,7 +198,6 @@ const App = () => {
     showForm();
     showLoginAndRegister();
     setIcon();
-    checkAdmin();
 }
 
 document.addEventListener('DOMContentLoaded', () => App())
