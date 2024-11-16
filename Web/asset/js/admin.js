@@ -318,6 +318,7 @@ function renderUserManagement() {
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
+                        <th>Status</th>
                         <th>Email</th>
                         <th>Password</th>
                         <th></th>
@@ -335,37 +336,57 @@ function renderUserManagement() {
 }
 // Lấy thông tin login //
 function renderUser(arr) {
-  const userManagementTbody = document.querySelector(".userTable tbody");
-  userManagementTbody.innerHTML = "";
+    const userManagementTbody = document.querySelector(".userTable tbody");
+    userManagementTbody.innerHTML = "";
+  
+    arr.forEach((user) => {
+      const userTr = document.createElement("tr");
+      userTr.innerHTML = `
+                  <td>${user.id}</td>
+                  <td>${user.name}</td>
+                  <td>${user.status ? 'Hoạt động' : 'Đã Khóa'}</td>
+                  <td>${user.email}</td>
+                  <td>${user.password}</td>
+                  <td style="display: flex">
+                      <button class="delete-btn product delete-user" data-user='${JSON.stringify(user)}' onclick=${user.status ? "updateUserStatus(this,false)" : "updateUserStatus(this,true)"}>
+                          ${user.status ? 'Khóa' : 'Mở Khóa'}
+                      </button> 
+                      <button class="delete-btn product delete-user" data-user='${JSON.stringify(user)}' onclick='EditUser(this)'>
+                          Edit
+                      </button> 
+                  </td>
+          `;
+      userManagementTbody.appendChild(userTr);
+    });
+  }
+  
+  const updateUserStatus = (button, newStatus) => {
+    const user = JSON.parse(button.getAttribute("data-user"));
 
-  arr.forEach((user) => {
-    const userTr = document.createElement("tr");
-    userTr.innerHTML = `
-                <td>${user.id}</td>
-                <td>${user.name}</td>
-                <td>${user.email}</td>
-                <td>${user.password}</td>
-                <td style="display: flex">
-                    <button class="delete-btn product delete-user" onclick = "BlockUser(${user.id})">
-                        Block
-                    </button> 
-                    <button class="delete-btn product delete-user" onclick = "BlockUser(${user.id})">
-                        Edit
-                    </button> 
-                </td>
-        `;
-    userManagementTbody.appendChild(userTr);
-  });
-}
-const BlockUser = (userId) => {
-    const index = listUsersClient.findIndex(user => user.id === userId);
-    if (index !== -1) {
-        listUsersClient.splice(index, 1);
-        console.log(listUsersClient);
-        localStorage.setItem('DataUsers', JSON.stringify(listUsersClient));
-        renderUser(listUsersClient); 
+    user.status = newStatus;
+    if (user.isAdmin) {
+        if(user.email === currentLoginAdmin.email){
+            alert('Không thể khóa tài khoản hiện đang đăng nhập')
+            return;
+        }
+        const index = listUsersAdmin.findIndex((adminUser) => adminUser.id === user.id);
+        listUsersAdmin[index] = user;
+        localStorage.setItem("DataUsersAdmin", JSON.stringify(listUsersAdmin));
+        renderUser(listUsersAdmin);
+    } else {
+        const index = listUsersClient.findIndex((clientUser) => clientUser.id === user.id);
+        listUsersClient[index] = user;
+        localStorage.setItem("DataUsers", JSON.stringify(listUsersClient));
+        renderUser(listUsersClient);
     }
-}
+};
+  
+  const EditUser = (button) => {
+    const user = JSON.parse(button.getAttribute("data-user")); 
+    console.log("Editing user:", user);
+  };
+  
+  
 function renderOrderStartictis() {
     document.querySelector(".div-title").innerHTML = `
         <h1 class="title">Order Statistics</h1>
