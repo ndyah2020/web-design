@@ -674,11 +674,13 @@ function renderPageNumber(arr, perPage) {
     totalPage = Math.ceil(arr.length / perPage); 
 
     document.querySelector(".pagination-ul").innerHTML = "";
-    document.querySelector(".pagination-ul").innerHTML += `
-        <a href="#recommend">
-            <li class="move-btn" onclick="prevPage()"><</li>
-        </a>
-    `;
+    if (totalPage > 0) {
+        document.querySelector(".pagination-ul").innerHTML += `
+            <a href="#recommend">
+                <li class="move-btn" onclick="prevPage()"><</li>
+            </a>
+        `;
+    }
 
     for (let i = 1; i <= totalPage; i++) {
         document.querySelector(".pagination-ul").innerHTML += `
@@ -688,11 +690,13 @@ function renderPageNumber(arr, perPage) {
         `;
     }
 
-    document.querySelector(".pagination-ul").innerHTML += `
-        <a href="#recommend">
-            <li class="move-btn" onclick="nextPage()">></li>
-        </a>
-    `;
+    if (totalPage > 0) {
+        document.querySelector(".pagination-ul").innerHTML += `
+            <a href="#recommend">
+                <li class="move-btn" onclick="nextPage()">></li>
+            </a>
+        `;
+    }
 
     if (totalPage > 1) {
         document.querySelector(".li1").classList.add("active");
