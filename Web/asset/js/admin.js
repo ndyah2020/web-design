@@ -118,10 +118,11 @@ function renderTotalPriceAdmin(arrOfOrderInListOrder) {
     arrOfOrderInListOrder.forEach((item) => {
         sumQuantity += item.quantity;
         sumPrice += item.price * item.quantity;
-        shipTotal += 5 * item.quantity;
+        shipTotal += 10000 * item.quantity;
     })
     let totalPriceFull = sumPrice + shipTotal;
-    return totalPriceFull.toFixed(2);
+    var formattedPrice = totalPriceFull.toLocaleString("vi-VN") + " đ";
+    return formattedPrice;
 } 
 
 function renderWaitOrder(arr) {
@@ -136,7 +137,7 @@ function renderWaitOrder(arr) {
             <div class="helloUser-Order">
                 <div class="sub-hello">
                     <p>User: ${order.email}</p>
-                    <p>Total: $${renderTotalPriceAdmin(order.order)}</p>
+                    <p>Total: ${renderTotalPriceAdmin(order.order)}</p>
                 </div>
                 <span class = "fee_shipping fee_shipping${order.id}" >Fee shipping: $10</span>
             </div>
@@ -183,7 +184,7 @@ function renderAcceptedOrder(arr){
             <div class="helloUser-Order">
                 <div class="sub-hello">
                     <p>User: ${order.email}</p>
-                    <p class="total">Total: $${renderTotalPriceAdmin(order.order)}</p>
+                    <p class="total">Total: ${renderTotalPriceAdmin(order.order)}</p>
                 </div>
                 <span class = "fee_shipping fee_shipping${order.id}" >Fee shipping: $10</span>
             </div>
@@ -222,7 +223,7 @@ function renderRejectedOrder(arr){
             <div class="helloUser-Order">
                 <div class="sub-hello">
                     <p>User: ${order.email}</p>
-                    <p class="total">Total: $${renderTotalPriceAdmin(order.order)}</p>
+                    <p class="total">Total: ${renderTotalPriceAdmin(order.order)}</p>
                 </div>
                 <span class = "fee_shipping fee_shipping${order.id}" >Fee shipping: $10</span>
             </div>
@@ -278,7 +279,7 @@ function renderOrderItem(arr, orderid) {
                 <td><img class="img-history" src="${item.img}" alt=""></td>
                 <td>${item.name}</td>
                 <td>${item.quantity}</td>
-                <td>$${item.price}</td>
+                <td>${item.price.toLocaleString("vi-VN") + "đ"}</td>
                 <td>${item.time}</td>
                 <td>${status(item.check)}</td>
             `;
@@ -578,6 +579,46 @@ function addSuccessForm() {
       clearTimeout(timer1);
       clearTimeout(timer2);
     });
+}
+
+// xử lý trạng thái order
+function acceptOrder(orderid) {
+    for (var i = 0; i < listOrders.length; i++) {
+        if (listOrders[i].id === orderid) {
+            if (listOrders[i].order[0].check === 0) {
+                listOrders[i].order.forEach((item) => {
+                    item.check = 1;
+                });
+            } else {
+                return;
+            }
+        }
+    }
+    updateListOrderstoLocalStorage();
+    alert("Đã xác nhận!");
+    renderOrderManagement();
+}
+
+function rejectOrder(orderid) {
+    for (var i = 0; i < listOrders.length; i++) {
+      if (listOrders[i].id === orderid) {
+        if (listOrders[i].order[0].check === 0) {
+          listOrders[i].order.forEach((item) => {
+            item.check = 2;
+          });
+        } else {
+          return;
+        }
+      }
+    }
+    updateListOrderstoLocalStorage();
+    alert("Đã hủy");
+    renderOrderManagement();
+}
+
+function updateListOrderstoLocalStorage() {
+    let order = JSON.stringify(listOrders);
+    localStorage.setItem("listOrders", order);
 }
 
 function openEditForm(productId) {

@@ -533,8 +533,14 @@ let listProducts =
             ]
         },
     ]
+let ListOrders = localStorage.getItem("listOrders")
+    ? JSON.parse(localStorage.getItem("listOrders"))
+    : [];
+let dataUsers = JSON.parse(localStorage.getItem("DataUsers"));
+let login = JSON.parse(localStorage.getItem("loginUser"));
+
  //Lưu mảng vào localStore để các file js khác có thể sử dụng không cần coppy sang
- if (!localStorage.getItem("listProducts")) {
+if (!localStorage.getItem("listProducts")) {
     localStorage.setItem("listProducts", JSON.stringify(listProducts));
 }
 // lọc sản phẩm theo hãng
@@ -674,7 +680,7 @@ function renderPageNumber(arr, perPage) {
     totalPage = Math.ceil(arr.length / perPage); 
 
     document.querySelector(".pagination-ul").innerHTML = "";
-    if (totalPage > 0) {
+    if (arr.length > perPage) {
         document.querySelector(".pagination-ul").innerHTML += `
             <a href="#recommend">
                 <li class="move-btn" onclick="prevPage()"><</li>
@@ -690,7 +696,7 @@ function renderPageNumber(arr, perPage) {
         `;
     }
 
-    if (totalPage > 0) {
+    if (arr.length > perPage) {
         document.querySelector(".pagination-ul").innerHTML += `
             <a href="#recommend">
                 <li class="move-btn" onclick="nextPage()">></li>
@@ -976,6 +982,158 @@ document.addEventListener('DOMContentLoaded', () => {
     showAndCloseAbout();
     renderCartUI();
 })
+
+// xem lịch sử mua hàng
+function displayHideHistory() {
+    const history = document.querySelector(".historyOrder");
+    history.classList.toggle("active");
+}
+function hideHistoryOrder1() {
+    const btnHistory = document.querySelector(".history");
+    btnHistory.addEventListener("click", () => {
+        displayHideHistory();
+    });
+}
+function hideHistoryOrder2() {
+    const btnCloseHistory = document.querySelector(".close-history");
+    btnCloseHistory.addEventListener("click", () => {
+        displayHideHistory();
+    });
+}
+
+function handleRenderHistoryOrder() {
+    if (login == null) return;
+    const historyOrder = document.querySelector(".historyOrder");
+    historyOrder.innerHTML = `
+        <div class="table-header">
+            <h2 class="title">History Order</h2>
+        </div>
+        <div class="container">
+            <img class="close-history" src="./asset/images/bx-x.svg" alt="">
+            <table>
+                <thead class = "tableHistoryHead"> 
+            
+                </thead>
+                <tbody class = "tableHistoryBody">
+
+                </tbody>
+            </table>
+        </div>
+    `;
+    const tableHead = document.querySelector(".tableHistoryHead");
+    tableHead.innerHTML = `
+        <tr>
+            <th>STT</th>
+            <th>Order time</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th></th>
+        </tr> 
+    `;
+    hideHistoryOrder1();
+    hideHistoryOrder2();
+    const tableBody = document.querySelector(".tableHistoryBody");
+    let userIndex = dataUsers.findIndex((user) => user.id == login.id);
+    let number = 0;
+    console.log(ListOrders);
+    ListOrders.forEach((item) => {
+        if (dataUsers[userIndex].id == item.userId) {
+            number++;
+            let row = `
+                <tr>
+                    <td>${number}</td> 
+                    <td>${item.order[0].time}</td>
+                    <td>${totalPriceOfOrder(item.order)}</td>
+                    <td>${(item.order[0].check)}</td>
+                    <td onclick = "renderHistoryOrderItem(${item.id})">
+                        <img class="showmore" src="./asset/images/showmore.png" alt="">
+                    </td>
+                </tr>`;
+            tableBody.innerHTML += row;
+        }
+    });
+}
+
+function totalPriceOfOrder(arrOfOrderInListOrder) {
+    let sumQuantity = 0;
+    let sumPrice = 0;
+    let shipTotal = 0;
+    arrOfOrderInListOrder.forEach((item) => {
+        sumQuantity += item.quantity;
+        sumPrice += item.price * item.quantity;
+        shipTotal += 10000 * item.quantity;
+    })
+    let totalPriceFull = sumPrice + shipTotal;
+    var formattedPrice = totalPriceFull.toLocaleString("vi-VN") + " đ";
+    return formattedPrice;
+}
+
+function renderHistoryOrderItem(orderId) {
+    const historyOrder = document.querySelector(".historyOrder");
+    historyOrder.innerHTML = `
+        <div class="table-header">
+            <h2 class="title">History Order</h2>
+        </div>
+        <div class="container">
+            <div>
+                <img class="close-history" src="./asset/images/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrder()">
+            </div>
+            <table>
+                <thead class = "tableHistoryHead"> 
+            
+                </thead>
+                <tbody class = "tableHistoryBody">
+
+                </tbody>
+            </table>
+        </div>
+    `;
+    hideHistoryOrder1();
+    const tableHead = document.querySelector(".tableHistoryHead");
+    tableHead.innerHTML = `
+        <tr>
+            <th>STT</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Quatity</th>    
+            <th>Price</th>
+        </tr> 
+    `;
+    const table = document.querySelector(".tableHistoryBody");
+    table.innerHTML = "";
+    let number = 0;
+    let totalPrice = 0;
+    for (var i = 0; i < ListOrders.length; i++) {
+        if (ListOrders[i].id === orderId) {
+            ListOrders[i].order.forEach((item) => {
+                number++;
+                let row = `
+                <tr>
+                    <td>${number}</td>
+                    <td><img class="img-history" src="${item.img}" alt=""></td>
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.price.toLocaleString("vi-VN") + " Đ"}</td>
+                </tr>`;
+                table.innerHTML += row;
+            });
+        }
+    }
+}
+
+handleRenderHistoryOrder();
+function status(check) {
+    if (check == 0) {
+      return "Đang chờ...";
+    } else {
+        if(check == 1){
+          return "Đã xác nhận!";
+        }
+        else{
+          return "Đã hủy";
+      }
+    }
+}
 
 // nghiên cứu em yêu khoa học
 

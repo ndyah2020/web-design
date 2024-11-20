@@ -411,6 +411,113 @@ a {
     cursor: pointer;
     user-select: none;
 }
+
+/* lịch sử order */
+.historyOrder {
+    width: 850px;
+    max-height: 500px;
+    background-color: #fff;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    box-shadow: 0px 16px 40px 0px rgba(0, 0, 0, 0.18);
+    overflow: auto;
+    overflow: overlay;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    top: 55%;
+    left: 50%;
+}
+
+.table-header {
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: 0.8rem 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+.table-header .title {
+    padding-top: 10px;
+    font-size: 2.8rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.historyOrder.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.historyOrder .container {
+    position: relative;
+}
+.historyOrder td,th{
+    vertical-align: middle;
+    text-align: center;
+}
+.historyOrder .close-history {
+    width: 35px;
+    height: 35px;
+    position: sticky;
+    top: 2%;
+    left: 100%;
+    z-index: 1;
+    cursor: pointer;
+}
+.historyOrder .showmore {
+    width: 35px;
+    height: 35px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.historyOrder::-webkit-scrollbar {
+    width: 4px;
+    height: 50px;
+}
+
+.historyOrder::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.historyOrder:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+}
+
+.historyOrder table {
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.historyOrder .img-history {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    vertical-align: middle;
+}
+
+table th {
+    position: sticky;
+    font-weight: 550;
+    top: -3px;
+    left: 0px;
+    background-color: var(--background-header);
+}
+
+table th,
+td {
+    padding: 20px 5px;
+    border-collapse: collapse;
+    border-bottom: 1px solid #ccc;
+}
+
+
 /* =================================== */
 
 /* ==========Main=========== */
