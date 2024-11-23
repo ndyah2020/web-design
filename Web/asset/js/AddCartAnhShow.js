@@ -10,7 +10,6 @@ const addCart = () => {
 
         productIndex === -1
             ?currentLogin.cartItems.push(productConfig)
-
             :currentLogin.cartItems[productIndex].quantity++;
 
         saveItemInToLocalStorage('currentLogin',currentLogin)

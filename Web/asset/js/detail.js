@@ -35,6 +35,8 @@ const showProductDetail = () => {
         producConfig.innerHTML += `<button class="btn-config">${config.cpu}</button>`
         
     })
+    
+    //Hiển thị các thông tin giới thiệu
     productPrice.textContent = product.model[0].price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
     descriptionName.textContent = product.name
     descriptionCpu.textContent = `Với bộ xử lý ${product.model[0].cpu} mới nhất`
