@@ -67,7 +67,6 @@ const selectConfig = (product) => {
                 img: product.img,
                 type: product.type,
                 quantity: 1,
-                check: 0,
                 time: new Date().toLocaleString("en-US", {
                     timeZone: "Asia/Ho_Chi_Minh",
                 }),

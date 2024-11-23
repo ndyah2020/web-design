@@ -27,13 +27,14 @@ const addCart = () => {
 
     if (btnAddCart) {
         btnAddCart.addEventListener('click', () => {
-            if (currentLogin.isAdmin){
-                alert('Tài khoản này không thể thêm sản phẩm')
-                return;
-            }
             if (!currentLogin) {
                 alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng');
                 showLogin();
+                return;
+            }
+            
+            if (currentLogin.isAdmin){
+                alert('Tài khoản này không thể thêm sản phẩm')
                 return;
             }
 
@@ -75,7 +76,7 @@ const renderImageCart = (cartItems) => {
     let itemCount = 1;
 
     cartItems.forEach((item) => {
-        if (itemCount <= 3 && item.check == 0) {
+        if (itemCount <= 3 ) {
             const cartItem = document.createElement("div");
             cartItem.className = "block-each-preview";
             cartItem.innerHTML = `
@@ -109,11 +110,10 @@ const renderNumberCart = (cartItems) => {
     let shippingPrice = 50000; // Giá vận chuyển cho mỗi sản phẩm
 
     cartItems.forEach((item) => {
-        if (item.check == 0) {
-            totalQuantity += item.quantity;
-            totalPrice += item.price * item.quantity;
-        }
+        totalQuantity += item.quantity;
+        totalPrice += item.price * item.quantity;
     });
+
     cartQuantity.textContent = `You have ${totalQuantity} item`;
     subtotal.textContent = `${totalPrice.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}`;
     shipping.textContent = `${(shippingPrice * totalQuantity).toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}`;

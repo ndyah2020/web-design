@@ -139,6 +139,7 @@ const updateListOrders = (data) => {
         email: data.email,
         nameCustomer: data.name,
         order: data.cartItems,
+        check: 0,
     };
 
     listOrders.push(listOrdersObject); 
