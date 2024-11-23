@@ -517,6 +517,10 @@ td {
     border-bottom: 1px solid #ccc;
 }
 
+.bar {
+    cursor: pointer;
+}
+
 
 /* =================================== */
 
