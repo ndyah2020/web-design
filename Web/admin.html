@@ -139,7 +139,7 @@
                     <img src="./asset/images/bx-x.svg" alt="" class="closeImgUser" />
                 </div>
                 <form action="" method="post" autocomplete="off" id="add-user">
-                    <input type="hidden" id="idUser" value="" />
+                    <input type="hidden" id="idUser" name='idUser' value="" />
                     <div class="form-group">
                         <label for="emailUser" class="form-label">Email</label>
                         <div class="div">
@@ -156,14 +156,15 @@
                         <p class="form-error"></p>
                     </div>
     
-                    <div class="form-group">
+                    <div class="form-group user-password">
                         <label for="password-user" class="form-label">Password</label>
                         <div class="div">
                             <input type="password" id="password-user" name="passwordUser" class="form-input" placeholder="Enter password-user" />
                         </div>
                         <p class="form-error"></p>
                     </div>
-                    <div class="form-group">
+                    
+                    <div class="form-group user-password-confirm">
                         <label for="password_confirmation" class="form-label">Password Comfirm</label>
                         <div class="div">
                             <input id="password_confirmation" name="passwordConfirmation"

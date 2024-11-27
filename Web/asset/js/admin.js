@@ -329,6 +329,11 @@ function renderUserManagement() {
             </table>
     `;
     renderUser(listUsersAdmin)
+    const selectElement = document.getElementById('cars');
+    selectElement.addEventListener('change', () => {
+        const selectedValue = selectElement.value;
+        selectedValue == 1 ? renderUser(listUsersClient) : renderUser(listUsersAdmin)
+    });
 }
 // Lấy thông tin login //
 function renderUser(arr) {
@@ -347,7 +352,7 @@ function renderUser(arr) {
                     <button class="delete-btn product delete-user" data-user='${JSON.stringify(user)}' onclick=${user.status ? "updateUserStatus(this,false)" : "updateUserStatus(this,true)"}>
                         ${user.status ? 'Khóa' : 'Mở Khóa'}
                     </button> 
-                    <button class="delete-btn product delete-user" data-user='${JSON.stringify(user)}' onclick='EditUser(this)'>
+                    <button class="delete-btn product delete-user" data-user='${JSON.stringify(user)}' onclick='openEditUser(this)'>
                         Edit
                     </button> 
                 </td>
@@ -358,29 +363,34 @@ function renderUser(arr) {
 
 const updateUserStatus = (button, newStatus) => {
     const user = JSON.parse(button.getAttribute("data-user"));
-
+    const actionMessage = newStatus ? 
+        "Bạn có chắc muốn mở khóa tài khoản này" : 
+        "Bạn có chắc muốn khóa tài khoản này";
+    
+    const shouldBlock = window.confirm(actionMessage);
+    if (!shouldBlock) {
+        return; 
+    }
     user.status = newStatus;
     if (user.isAdmin) {
         if (user.email === currentLoginAdmin.email) {
-            alert('Không thể khóa tài khoản hiện đang đăng nhập')
-            return;
+            alert('Không thể khóa tài khoản hiện đang đăng nhập');
+            return; 
         }
+
         const index = listUsersAdmin.findIndex((adminUser) => adminUser.id === user.id);
         listUsersAdmin[index] = user;
         localStorage.setItem("DataUsersAdmin", JSON.stringify(listUsersAdmin));
-        renderUser(listUsersAdmin);
+        renderUser(listUsersAdmin); 
     } else {
         const index = listUsersClient.findIndex((clientUser) => clientUser.id === user.id);
         listUsersClient[index] = user;
         localStorage.setItem("DataUsers", JSON.stringify(listUsersClient));
-        renderUser(listUsersClient);
+        renderUser(listUsersClient); 
     }
 };
 
-const EditUser = (button) => {
-    const user = JSON.parse(button.getAttribute("data-user"));
-    console.log("Editing user:", user);
-};
+
 
 
 function renderOrderStartictis() {
@@ -480,7 +490,7 @@ function rmvAnimate() {
     for (let i = 0; i < allDiv.length; i++) {
         const childDiv = allDiv[i].querySelector('.form-input');
         if (childDiv) {
-            childDiv.style.border = 'none';  
+            childDiv.style.border = 'none';
         }
     }
     for (let j = 0; j < allFormError.length; j++) {
@@ -488,7 +498,10 @@ function rmvAnimate() {
     }
 }
 function rmvAnimateUser() {
-    if (checkEdit == 1) clearFormUser();
+    if (checkEdit == 1){
+        clearFormUser();
+        document.getElementById('emailUser').disabled = false
+    } 
     addEditUserBackgroundForm.classList.remove("animate");
     addEditUserForm.classList.remove("animate");
     var allDiv = document.querySelectorAll(".div");
@@ -498,12 +511,13 @@ function rmvAnimateUser() {
     for (let i = 0; i < allDiv.length; i++) {
         const childDiv = allDiv[i].querySelector('.form-input');
         if (childDiv) {
-            childDiv.style.border = 'none';  
+            childDiv.style.border = 'none';
         }
     }
     for (let j = 0; j < allFormError.length; j++) {
         allFormError[j].innerText = "";
     }
+    checkEdit == 0
 }
 
 function clearForm() {
@@ -514,12 +528,7 @@ function clearForm() {
     document.getElementById("cpu").value = "";
     document.getElementById("linkImage").value = "";
 }
-const clearFormUser = () => {
-    document.getElementById("emailUser").value = "";
-    document.getElementById("name-user").value = "";
-    document.getElementById("password-user").value = "";
-    document.getElementById("password_confirmation").value = "";
-}
+
 
 let checkEdit = 0;
 const btnCloseForm = document.querySelector(".closeImg");
@@ -557,6 +566,7 @@ function openAddForm() {
     btnCloseForm.addEventListener("click", rmvAnimate);
 }
 function openAddFormUser() {
+    checkEdit = 0
     addAnimateUser();
     btnCloseFormUser.addEventListener("click", rmvAnimateUser);
 }
@@ -603,7 +613,7 @@ function addSuccessForm() {
 
     timer1 = setTimeout(() => {
         toast.classList.remove("active");
-    }, 2500); //1s = 1000 milliseconds
+    }, 2500); 
 
     timer2 = setTimeout(() => {
         progress.classList.remove("active");
@@ -685,6 +695,32 @@ function openEditForm(productId) {
     btnCloseForm.addEventListener("click", rmvAnimate);
 }
 
+const openEditUser = (button) => {
+    checkEdit = 1;
+    const user = JSON.parse(button.getAttribute("data-user"));
+    const userEmail = document.getElementById('emailUser')
+    const userName = document.getElementById('name-user')
+    const userPassword = document.getElementById('password-user')
+    const userComfirm = document.getElementById('password_confirmation')
+    const idUser = document.getElementById('idUser')
+
+    idUser.value = user.id
+    userEmail.value = user?.email || 'N/A';
+    userEmail.disabled = true; 
+
+    userName.value = user?.name || 'N/A';
+    userPassword.value = user.password;
+    userComfirm.value = user.password;
+
+    addAnimateUser();
+    
+    const btnCloseFormUser = document.querySelector('.closeImgUser'); // Thêm phần này để đảm bảo btnCloseFormUser được tìm thấy
+    if (btnCloseFormUser) {
+        btnCloseFormUser.addEventListener("click", rmvAnimateUser);
+    }
+}
+
+
 function editProduct() {
     const productId = parseInt(document.getElementById("idProduct").value);
     const productName = document.getElementById("nameProduct").value;
@@ -706,6 +742,36 @@ function editProduct() {
         console.log("Product not found for editing with ID " + productId);
     }
 }
+
+const editUser = (data) => {
+    const userEmail = document.getElementById('emailUser')
+    const userName = document.getElementById('name-user')
+    const userPassword = document.getElementById('password-user')
+    const idUser = document.getElementById('idUser')
+
+
+    userName.value = data.nameUser
+    userPassword.value = data.passwordUser
+
+    const editUserIndex = listUsersAdmin.findIndex((user) => user.email === userEmail.value)
+    if (editUserIndex !== -1) {
+        listUsersAdmin[editUserIndex] = {
+            id: parseInt(idUser.value),
+            email: userEmail.value,
+            isAdmin: 1,
+            name: userName.value,
+            password: userPassword.value,
+            status: true,
+        };
+
+        localStorage.setItem("DataUsersAdmin", JSON.stringify(listUsersAdmin));
+        renderUserManagement();
+        rmvAnimateUser();
+    } else {
+        console.log("Không tìm thấy người dùng để chỉnh sửa.");
+    }
+}
+
 
 function deleteProduct(productId) {
     const shouldDelete = window.confirm(
@@ -781,28 +847,38 @@ const addUserValidator = new Validator({
     ],
 
     onSubmit: function (data) {
-        const newUser = {
-            id: setIdUser(),
-            isAdmin: 1,
-            name: data.nameUser,
-            email: data.emailUser,
-            password: data.passwordUser,
-            status: true,
+        if(checkEdit === 0){
+            const newUser = {
+                id: setIdUser(),
+                isAdmin: 1,
+                name: data.nameUser,
+                email: data.emailUser,
+                password: data.passwordUser,
+                status: true,
+            }
+            checkNewUser(newUser)
+        }else{
+            
+            editUser(data)
         }
-        checkNewUser(newUser)
     },
 });
 
 
-
+const clearFormUser = () => {
+    document.getElementById("emailUser").value = "";
+    document.getElementById("name-user").value = "";
+    document.getElementById("password-user").value = "";
+    document.getElementById("password_confirmation").value = "";
+}
 
 const checkNewUser = (newUser) => {
     const userEmail = listUsersAdmin.find((user) => user.email === newUser.email)
 
     if (userEmail) {
-        clearError(".form-group","form-input")
+        clearError(".form-group", "form-input")
         alert('Email này đã tồn tại')
-        
+
         return;
     }
     listUsersAdmin.push(newUser)

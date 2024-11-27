@@ -59,7 +59,7 @@ const checkLoginAdmin = (dataFromInputLogin) => {
         saveItemInToLocalStorage('currentLoginAdmin', currentLoginAdmin);
         window.location = "./admin.html"
     } else {
-        document.querySelector('.loginError').innerText = "Mật khẩu không chính xác";
+        document.querySelector('.loginError').innerText = "Tài khoản hoặc mật khẩu không chính xác";
     }
 };
 

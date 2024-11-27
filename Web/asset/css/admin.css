@@ -798,7 +798,10 @@ td {
    padding: 5px 0px;
 }
 .hidden {
-   display: none;
+   display: none ;
+}
+.hiddenUser {
+   display: none !important;
 }
 /* login admin */
 @keyframes backgroundeffect1 {
