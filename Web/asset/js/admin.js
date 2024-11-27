@@ -86,7 +86,7 @@ function renderProducts(arr) {
                 </button>
             </div>
       `;
-      productListContainer.appendChild(productDiv);
+        productListContainer.appendChild(productDiv);
     });
 }
 
@@ -123,17 +123,17 @@ function renderTotalPriceAdmin(arrOfOrderInListOrder) {
     let totalPriceFull = sumPrice + shipTotal;
     var formattedPrice = totalPriceFull.toLocaleString("vi-VN") + " đ";
     return formattedPrice;
-} 
+}
 
 function renderWaitOrder(arr) {
     const orderManagementBody = document.querySelector(".orderManagementBody");
     orderManagementBody.innerHTML = "";
     arr.forEach((order) => {
-      if (order.order[0].check === 0) {
-        const orderDiv = document.createElement("div");
-        orderDiv.classList.add("historyOrder");
-        orderDiv.setAttribute("id", order.id);
-        orderDiv.innerHTML = `
+        if (order.order[0].check === 0) {
+            const orderDiv = document.createElement("div");
+            orderDiv.classList.add("historyOrder");
+            orderDiv.setAttribute("id", order.id);
+            orderDiv.innerHTML = `
             <div class="helloUser-Order">
                 <div class="sub-hello">
                     <p>User: ${order.email}</p>
@@ -166,21 +166,21 @@ function renderWaitOrder(arr) {
                 </div>
             </div>
         `;
-        orderManagementBody.appendChild(orderDiv);
-        renderOrderItem(order.order, order.id);
-      }
+            orderManagementBody.appendChild(orderDiv);
+            renderOrderItem(order.order, order.id);
+        }
     });
 }
-function renderAcceptedOrder(arr){
+function renderAcceptedOrder(arr) {
     const orderManagementBody = document.querySelector(".orderManagementBody")
     orderManagementBody.innerHTML = "";
     arr.forEach((order) => {
-        if(order.order[0].check === 1){
-        const orderDiv = document.createElement("div");
-        orderDiv.classList.add("historyOrder");
-        var orderid = order.id;
-        orderDiv.setAttribute("id", orderid);
-        orderDiv.innerHTML = `
+        if (order.order[0].check === 1) {
+            const orderDiv = document.createElement("div");
+            orderDiv.classList.add("historyOrder");
+            var orderid = order.id;
+            orderDiv.setAttribute("id", orderid);
+            orderDiv.innerHTML = `
             <div class="helloUser-Order">
                 <div class="sub-hello">
                     <p>User: ${order.email}</p>
@@ -205,21 +205,21 @@ function renderAcceptedOrder(arr){
                 </table>
             </div>
       `;
-      orderManagementBody.appendChild(orderDiv);
-      renderOrderItem(order.order, orderid);
-      }
+            orderManagementBody.appendChild(orderDiv);
+            renderOrderItem(order.order, orderid);
+        }
     });
 }
-function renderRejectedOrder(arr){
+function renderRejectedOrder(arr) {
     const orderManagementBody = document.querySelector(".orderManagementBody")
     orderManagementBody.innerHTML = "";
     arr.forEach((order) => {
-        if(order.order[0].check === 2){
-        const orderDiv = document.createElement("div");
-        orderDiv.classList.add("historyOrder");
-        var orderid = order.id;
-        orderDiv.setAttribute("id", orderid);
-        orderDiv.innerHTML = `
+        if (order.order[0].check === 2) {
+            const orderDiv = document.createElement("div");
+            orderDiv.classList.add("historyOrder");
+            var orderid = order.id;
+            orderDiv.setAttribute("id", orderid);
+            orderDiv.innerHTML = `
             <div class="helloUser-Order">
                 <div class="sub-hello">
                     <p>User: ${order.email}</p>
@@ -246,8 +246,8 @@ function renderRejectedOrder(arr){
                 </table>
             </div>
         `;
-        orderManagementBody.appendChild(orderDiv);
-        renderOrderItem(order.order, orderid);
+            orderManagementBody.appendChild(orderDiv);
+            renderOrderItem(order.order, orderid);
         }
     });
 }
@@ -263,15 +263,15 @@ function renderTotalShipAdmin(arrOfOrderInListOrder) {
     })
     return shipTotal;
 }
-  
+
 function renderOrderItem(arr, orderid) {
     const orderManagementTbody = document
         .getElementById(orderid)
         .querySelector(".tableHistory");
-        var variableNeed = ".fee_shipping" + orderid
+    var variableNeed = ".fee_shipping" + orderid
     document.querySelector(variableNeed).textContent = "Fee shipping: $" + renderTotalShipAdmin(arr);
     let number = 0;
-        arr.forEach((item) => {
+    arr.forEach((item) => {
         number++;
         const orderTr = document.createElement("tr");
         orderTr.innerHTML = `
@@ -291,20 +291,20 @@ function status(check) {
     if (check == 0) {
         return "Đang chờ...";
     } else {
-        if(check == 1){
+        if (check == 1) {
             return "Đã xác nhận!";
         } else {
             return "Đã hủy";
         }
     }
 }
-  
+
 function renderUserManagement() {
     document.querySelector(".div-title").innerHTML = `
             <h1 class="title">User Management</h1>
     `;
     document.querySelector(".contain-add-product-search").innerHTML = `
-            <button class="add-btn-user" onclick="openAddForm()">Add User</button>
+            <button class="add-btn-user" onclick="openAddFormUser()">Add User</button>
 
             <div class="select-view-users">
                 <label for="cars">Chọn loại tài khoản cần xem</label>
@@ -329,44 +329,39 @@ function renderUserManagement() {
             </table>
     `;
     renderUser(listUsersAdmin)
-    const selectElement = document.getElementById('cars');
-    selectElement.addEventListener('change', () => {
-        const selectedValue = selectElement.value;
-        selectedValue == 1 ? renderUser(listUsersClient) : renderUser(listUsersAdmin)
-    });
 }
 // Lấy thông tin login //
 function renderUser(arr) {
     const userManagementTbody = document.querySelector(".userTable tbody");
     userManagementTbody.innerHTML = "";
-  
+
     arr.forEach((user) => {
-      const userTr = document.createElement("tr");
-      userTr.innerHTML = `
-                  <td>${user.id}</td>
-                  <td>${user.name}</td>
-                  <td>${user.status ? 'Hoạt động' : 'Đã Khóa'}</td>
-                  <td>${user.email}</td>
-                  <td>${user.password}</td>
-                  <td style="display: flex">
-                      <button class="delete-btn product delete-user" data-user='${JSON.stringify(user)}' onclick=${user.status ? "updateUserStatus(this,false)" : "updateUserStatus(this,true)"}>
-                          ${user.status ? 'Khóa' : 'Mở Khóa'}
-                      </button> 
-                      <button class="delete-btn product delete-user" data-user='${JSON.stringify(user)}' onclick='EditUser(this)'>
-                          Edit
-                      </button> 
-                  </td>
-          `;
-      userManagementTbody.appendChild(userTr);
+        const userTr = document.createElement("tr");
+        userTr.innerHTML = `
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.status ? 'Hoạt động' : 'Đã Khóa'}</td>
+                <td>${user.email}</td>
+                <td>${user.password}</td>
+                <td style="display: flex">
+                    <button class="delete-btn product delete-user" data-user='${JSON.stringify(user)}' onclick=${user.status ? "updateUserStatus(this,false)" : "updateUserStatus(this,true)"}>
+                        ${user.status ? 'Khóa' : 'Mở Khóa'}
+                    </button> 
+                    <button class="delete-btn product delete-user" data-user='${JSON.stringify(user)}' onclick='EditUser(this)'>
+                        Edit
+                    </button> 
+                </td>
+        `;
+        userManagementTbody.appendChild(userTr);
     });
-  }
-  
-  const updateUserStatus = (button, newStatus) => {
+}
+
+const updateUserStatus = (button, newStatus) => {
     const user = JSON.parse(button.getAttribute("data-user"));
 
     user.status = newStatus;
     if (user.isAdmin) {
-        if(user.email === currentLoginAdmin.email){
+        if (user.email === currentLoginAdmin.email) {
             alert('Không thể khóa tài khoản hiện đang đăng nhập')
             return;
         }
@@ -381,13 +376,13 @@ function renderUser(arr) {
         renderUser(listUsersClient);
     }
 };
-  
-  const EditUser = (button) => {
-    const user = JSON.parse(button.getAttribute("data-user")); 
+
+const EditUser = (button) => {
+    const user = JSON.parse(button.getAttribute("data-user"));
     console.log("Editing user:", user);
-  };
-  
-  
+};
+
+
 function renderOrderStartictis() {
     document.querySelector(".div-title").innerHTML = `
         <h1 class="title">Order Statistics</h1>
@@ -469,14 +464,35 @@ function addAnimate() {
     addEditProductBackgroundForm.classList.add("animate");
     addEditProductForm.classList.add("animate");
 }
-  
+
+const addAnimateUser = () => {
+    addEditUserBackgroundForm.classList.add("animate");
+    addEditUserForm.classList.add("animate");
+}
+
 function rmvAnimate() {
     if (checkEdit == 1) clearForm();
     addEditProductBackgroundForm.classList.remove("animate");
     addEditProductForm.classList.remove("animate");
     var allDiv = document.querySelectorAll(".div");
     var allFormError = document.querySelectorAll(".form-error");
-  
+
+    for (let i = 0; i < allDiv.length; i++) {
+        Object.assign(allDiv[i].style, {
+            "border-color": "#b3b3b3",
+        });
+    }
+    for (let j = 0; j < allFormError.length; j++) {
+        allFormError[j].innerText = "";
+    }
+}
+function rmvAnimateUser() {
+    if (checkEdit == 1) clearForm();
+    addEditUserBackgroundForm.classList.remove("animate");
+    addEditUserForm.classList.remove("animate");
+    var allDiv = document.querySelectorAll(".div");
+    var allFormError = document.querySelectorAll(".form-error");
+
     for (let i = 0; i < allDiv.length; i++) {
         Object.assign(allDiv[i].style, {
             "border-color": "#b3b3b3",
@@ -493,17 +509,26 @@ function clearForm() {
     document.getElementById("type").value = "";
     document.getElementById("linkImage").value = "";
 }
-  
+
 let checkEdit = 0;
 const btnCloseForm = document.querySelector(".closeImg");
 const btnAddProduct = document.querySelector(".add-btn");
 
+const btnCloseFormUser = document.querySelector(".closeImgUser");
+
 const addEditProductBackgroundForm = document.querySelector(".add-edit-product-background-form");
+const addEditUserBackgroundForm = document.querySelector(".add-edit-user-background-form")
 
 addEditProductBackgroundForm.addEventListener("click", rmvAnimate);
+addEditUserBackgroundForm.addEventListener("click", rmvAnimateUser);
+
 const addEditProductForm = document.querySelector(".add-edit-product-form");
 addEditProductForm.onclick = function (event) {
     // Ngăn chặn sự kiện khi ấn vào form mà bị mất
+    event.stopPropagation();
+};
+const addEditUserForm = document.querySelector(".add-edit-user-form");
+addEditUserForm.onclick = function (event) {
     event.stopPropagation();
 };
 
@@ -511,7 +536,7 @@ addEditProductForm.onclick = function (event) {
 function setId() {
     let max = listProducts[0].id;
     for (let i = 1; i < listProducts.length; i++) {
-      if (listProducts[i].id > max) max = listProducts[i].id;
+        if (listProducts[i].id > max) max = listProducts[i].id;
     }
     return max + 1;
 }
@@ -519,6 +544,10 @@ function setId() {
 function openAddForm() {
     addAnimate();
     btnCloseForm.addEventListener("click", rmvAnimate);
+}
+function openAddFormUser() {
+    addAnimateUser();
+    btnCloseFormUser.addEventListener("click", rmvAnimateUser);
 }
 
 function addProduct(data) {
@@ -557,27 +586,27 @@ function addSuccessForm() {
     const closeIcon = document.querySelector(".close");
     const progress = document.querySelector(".progress");
     let timer1, timer2;
-  
+
     toast.classList.add("active");
     progress.classList.add("active");
-  
+
     timer1 = setTimeout(() => {
-      toast.classList.remove("active");
+        toast.classList.remove("active");
     }, 2500); //1s = 1000 milliseconds
-  
+
     timer2 = setTimeout(() => {
-      progress.classList.remove("active");
-    }, 2800);
-  
-    closeIcon.addEventListener("click", () => {
-      toast.classList.remove("active");
-  
-      setTimeout(() => {
         progress.classList.remove("active");
-      }, 300);
-  
-      clearTimeout(timer1);
-      clearTimeout(timer2);
+    }, 2800);
+
+    closeIcon.addEventListener("click", () => {
+        toast.classList.remove("active");
+
+        setTimeout(() => {
+            progress.classList.remove("active");
+        }, 300);
+
+        clearTimeout(timer1);
+        clearTimeout(timer2);
     });
 }
 
@@ -601,15 +630,15 @@ function acceptOrder(orderid) {
 
 function rejectOrder(orderid) {
     for (var i = 0; i < listOrders.length; i++) {
-      if (listOrders[i].id === orderid) {
-        if (listOrders[i].order[0].check === 0) {
-          listOrders[i].order.forEach((item) => {
-            item.check = 2;
-          });
-        } else {
-          return;
+        if (listOrders[i].id === orderid) {
+            if (listOrders[i].order[0].check === 0) {
+                listOrders[i].order.forEach((item) => {
+                    item.check = 2;
+                });
+            } else {
+                return;
+            }
         }
-      }
     }
     updateListOrderstoLocalStorage();
     alert("Đã hủy");
@@ -629,17 +658,17 @@ function openEditForm(productId) {
     const productPrice = document.getElementById("price");
     const productBrand = document.getElementById("brand");
     const productType = document.getElementById("type");
-  
+
     for (let i = 0; i < listProducts.length; i++) {
-      if (listProducts[i].id === productId) {
-        const product = listProducts[i];
-        productName.value = product.name;
-        productCpu.value = product.model[0].cpu;
-        productPrice.value = product.model[0].price;
-        productBrand.value = product.brand;
-        productType.value = product.type;
-        // productImg.value = product.image;
-      }
+        if (listProducts[i].id === productId) {
+            const product = listProducts[i];
+            productName.value = product.name;
+            productCpu.value = product.model[0].cpu;
+            productPrice.value = product.model[0].price;
+            productBrand.value = product.brand;
+            productType.value = product.type;
+            // productImg.value = product.image;
+        }
     }
     addAnimate();
     btnCloseForm.addEventListener("click", rmvAnimate);
@@ -652,32 +681,32 @@ function editProduct() {
     const productType = document.getElementById("type").value;
     const productImg = document.getElementById("linkImage").value;
     const productToEdit = listProducts.find(
-      (product) => product.id === productId
+        (product) => product.id === productId
     );
     if (productToEdit) {
-      productToEdit.name = productName;
-      productToEdit.price = productPrice;
-      productToEdit.nature.type = productType;
-      productToEdit.image = productImg;
-      localStorage.setItem("listProducts", JSON.stringify(listProducts));
-      renderProducts(listProducts);
-      rmvAnimate();
+        productToEdit.name = productName;
+        productToEdit.price = productPrice;
+        productToEdit.nature.type = productType;
+        productToEdit.image = productImg;
+        localStorage.setItem("listProducts", JSON.stringify(listProducts));
+        renderProducts(listProducts);
+        rmvAnimate();
     } else {
-      console.log("Product not found for editing with ID " + productId);
+        console.log("Product not found for editing with ID " + productId);
     }
 }
 
 function deleteProduct(productId) {
     const shouldDelete = window.confirm(
-      "Are you sure you want to delete this product"
+        "Are you sure you want to delete this product"
     );
     for (let i = 0; i < listProducts.length; i++) {
-      if (listProducts[i].id === productId && shouldDelete) {
-        console.log("da xoa  " + listProducts[i].id);
-        console.log(listProducts);
-        listProducts.splice(i, 1);
-        
-      }
+        if (listProducts[i].id === productId && shouldDelete) {
+            console.log("da xoa  " + listProducts[i].id);
+            console.log(listProducts);
+            listProducts.splice(i, 1);
+
+        }
     }
     localStorage.setItem("listProducts", JSON.stringify(listProducts));
     renderProducts(listProducts);
@@ -688,6 +717,29 @@ function deleteProduct(productId) {
 
 const runValidatorForm = new Validator({
     form: "#add-form",
+    formGroupSelector: ".form-group",
+    errorSelector: ".form-error",
+    rules: [
+        Validator.isRequired("#nameProduct", "Vui lòng nhập tên sản phẩm"),
+        Validator.isRequired("#cpu", "Vui lòng nhập tên CPU"),
+        Validator.isRequired("#price", "Vui lòng nhập đơn giá"),
+        Validator.isRequired("#brand", "Vui lòng chọn hãng sản phẩm"),
+        Validator.isRequired("#type", "Vui lòng chọn loại sản phẩm"),
+        Validator.isRequired("#linkImage", "Vui lòng chọn link hình ảnh"),
+    ],
+    onSubmit: function (data) {
+        if (checkEdit === 0) {
+            addSuccessForm();
+            console.log(data);
+            clearForm();
+            addProduct(data);
+        } else {
+            editProduct();
+        }
+    },
+});
+const addUserValidator = new Validator({
+    form: "#add-user",
     formGroupSelector: ".form-group",
     errorSelector: ".form-error",
     rules: [

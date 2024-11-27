@@ -3,8 +3,8 @@ var DataUsersAdmin = localStorage.getItem('DataUsersAdmin') ? JSON.parse(localSt
         id:         1,
         isAdmin:    1,
         name: "",
-        email:      'admin123@gmail.com',
-        password:   'admin123',
+        email:      'admin@gmail.com',
+        password:   '123123',
         status :   true,
     },
 ];

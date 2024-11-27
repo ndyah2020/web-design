@@ -55,21 +55,21 @@
                     </ul>
                 </nav>
                 <div class="main-content">
-                    <div class="contain-add-product-search">
-                    </div>
+                    <div class="contain-add-product-search"></div>
+                    <div class="contain-add-user-search"></div>
                 </div>
             </div>
         </main>
+
         <div class="add-edit-product-background-form">
             <div class="add-edit-product-form">
                 <div class="head-form">
                     <h2 class="title">Product</h2>
                     <img src="./asset/images/bx-x.svg" alt="" class="closeImg" />
                 </div>
-                
                 <form action="" method="post" autocomplete="off" id="add-form">
                     <input type="hidden" id="idProduct" value="" />
-                    <div class="form-group">
+                    <div class="orm-groupf">
                         <label for="nameProduct" class="form-label">Name Product</label>
                         <div class="div">
                             <input type="text" id="nameProduct" name="nameProduct" class="form-input" placeholder="Enter product's name" />
@@ -131,6 +131,50 @@
                 </form>
             </div>
         </div>
+
+        <div class="add-edit-user-background-form">
+            <div class="add-edit-user-form">
+                <div class="head-form">
+                    <h2 class="title">User</h2>
+                    <img src="./asset/images/bx-x.svg" alt="" class="closeImgUser" />
+                </div>
+                <form action="" method="post" autocomplete="off" id="add-user">
+                    <input type="hidden" id="idUser" value="" />
+                    <div class="form-group">
+                        <label for="emailUser" class="form-label">Email</label>
+                        <div class="div">
+                            <input type="text" id="emailUser" name="emailUser" class="form-input" placeholder="Enter email name" />
+                        </div>
+                        <p class="form-error"></p>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="name-user" class="form-label">Name</label>
+                        <div class="div">
+                            <input type="text" id="name-user" name="name-user" class="form-input" placeholder="Enter user's name" />
+                        </div>
+                        <p class="form-error"></p>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="password-user" class="form-label">Password</label>
+                        <div class="div">
+                            <input type="password" id="password-user" name="password-user" class="form-input" placeholder="Enter password-user" />
+                        </div>
+                        <p class="form-error"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="password-user" class="form-label">Password Comfirm</label>
+                        <div class="div">
+                            <input type="password" id="password-user" name="password-user" class="form-input" placeholder="Enter password-user" />
+                        </div>
+                        <p class="form-error"></p>
+                    </div>
+                    <button class="btn-save">Save</button>
+                </form>
+            </div>
+        </div>
+
         <div class="toast">
             <div class="toast-content">
                 <!-- dau tich (check) -->

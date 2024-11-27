@@ -1,15 +1,15 @@
 function Validator(options) {
     const selectorRules = new Map();
-    const showError = (errorMessage, inputElement) =>{
+    const showError = (errorMessage, inputElement) => {
         const errorElement = inputElement.parentElement.parentElement.querySelector(options.errorSelector);
         errorElement.innerText = errorMessage;
-        inputElement.style.border = '1px solid red'; 
-    }   
+        inputElement.style.border = '1px solid red';
+    }
 
     const clearError = (inputElement) => {
         const errorElement = inputElement.parentElement.parentElement.querySelector(options.errorSelector);
         errorElement.innerText = '';
-        inputElement.style.border = ''; 
+        inputElement.style.border = '';
     }
 
     const validate = (inputElement, rule) => {
@@ -18,7 +18,7 @@ function Validator(options) {
 
         for (var i = 0; i < rules.length; ++i) {
             errorMessage = rules[i](inputElement.value);
-           if (errorMessage) break;
+            if (errorMessage) break;
         }
 
         if (errorMessage) {
@@ -31,7 +31,7 @@ function Validator(options) {
     };
 
     const formElement = document.querySelector(options.form)
-    if(formElement){
+    if (formElement) {
 
         formElement.addEventListener("submit", (event) => {
             event.preventDefault();
@@ -39,44 +39,44 @@ function Validator(options) {
 
             options.rules.forEach((rule) => {
                 const inputEmlement = formElement.querySelector(rule.selector)
-                var isValid = validate(inputEmlement,rule)
-            
-                if(isValid){
+                var isValid = validate(inputEmlement, rule)
+
+                if (isValid) {
                     isFormValid = true
                 }
-            })  
-            if(!isFormValid){
-                if(typeof options.onSubmit === 'function'){
+            })
+            if (!isFormValid) {
+                if (typeof options.onSubmit === 'function') {
                     const enableInputs = formElement.querySelectorAll('[name]')
-                    const ArrayFormValues = Array.from(enableInputs).reduce((object, valuesInput) =>{
+                    const ArrayFormValues = Array.from(enableInputs).reduce((object, valuesInput) => {
                         object[valuesInput.name] = valuesInput.value
                         return object;
-                    },{})
+                    }, {})
                     options.onSubmit(ArrayFormValues)
-                }else{
+                } else {
                     options.onSubmit()
                 }
             }
 
         });
-        
-   
+
+
         options.rules.forEach((rule) => {
-            if(!selectorRules.has(rule.selector)){
+            if (!selectorRules.has(rule.selector)) {
                 selectorRules.set(rule.selector, [])
             }
             selectorRules.get(rule.selector).push(rule.test)
 
             const inputEmlement = formElement.querySelector(rule.selector)
-            
-            if(inputEmlement){
-                inputEmlement.addEventListener('blur', () => 
-                    validate(inputEmlement,rule)
-                ) 
+
+            if (inputEmlement) {
+                inputEmlement.addEventListener('blur', () =>
+                    validate(inputEmlement, rule)
+                )
             }
 
         })
-       
+
     }
 }
 
