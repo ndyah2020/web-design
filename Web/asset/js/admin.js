@@ -347,14 +347,15 @@ function renderUser(arr) {
                 <td>${user.name}</td>
                 <td>${user.status ? 'Hoạt động' : 'Đã Khóa'}</td>
                 <td>${user.email}</td>
-                <td>${user.password}</td>
+                <td>${user.isAdmin ? user.password: '*************'}</td>
                 <td style="display: flex">
                     <button class="delete-btn product delete-user" data-user='${JSON.stringify(user)}' onclick=${user.status ? "updateUserStatus(this,false)" : "updateUserStatus(this,true)"}>
                         ${user.status ? 'Khóa' : 'Mở Khóa'}
                     </button> 
-                    <button class="delete-btn product delete-user" data-user='${JSON.stringify(user)}' onclick='openEditUser(this)'>
-                        Edit
-                    </button> 
+
+                    ${user.isAdmin ? `<button class="delete-btn product delete-user" data-user='${JSON.stringify(user)}' onclick='openEditUser(this)'>
+                    Edit
+                    </button>` : ''}
                 </td>
         `;
         userManagementTbody.appendChild(userTr);
@@ -363,30 +364,30 @@ function renderUser(arr) {
 
 const updateUserStatus = (button, newStatus) => {
     const user = JSON.parse(button.getAttribute("data-user"));
-    const actionMessage = newStatus ? 
-        "Bạn có chắc muốn mở khóa tài khoản này" : 
+    const actionMessage = newStatus ?
+        "Bạn có chắc muốn mở khóa tài khoản này" :
         "Bạn có chắc muốn khóa tài khoản này";
-    
+
     const shouldBlock = window.confirm(actionMessage);
     if (!shouldBlock) {
-        return; 
+        return;
     }
     user.status = newStatus;
     if (user.isAdmin) {
         if (user.email === currentLoginAdmin.email) {
             alert('Không thể khóa tài khoản hiện đang đăng nhập');
-            return; 
+            return;
         }
 
         const index = listUsersAdmin.findIndex((adminUser) => adminUser.id === user.id);
         listUsersAdmin[index] = user;
         localStorage.setItem("DataUsersAdmin", JSON.stringify(listUsersAdmin));
-        renderUser(listUsersAdmin); 
+        renderUser(listUsersAdmin);
     } else {
         const index = listUsersClient.findIndex((clientUser) => clientUser.id === user.id);
         listUsersClient[index] = user;
         localStorage.setItem("DataUsers", JSON.stringify(listUsersClient));
-        renderUser(listUsersClient); 
+        renderUser(listUsersClient);
     }
 };
 
@@ -498,10 +499,10 @@ function rmvAnimate() {
     }
 }
 function rmvAnimateUser() {
-    if (checkEdit == 1){
+    if (checkEdit == 1) {
         clearFormUser();
         document.getElementById('emailUser').disabled = false
-    } 
+    }
     addEditUserBackgroundForm.classList.remove("animate");
     addEditUserForm.classList.remove("animate");
     var allDiv = document.querySelectorAll(".div");
@@ -613,7 +614,7 @@ function addSuccessForm() {
 
     timer1 = setTimeout(() => {
         toast.classList.remove("active");
-    }, 2500); 
+    }, 2500);
 
     timer2 = setTimeout(() => {
         progress.classList.remove("active");
@@ -706,14 +707,14 @@ const openEditUser = (button) => {
 
     idUser.value = user.id
     userEmail.value = user?.email || 'N/A';
-    userEmail.disabled = true; 
+    userEmail.disabled = true;
 
     userName.value = user?.name || 'N/A';
     userPassword.value = user.password;
     userComfirm.value = user.password;
 
     addAnimateUser();
-    
+
     const btnCloseFormUser = document.querySelector('.closeImgUser'); // Thêm phần này để đảm bảo btnCloseFormUser được tìm thấy
     if (btnCloseFormUser) {
         btnCloseFormUser.addEventListener("click", rmvAnimateUser);
@@ -847,7 +848,7 @@ const addUserValidator = new Validator({
     ],
 
     onSubmit: function (data) {
-        if(checkEdit === 0){
+        if (checkEdit === 0) {
             const newUser = {
                 id: setIdUser(),
                 isAdmin: 1,
@@ -857,8 +858,8 @@ const addUserValidator = new Validator({
                 status: true,
             }
             checkNewUser(newUser)
-        }else{
-            
+        } else {
+
             editUser(data)
         }
     },
