@@ -69,7 +69,7 @@
                 </div>
                 <form action="" method="post" autocomplete="off" id="add-form">
                     <input type="hidden" id="idProduct" value="" />
-                    <div class="orm-groupf">
+                    <div class="form-group">
                         <label for="nameProduct" class="form-label">Name Product</label>
                         <div class="div">
                             <input type="text" id="nameProduct" name="nameProduct" class="form-input" placeholder="Enter product's name" />
@@ -96,7 +96,7 @@
                     <div class="form-group">
                         <label for="brand" class="form-label">Brand</label>
                         <div class="div">
-                            <select name="brand" id="brand" class="form-select">
+                            <select name="brand" id="brand" class="form-select form-input">
                                 <option value="" hidden>Choose brand product</option>
                                 <option value="Acer">Acer</option>
                                 <option value="ASUS">Asus</option>
@@ -111,7 +111,7 @@
                     <div class="form-group">
                         <label for="type" class="form-label">Type</label>
                         <div class="div">
-                            <select name="type" id="type" class="form-select">
+                            <select name="type" id="type" class="form-select form-input">
                                 <option value="" hidden>Choose type product</option>
                                 <option value="Gaming">Gaming</option>
                                 <option value="Office">Office</option>
@@ -151,7 +151,7 @@
                     <div class="form-group">
                         <label for="name-user" class="form-label">Name</label>
                         <div class="div">
-                            <input type="text" id="name-user" name="name-user" class="form-input" placeholder="Enter user's name" />
+                            <input type="text" id="name-user" name="nameUser" class="form-input" placeholder="Enter user's name" />
                         </div>
                         <p class="form-error"></p>
                     </div>
@@ -159,14 +159,15 @@
                     <div class="form-group">
                         <label for="password-user" class="form-label">Password</label>
                         <div class="div">
-                            <input type="password" id="password-user" name="password-user" class="form-input" placeholder="Enter password-user" />
+                            <input type="password" id="password-user" name="passwordUser" class="form-input" placeholder="Enter password-user" />
                         </div>
                         <p class="form-error"></p>
                     </div>
                     <div class="form-group">
-                        <label for="password-user" class="form-label">Password Comfirm</label>
+                        <label for="password_confirmation" class="form-label">Password Comfirm</label>
                         <div class="div">
-                            <input type="password" id="password-user" name="password-user" class="form-input" placeholder="Enter password-user" />
+                            <input id="password_confirmation" name="passwordConfirmation"
+                                placeholder="Enter password-user" type="password" class="form-input">
                         </div>
                         <p class="form-error"></p>
                     </div>

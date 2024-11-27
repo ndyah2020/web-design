@@ -9,7 +9,7 @@ function Validator(options) {
     const clearError = (inputElement) => {
         const errorElement = inputElement.parentElement.parentElement.querySelector(options.errorSelector);
         errorElement.innerText = '';
-        inputElement.style.border = '';
+        inputElement.style.border = 'none';
     }
 
     const validate = (inputElement, rule) => {
@@ -29,6 +29,19 @@ function Validator(options) {
         inputElement.addEventListener('input', () => clearError(inputElement));
         return !!errorMessage;
     };
+
+
+    // const bthCloseForm = document.querySelector(options.bthCloseForm)
+    // if(bthCloseForm){
+    //     bthCloseForm.addEventListener('click', () => {
+    //         options.rules.forEach((rule) => {
+    //             const inputEmlement = formElement.querySelector(rule.selector)
+    //             clearError(inputEmlement)
+    //             inputEmlement.value = ""
+    //         })
+    //     })
+    // }
+
 
     const formElement = document.querySelector(options.form)
     if (formElement) {
@@ -103,3 +116,14 @@ Validator.isComfimer = (selector, getComfirmValue, message) => ({
     selector: selector,
     test: (value) => value === getComfirmValue() ? undefined : message || 'Giá trị nhập vào không trùng khớp'
 })
+
+// khôn có ksy tự đặc biệt hay sốg
+Validator.noSpecialCharactersOrNumbers = (selector, message) => ({
+    selector: selector,
+    test: (value) => {
+        const regex = /^[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\s]*$/i;
+        return regex.test(value) ? undefined : message || "Trường này không được có ký tự đặc biệt hoặc số";
+    }
+});
+
+

@@ -478,25 +478,28 @@ function rmvAnimate() {
     var allFormError = document.querySelectorAll(".form-error");
 
     for (let i = 0; i < allDiv.length; i++) {
-        Object.assign(allDiv[i].style, {
-            "border-color": "#b3b3b3",
-        });
+        const childDiv = allDiv[i].querySelector('.form-input');
+        if (childDiv) {
+            childDiv.style.border = 'none';  
+        }
     }
     for (let j = 0; j < allFormError.length; j++) {
         allFormError[j].innerText = "";
     }
 }
 function rmvAnimateUser() {
-    if (checkEdit == 1) clearForm();
+    if (checkEdit == 1) clearFormUser();
     addEditUserBackgroundForm.classList.remove("animate");
     addEditUserForm.classList.remove("animate");
     var allDiv = document.querySelectorAll(".div");
     var allFormError = document.querySelectorAll(".form-error");
 
+
     for (let i = 0; i < allDiv.length; i++) {
-        Object.assign(allDiv[i].style, {
-            "border-color": "#b3b3b3",
-        });
+        const childDiv = allDiv[i].querySelector('.form-input');
+        if (childDiv) {
+            childDiv.style.border = 'none';  
+        }
     }
     for (let j = 0; j < allFormError.length; j++) {
         allFormError[j].innerText = "";
@@ -505,9 +508,17 @@ function rmvAnimateUser() {
 
 function clearForm() {
     document.getElementById("nameProduct").value = "";
+    document.getElementById("linkImage").value = "";
     document.getElementById("price").value = "";
     document.getElementById("type").value = "";
+    document.getElementById("cpu").value = "";
     document.getElementById("linkImage").value = "";
+}
+const clearFormUser = () => {
+    document.getElementById("emailUser").value = "";
+    document.getElementById("name-user").value = "";
+    document.getElementById("password-user").value = "";
+    document.getElementById("password_confirmation").value = "";
 }
 
 let checkEdit = 0;
@@ -738,26 +749,65 @@ const runValidatorForm = new Validator({
         }
     },
 });
+
+function setIdUser() {
+    let max = listUsersAdmin[0].id;
+    for (let i = 1; i < listUsersAdmin.length; i++) {
+        if (listUsersAdmin[i].id > max) max = listUsersAdmin[i].id;
+    }
+    return max + 1;
+}
+
 const addUserValidator = new Validator({
     form: "#add-user",
     formGroupSelector: ".form-group",
     errorSelector: ".form-error",
     rules: [
-        Validator.isRequired("#nameProduct", "Vui lòng nhập tên sản phẩm"),
-        Validator.isRequired("#cpu", "Vui lòng nhập tên CPU"),
-        Validator.isRequired("#price", "Vui lòng nhập đơn giá"),
-        Validator.isRequired("#brand", "Vui lòng chọn hãng sản phẩm"),
-        Validator.isRequired("#type", "Vui lòng chọn loại sản phẩm"),
-        Validator.isRequired("#linkImage", "Vui lòng chọn link hình ảnh"),
+        Validator.isRequired("#emailUser", "Vui lòng nhập thông tin email"),
+        Validator.isEmail("#emailUser", "Vui lòng nhập đúng email"),
+
+        Validator.isRequired("#name-user", "Tên không được bỏ trống"),
+        Validator.noSpecialCharactersOrNumbers('#name-user', 'Tên không hợp lệ'),
+
+        Validator.isRequired('#password-user', 'Vui lòng nhập password'),
+        Validator.isPassword('#password-user', 6),
+
+        Validator.isRequired('#password_confirmation', 'Vui lòng xác nhận password'),
+        Validator.isComfimer(
+            '#password_confirmation',
+            () => document.querySelector('#add-user #password-user').value,
+            'Mật khẩu không trùng khớp'
+        ),
     ],
+
     onSubmit: function (data) {
-        if (checkEdit === 0) {
-            addSuccessForm();
-            console.log(data);
-            clearForm();
-            addProduct(data);
-        } else {
-            editProduct();
+        const newUser = {
+            id: setIdUser(),
+            isAdmin: 1,
+            name: data.nameUser,
+            email: data.emailUser,
+            password: data.passwordUser,
+            status: true,
         }
+        checkNewUser(newUser)
     },
 });
+
+
+
+
+const checkNewUser = (newUser) => {
+    const userEmail = listUsersAdmin.find((user) => user.email === newUser.email)
+
+    if (userEmail) {
+        clearError(".form-group","form-input")
+        alert('Email này đã tồn tại')
+        
+        return;
+    }
+    listUsersAdmin.push(newUser)
+    localStorage.setItem("DataUsersAdmin", JSON.stringify(listUsersAdmin));
+    clearFormUser()
+    rmvAnimateUser()
+    renderUserManagement();
+}

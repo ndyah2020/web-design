@@ -125,7 +125,6 @@ const CheckLoginForm = new Validator({
         checkLogin(dataUser)
     }
 });
-  
 
 
 
