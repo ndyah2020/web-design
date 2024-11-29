@@ -564,6 +564,8 @@ function setId() {
 
 function openAddForm() {
     addAnimate();
+    const imagePreview = document.getElementById('imagePreview');
+    imagePreview.style.display = 'none';
     btnCloseForm.addEventListener("click", rmvAnimate);
 }
 function openAddFormUser() {
@@ -579,22 +581,20 @@ function addProduct(data) {
     const productPrice = parseFloat(data.price);
     const productBrand = data.brand;
     const productType = data.type;
-    const productImg = data.linkImage;
+    const productImg = data.linkImage;    
+    if (productImg) {
+        const reader = new FileReader(); 
+        reader.readAsDataURL(productImg);
 
-    if(productImg){
-        const reader = new FileReader();
+        reader.onload = function (e) {
+            const imageUrl = e.target.result;
 
-        reader.readAsDataURL(productImg)
-        
-        reader.onload = function(e) {
-            const imgaeUrl = e.target.result;
-            
             const product = {
                 id: productId,
                 name: productName,
                 brand: productBrand,
                 type: productType,
-                img: imgaeUrl,
+                img: imageUrl,
                 star: 5.0,
                 model: [
                     {
@@ -603,16 +603,17 @@ function addProduct(data) {
                     }
                 ]
             };
-            console.log(product)
+            
+
             listProducts.unshift(product);
             clearForm();
             localStorage.setItem("listProducts", JSON.stringify(listProducts));
-            console.log(listProducts);
             renderProducts(listProducts);
             rmvAnimate();
         }
-    }
+    } 
 }
+
 
 function addSuccessForm() {
     const toast = document.querySelector(".toast");
@@ -686,11 +687,14 @@ function updateListOrderstoLocalStorage() {
 function openEditForm(productId) {
     document.getElementById("idProduct").value = productId;
     checkEdit = 1;
+    
     const productName = document.getElementById("nameProduct");
     const productCpu = document.getElementById("cpu");
     const productPrice = document.getElementById("price");
     const productBrand = document.getElementById("brand");
     const productType = document.getElementById("type");
+    const imagePreview = document.getElementById('imagePreview')
+    imagePreview.style.display = 'block';
 
     for (let i = 0; i < listProducts.length; i++) {
         if (listProducts[i].id === productId) {
@@ -700,7 +704,7 @@ function openEditForm(productId) {
             productPrice.value = product.model[0].price;
             productBrand.value = product.brand;
             productType.value = product.type;
-            // productImg.value = product.image;
+            imagePreview.src = product.img ? product.img : '';
         }
     }
     addAnimate();
@@ -733,26 +737,33 @@ const openEditUser = (button) => {
 }
 
 
-function editProduct() {
+function editProduct(data) {
     const productId = parseInt(document.getElementById("idProduct").value);
-    const productName = document.getElementById("nameProduct").value;
-    const productPrice = parseFloat(document.getElementById("price").value);
-    const productType = document.getElementById("type").value;
-    const productImg = document.getElementById("linkImage").value;
+    const productImg = data.linkImage
+
     const productToEdit = listProducts.find(
         (product) => product.id === productId
     );
-    if (productToEdit) {
-        productToEdit.name = productName;
-        productToEdit.price = productPrice;
-        productToEdit.nature.type = productType;
-        productToEdit.image = productImg;
-        localStorage.setItem("listProducts", JSON.stringify(listProducts));
-        renderProducts(listProducts);
-        rmvAnimate();
-    } else {
-        console.log("Product not found for editing with ID " + productId);
-    }
+    console.log(productToEdit)
+    const reader = new FileReader();
+
+    reader.readAsDataURL(productImg)
+    reader.onload = function(e){
+        const imgaeUrl = e.target.result;
+        if (productToEdit) {
+            productToEdit.name = data.nameProduct;
+            productToEdit.model[0].price = data.price;
+            productToEdit.model[0].cpu = data.cpu;
+            productToEdit.typen = data.type;
+            productToEdit.img = imgaeUrl;
+
+            localStorage.setItem("listProducts", JSON.stringify(listProducts));
+            renderProducts(listProducts);
+            rmvAnimate();
+        } else {
+            console.log("Product not found for editing with ID " + productId);
+        }
+    }   
 }
 
 const editUser = (data) => {
@@ -822,7 +833,7 @@ const runValidatorForm = new Validator({
             clearForm();
             addProduct(data);
         } else {
-            editProduct();
+            editProduct(data);
         }
     },
 });
