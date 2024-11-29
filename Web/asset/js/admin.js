@@ -580,27 +580,38 @@ function addProduct(data) {
     const productBrand = data.brand;
     const productType = data.type;
     const productImg = data.linkImage;
-    console.log(productImg);
-    const product = {
-        id: productId,
-        name: productName,
-        brand: productBrand,
-        type: productType,
-        image: productImg,
-        star: 5.0,
-        model: [
-            {
-                cpu: productCpu,
-                price: productPrice,
-            }
-        ]
-    };
-    listProducts.unshift(product);
-    clearForm();
-    localStorage.setItem("listProducts", JSON.stringify(listProducts));
-    console.log(listProducts);
-    renderProducts(listProducts);
-    rmvAnimate();
+
+    if(productImg){
+        const reader = new FileReader();
+
+        reader.readAsDataURL(productImg)
+        
+        reader.onload = function(e) {
+            const imgaeUrl = e.target.result;
+            
+            const product = {
+                id: productId,
+                name: productName,
+                brand: productBrand,
+                type: productType,
+                img: imgaeUrl,
+                star: 5.0,
+                model: [
+                    {
+                        cpu: productCpu,
+                        price: productPrice,
+                    }
+                ]
+            };
+            console.log(product)
+            listProducts.unshift(product);
+            clearForm();
+            localStorage.setItem("listProducts", JSON.stringify(listProducts));
+            console.log(listProducts);
+            renderProducts(listProducts);
+            rmvAnimate();
+        }
+    }
 }
 
 function addSuccessForm() {
@@ -808,7 +819,6 @@ const runValidatorForm = new Validator({
     onSubmit: function (data) {
         if (checkEdit === 0) {
             addSuccessForm();
-            console.log(data);
             clearForm();
             addProduct(data);
         } else {

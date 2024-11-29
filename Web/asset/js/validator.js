@@ -29,20 +29,6 @@ function Validator(options) {
         inputElement.addEventListener('input', () => clearError(inputElement));
         return !!errorMessage;
     };
-
-
-    // const bthCloseForm = document.querySelector(options.bthCloseForm)
-    // if(bthCloseForm){
-    //     bthCloseForm.addEventListener('click', () => {
-    //         options.rules.forEach((rule) => {
-    //             const inputEmlement = formElement.querySelector(rule.selector)
-    //             clearError(inputEmlement)
-    //             inputEmlement.value = ""
-    //         })
-    //     })
-    // }
-
-
     const formElement = document.querySelector(options.form)
     if (formElement) {
 
@@ -62,7 +48,14 @@ function Validator(options) {
                 if (typeof options.onSubmit === 'function') {
                     const enableInputs = formElement.querySelectorAll('[name]')
                     const ArrayFormValues = Array.from(enableInputs).reduce((object, valuesInput) => {
-                        object[valuesInput.name] = valuesInput.value
+                        if(valuesInput.type === 'file'){
+                            if (valuesInput.files.length > 0) {  
+                                object[valuesInput.name] = valuesInput.files[0];
+                                console.log(valuesInput.files[0])
+                            }
+                        }else{
+                            object[valuesInput.name] = valuesInput.value
+                        }
                         return object;
                     }, {})
                     options.onSubmit(ArrayFormValues)
@@ -125,5 +118,3 @@ Validator.noSpecialCharactersOrNumbers = (selector, message) => ({
         return regex.test(value) ? undefined : message || "Trường này không được có ký tự đặc biệt hoặc số";
     }
 });
-
-
