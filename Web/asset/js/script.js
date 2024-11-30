@@ -979,7 +979,12 @@ maxPrice.addEventListener("input", function() {
     maxPriceValue.textContent = maxValue;
 })
 
-function searchAdvanced(productName, brand, type, minPrice, maxPrice) {
+function searchAdvanced(productName, brand, type, minPriceForSearch, maxPriceForSearch) {
+    if (minPriceForSearch > maxPriceForSearch) {
+        alert("Khoảng tiền lọc không hợp lệ!");
+        return;
+    }
+
     let productSearch = listProducts.filter((product) => {
         if (productName && !product.name.trim().toLowerCase().includes(productName.trim().toLowerCase())) {
             return false;
@@ -990,9 +995,10 @@ function searchAdvanced(productName, brand, type, minPrice, maxPrice) {
         if (type && product.type !== type) {
             return false;
         }
-        if (minPrice > product.model[0].price || maxPrice < product.model[0].price) {
-            return false;
+        if (minPriceForSearch <= product.model[0].price && maxPriceForSearch >= product.model[0].price) {
+            return true;
         }
+        else return false;
         return true;
     });
 
@@ -1001,6 +1007,9 @@ function searchAdvanced(productName, brand, type, minPrice, maxPrice) {
         renderPageNumber(productSearch, perPage);
         handleMoveButton();
         console.log(productSearch);
+        console.log(minPriceForSearch + " " + maxPriceForSearch);
+        console.log(typeof(minPriceForSearch) + " " + typeof(maxPriceForSearch));
+        console.log(typeof(listProducts[0].model[0].price));
     }
     else {console.log("Khong co product")}
     return;
@@ -1011,7 +1020,7 @@ const searchAdvancedBtn = document.querySelector(".btn-show-result");
 searchAdvancedBtn.addEventListener("click", function(e) {
     e.preventDefault();
     searchAdvanced(
-        productName.value, brand.value, type.value, minPrice.value, maxPrice.value
+        productName.value, brand.value, type.value, Number(minPrice.value), Number(maxPrice.value)
     );
 });
 
