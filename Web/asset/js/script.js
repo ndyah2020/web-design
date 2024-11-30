@@ -596,36 +596,43 @@ var officeBtn = document.querySelector(".btn-office");
 acerBtn.addEventListener("click", function() {
     getProduct(acerProducts);
     renderPageNumber(acerProducts, perPage);
+    handleMoveButton();
 });
 
 asusBtn.addEventListener("click", function() {
     getProduct(asusProducts);
     renderPageNumber(asusProducts, perPage);
+    handleMoveButton();
 });
 
 lenovoBtn.addEventListener("click", function() {
     getProduct(lenovoProducts);
     renderPageNumber(lenovoProducts, perPage);
+    handleMoveButton();
 });
 
 msiBtn.addEventListener("click", function() {
     getProduct(msiProducts);
     renderPageNumber(msiProducts, perPage);
+    handleMoveButton();
 });
 
 dellBtn.addEventListener("click", function() {
     getProduct(dellProducts);
     renderPageNumber(dellProducts, perPage);
+    handleMoveButton();
 });
 
 gamingBtn.addEventListener("click", function() {
     getProduct(gamingProducts);
     renderPageNumber(gamingProducts, perPage);
+    handleMoveButton();
 });
 
 officeBtn.addEventListener("click", function() {
     getProduct(officeProducts);
     renderPageNumber(officeProducts, perPage);
+    handleMoveButton();
 });
 
 // phân trang
@@ -676,17 +683,16 @@ function getProduct(arr) {
 }
 
 getProduct(listProducts);
+//
 function renderPageNumber(arr, perPage) {
     totalPage = Math.ceil(arr.length / perPage); 
-
     document.querySelector(".pagination-ul").innerHTML = "";
-    if (arr.length > perPage) {
-        document.querySelector(".pagination-ul").innerHTML += `
-            <a href="#recommend">
-                <li class="move-btn" onclick="prevPage()"><</li>
-            </a>
-        `;
-    }
+
+    document.querySelector(".pagination-ul").innerHTML += `
+        <a href="#recommend">
+            <li class="move-btn move-prev" onclick="prevPage()"><</li>
+        </a>
+    `;
 
     for (let i = 1; i <= totalPage; i++) {
         document.querySelector(".pagination-ul").innerHTML += `
@@ -696,22 +702,48 @@ function renderPageNumber(arr, perPage) {
         `;
     }
 
-    if (arr.length > perPage) {
-        document.querySelector(".pagination-ul").innerHTML += `
-            <a href="#recommend">
-                <li class="move-btn" onclick="nextPage()">></li>
-            </a>
-        `;
-    }
+    document.querySelector(".pagination-ul").innerHTML += `
+        <a href="#recommend">
+            <li class="move-btn move-next" onclick="nextPage()">></li>
+        </a>
+    `;
 
-    if (totalPage > 1) {
-        document.querySelector(".li1").classList.add("active");
-    } else if (totalPage <= 1) {
-        document.querySelector(".li1").style.display = "none";
-    }
+    document.querySelector(".li1").classList.add("active");
+
+    // if (totalPage > 1) {
+    //     document.querySelector(".li1").classList.add("active");
+    // } else if (totalPage <= 1) {
+    //     document.querySelector(".li1").style.display = "none";
+    // }
 }
 
 let currentProductList = listProducts;
+
+function handleMoveButton() {
+    let prevBtn = document.querySelector(".move-prev");
+    let nextBtn = document.querySelector(".move-next");
+
+    if (totalPage === 1) {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+        return;
+    }
+
+    if (currentPage === 1) {
+        prevBtn.style.display = 'none';
+    }
+    else {
+        prevBtn.style.display = 'block';
+    }
+
+    if (currentPage === totalPage) {
+        nextBtn.style.display = 'none';
+    }
+    else {
+        nextBtn.style.display = 'block';
+    }
+}
+
 function activePageIndex(event, num) {
     let listPageIndex = document.querySelectorAll(".list-index");
     for (l of listPageIndex) {
@@ -721,6 +753,7 @@ function activePageIndex(event, num) {
     currentPage = num;
 
     getProduct(currentProductList);
+    handleMoveButton();
 }
 
 function prevPage() {
@@ -732,6 +765,7 @@ function prevPage() {
         currentPage = currentPage - 1;
         listPageIndex[currentPage-1].classList.add("active");
         getProduct(currentProductList);
+        handleMoveButton();
     }
 }
 
@@ -744,10 +778,12 @@ function nextPage() {
         currentPage = currentPage + 1;
         listPageIndex[currentPage-1].classList.add("active");
         getProduct(currentProductList);
+        handleMoveButton();
     }
 }
 
 renderPageNumber(listProducts, perPage);
+handleMoveButton();
 
 // Hiển thị và đóng about
 const showAndCloseAbout = () => {
@@ -954,7 +990,7 @@ function searchAdvanced(productName, brand, type, minPrice, maxPrice) {
         if (type && product.type !== type) {
             return false;
         }
-        if (minPrice > product.model[0].price || maxPrice < product.model[product.model.length - 1].price) {
+        if (minPrice > product.model[0].price || maxPrice < product.model[0].price) {
             return false;
         }
         return true;
@@ -963,8 +999,10 @@ function searchAdvanced(productName, brand, type, minPrice, maxPrice) {
     if (productSearch) {
         getProduct(productSearch);
         renderPageNumber(productSearch, perPage);
+        handleMoveButton();
+        console.log(productSearch);
     }
-    
+    else {console.log("Khong co product")}
     return;
 }
 
@@ -1033,11 +1071,11 @@ function handleRenderHistoryOrder() {
     hideHistoryOrder1();
     hideHistoryOrder2();
     const tableBody = document.querySelector(".tableHistoryBody");
-    let userIndex = dataUsers.findIndex((user) => user.id == login.id);
+    let userIndex = dataUsers.findIndex((user) => user.id === login.id);
     let number = 0;
     console.log(ListOrders);
     ListOrders.forEach((item) => {
-        if (dataUsers[userIndex].id == item.userId) {
+        if (dataUsers[userIndex].id === item.userId) {
             number++;
             let row = `
                 <tr>
