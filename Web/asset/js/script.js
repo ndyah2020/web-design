@@ -537,7 +537,7 @@ let ListOrders = localStorage.getItem("listOrders")
     ? JSON.parse(localStorage.getItem("listOrders"))
     : [];
 let dataUsers = JSON.parse(localStorage.getItem("DataUsers"));
-let login = JSON.parse(localStorage.getItem("loginUser"));
+let login = JSON.parse(localStorage.getItem("currentLogin"));
 
  //Lưu mảng vào localStore để các file js khác có thể sử dụng không cần coppy sang
 if (!localStorage.getItem("listProducts")) {
@@ -1082,7 +1082,6 @@ function handleRenderHistoryOrder() {
     const tableBody = document.querySelector(".tableHistoryBody");
     let userIndex = dataUsers.findIndex((user) => user.id === login.id);
     let number = 0;
-    console.log(ListOrders);
     ListOrders.forEach((item) => {
         if (dataUsers[userIndex].id === item.userId) {
             number++;
@@ -1091,7 +1090,7 @@ function handleRenderHistoryOrder() {
                     <td>${number}</td> 
                     <td>${item.order[0].time}</td>
                     <td>${totalPriceOfOrder(item.order)}</td>
-                    <td>${(item.order[0].check)}</td>
+                    <td>${status(item.check)}</td>
                     <td onclick = "renderHistoryOrderItem(${item.id})">
                         <img class="showmore" src="./asset/images/showmore.png" alt="">
                     </td>
