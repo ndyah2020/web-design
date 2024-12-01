@@ -129,7 +129,7 @@ function renderWaitOrder(arr) {
     const orderManagementBody = document.querySelector(".orderManagementBody");
     orderManagementBody.innerHTML = "";
     arr.forEach((order) => {
-        if (order.order[0].check === 0) {
+        if (order.check === 0) {
             const orderDiv = document.createElement("div");
             orderDiv.classList.add("historyOrder");
             orderDiv.setAttribute("id", order.id);
@@ -175,7 +175,7 @@ function renderAcceptedOrder(arr) {
     const orderManagementBody = document.querySelector(".orderManagementBody")
     orderManagementBody.innerHTML = "";
     arr.forEach((order) => {
-        if (order.order[0].check === 1) {
+        if (order.check === 1) {
             const orderDiv = document.createElement("div");
             orderDiv.classList.add("historyOrder");
             var orderid = order.id;
@@ -214,7 +214,7 @@ function renderRejectedOrder(arr) {
     const orderManagementBody = document.querySelector(".orderManagementBody")
     orderManagementBody.innerHTML = "";
     arr.forEach((order) => {
-        if (order.order[0].check === 2) {
+        if (order.check === 2) {
             const orderDiv = document.createElement("div");
             orderDiv.classList.add("historyOrder");
             var orderid = order.id;
@@ -281,22 +281,28 @@ function renderOrderItem(arr, orderid) {
                 <td>${item.quantity}</td>
                 <td>${item.price.toLocaleString("vi-VN") + "đ"}</td>
                 <td>${item.time}</td>
-                <td>${status(item.check)}</td>
+                <td>${status(listOrders[orderid-1].check)}</td>
             `;
         orderManagementTbody.appendChild(orderTr);
     });
 }
 
 function status(check) {
-    if (check == 0) {
-        return "Đang chờ...";
-    } else {
-        if (check == 1) {
-            return "Đã xác nhận!";
-        } else {
-            return "Đã hủy";
-        }
+    let ans = "????";
+    switch (check) {
+        case 0:
+            ans = "Đang chờ...";
+            break;
+        case 1:
+            ans = "Đã xác nhận!";
+            break;
+        case 2:
+            ans = "Đã hủy";
+            break;
+        default:
+            break;
     }
+    return ans;
 }
 
 function renderUserManagement() {
@@ -648,35 +654,39 @@ function addSuccessForm() {
 function acceptOrder(orderid) {
     for (var i = 0; i < listOrders.length; i++) {
         if (listOrders[i].id === orderid) {
-            if (listOrders[i].order[0].check === 0) {
-                listOrders[i].order.forEach((item) => {
-                    item.check = 1;
-                });
-            } else {
-                return;
-            }
+            listOrders[i].check = 1;
+            updateListOrderstoLocalStorage();
+            renderOrderManagement();
+            return;
+            // if (listOrders[i].order[0].check === 0) {
+            //     listOrders[i].order.forEach((item) => {
+            //         item.check = 1;
+            //     });
+            // } else {
+            //     return;
+            // }
         }
     }
-    updateListOrderstoLocalStorage();
     alert("Đã xác nhận!");
-    renderOrderManagement();
 }
 
 function rejectOrder(orderid) {
     for (var i = 0; i < listOrders.length; i++) {
         if (listOrders[i].id === orderid) {
-            if (listOrders[i].order[0].check === 0) {
-                listOrders[i].order.forEach((item) => {
-                    item.check = 2;
-                });
-            } else {
-                return;
-            }
+            listOrders[i].check = 2;
+            updateListOrderstoLocalStorage();
+            renderOrderManagement();
+            return;
+            // if (listOrders[i].order[0].check === 0) {
+            //     listOrders[i].order.forEach((item) => {
+            //         item.check = 2;
+            //     });
+            // } else {
+            //     return;
+            // }
         }
     }
-    updateListOrderstoLocalStorage();
     alert("Đã hủy");
-    renderOrderManagement();
 }
 
 function updateListOrderstoLocalStorage() {
