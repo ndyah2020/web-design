@@ -49,7 +49,7 @@ let configOfTheSelectedProduct = null
 const selectConfig = (product) => {
     const buttonConfig = document.querySelectorAll('.btn-config')
     const productPrice = document.querySelector('.product-price')
-
+    const btnAddCart = document.querySelector('.btn-add');
 
     buttonConfig.forEach(function(button, index) {
         button.addEventListener('click', function(event){
@@ -61,6 +61,12 @@ const selectConfig = (product) => {
 
             event.stopPropagation()
 
+            if(product.model[index].price === 0){
+                btnAddCart.style.display = 'none'
+            }else{
+                btnAddCart.style.display = 'block'
+            }
+            console.log(btnAddCart)
             configOfTheSelectedProduct = {
                 id:`LapTop-${product.id}-${product.model[index].cpu}`,
                 name: product.name,

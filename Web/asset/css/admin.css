@@ -274,14 +274,23 @@ a {
    font-size: 19px;
    position: absolute;
    margin-left: 150px;
-   width: 400px;        
+   width: 250px;        
    overflow: hidden;    
    white-space: nowrap; 
    text-overflow: ellipsis;
 }
+.main-content .product .add_config{
+   margin-left: 300px;
+   margin-bottom: 12px;
+} 
+.product .add_config input{
+   padding: 4px;
+   margin-top: 2px;
+}
 
 .main-content .product .price {
-   margin-left: 550px;
+   margin-left: 50px;
+   min-width: 102px;
 }
 
 .main-content .group-btn {

@@ -64,28 +64,76 @@ function renderProductManagement() {
     // handleProductManagement(); /// chưa làm
 }
 
+var selectedIndexModelProduct = 0
 function renderProducts(arr) {
     const productListContainer = document.querySelector(".contain-product");
     productListContainer.innerHTML = "";
-
     arr.forEach((product) => {
         const productDiv = document.createElement("div");
         productDiv.classList.add("product");
-        let formattedPrice = product.model[0].price.toLocaleString("vi-VN") + " đ"
-
+        function formatPrice(price) {
+            return price.toLocaleString("vi-VN") + " đ";
+        }
         productDiv.innerHTML = `
             <img src="${product.img}" alt="" class="img-product" />
             <h2 class="name">${product.name}</h2>
-            <span class="price">${formattedPrice}</span>
+            <div class='add_config'>
+                <label for="add_config" class="form-label">Add config</label><br>
+                <input type="text" id="add_config_${product.id}" class="add-config-input"/>
+            </div>
+            <div class='seleted_config'>
+                <select name="config" id="config-${product.id}" class="form-select form-input">
+                    ${product.model.map((model, index) => `
+                        <option value="${index}">${model.cpu}</option>
+                    `).join('')}
+                </select>
+            </div>
+            <span class="price">${formatPrice(product.model[0].price)}</span>
             <div class="group-btn">
+                        
                 <button class="edit-btn" onclick="openEditForm(${product.id})">   
                     Edit
                 </button>
                 <button class="delete-btn" onclick="deleteProduct(${product.id})">
                     Delete
                 </button>
+                <button class="delete-btn" onclick="deleteProductConfig(${product.id})">
+                    Delete config
+                </button>
             </div>
-      `;
+        `;
+        const inputElement = productDiv.querySelector('.add-config-input');
+        const selectElement = productDiv.querySelector(`#config-${product.id}`);
+        const priceElement = productDiv.querySelector('.price');
+
+        selectElement.addEventListener('change', (event) => {
+            selectedIndexModelProduct = event.target.value;
+            const selectedPrice = product.model[selectedIndexModelProduct].price;
+            priceElement.textContent = formatPrice(selectedPrice);
+        });
+
+        inputElement.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const inputValue = inputElement.value;
+                const isConfig = product.model.find((config) => inputValue.toLowerCase() === config.cpu.toLowerCase())
+                if (isConfig) {
+                    alert("Cấu hình đã tồn tại")
+                    return;
+                }
+                const newModel = {
+                    cpu: inputValue,
+                    price: 0
+                }
+                product.model.push(newModel)
+                localStorage.setItem('listProducts', JSON.stringify(arr));
+                inputElement.value = ''
+                renderProducts(listProducts);
+            }
+        });
+        inputElement.addEventListener('blur', () => {
+            inputElement.value = ''
+        });
         productListContainer.appendChild(productDiv);
     });
 }
@@ -111,6 +159,23 @@ function renderOrderManagement() {
     renderWaitOrder(listOrders);
 }
 
+function deleteProductConfig(productId) {
+    const shouldDelete = window.confirm('Bạn có chắc muốn xóa cấu hình này');
+    if (shouldDelete) {
+        const productSeleted = listProducts.find((product) => product.id === productId)
+        if (productSeleted.model.length - 1 < 1) {
+            alert('Không thể xóa cấu hình duy nhất')
+            return;
+        }
+        productSeleted.model.splice(selectedIndexModelProduct, 1)
+        localStorage.setItem('listProducts', JSON.stringify(listProducts));
+        renderProducts(listProducts)
+        selectedIndexModelProduct = 0
+    }else{
+        renderProducts(listProducts)
+        selectedIndexModelProduct = 0
+    }
+}
 function renderTotalPriceAdmin(arrOfOrderInListOrder) {
     let sumQuantity = 0;
     let sumPrice = 0;
@@ -281,7 +346,7 @@ function renderOrderItem(arr, orderid) {
                 <td>${item.quantity}</td>
                 <td>${item.price.toLocaleString("vi-VN") + "đ"}</td>
                 <td>${item.time}</td>
-                <td>${status(listOrders[orderid-1].check)}</td>
+                <td>${status(listOrders[orderid - 1].check)}</td>
             `;
         orderManagementTbody.appendChild(orderTr);
     });
@@ -353,7 +418,7 @@ function renderUser(arr) {
                 <td>${user.name}</td>
                 <td>${user.status ? 'Hoạt động' : 'Đã Khóa'}</td>
                 <td>${user.email}</td>
-                <td>${user.isAdmin ? user.password: '*************'}</td>
+                <td>${user.isAdmin ? user.password : '*************'}</td>
                 <td style="display: flex">
                     <button class="delete-btn product delete-user" data-user='${JSON.stringify(user)}' onclick=${user.status ? "updateUserStatus(this,false)" : "updateUserStatus(this,true)"}>
                         ${user.status ? 'Khóa' : 'Mở Khóa'}
@@ -370,6 +435,7 @@ function renderUser(arr) {
 
 const updateUserStatus = (button, newStatus) => {
     const user = JSON.parse(button.getAttribute("data-user"));
+
     const actionMessage = newStatus ?
         "Bạn có chắc muốn mở khóa tài khoản này" :
         "Bạn có chắc muốn khóa tài khoản này";
@@ -503,6 +569,8 @@ function rmvAnimate() {
     for (let j = 0; j < allFormError.length; j++) {
         allFormError[j].innerText = "";
     }
+    selectedIndexModelProduct = 0
+    renderProducts(listProducts);
 }
 function rmvAnimateUser() {
     if (checkEdit == 1) {
@@ -587,9 +655,9 @@ function addProduct(data) {
     const productPrice = parseFloat(data.price);
     const productBrand = data.brand;
     const productType = data.type;
-    const productImg = data.linkImage;    
+    const productImg = data.linkImage;
     if (productImg) {
-        const reader = new FileReader(); 
+        const reader = new FileReader();
         reader.readAsDataURL(productImg);
 
         reader.onload = function (e) {
@@ -609,7 +677,7 @@ function addProduct(data) {
                     }
                 ]
             };
-            
+
 
             listProducts.unshift(product);
             clearForm();
@@ -617,7 +685,7 @@ function addProduct(data) {
             renderProducts(listProducts);
             rmvAnimate();
         }
-    } 
+    }
 }
 
 
@@ -695,9 +763,12 @@ function updateListOrderstoLocalStorage() {
 }
 
 function openEditForm(productId) {
+    // if(productIdSeleted !== productId){
+    //     productIdSeleted = productId
+    //     selectedIndexModelProduct = 0
+    // }
     document.getElementById("idProduct").value = productId;
     checkEdit = 1;
-    
     const productName = document.getElementById("nameProduct");
     const productCpu = document.getElementById("cpu");
     const productPrice = document.getElementById("price");
@@ -710,8 +781,8 @@ function openEditForm(productId) {
         if (listProducts[i].id === productId) {
             const product = listProducts[i];
             productName.value = product.name;
-            productCpu.value = product.model[0].cpu;
-            productPrice.value = product.model[0].price;
+            productCpu.value = product.model[selectedIndexModelProduct].cpu;
+            productPrice.value = product.model[selectedIndexModelProduct].price;
             productBrand.value = product.brand;
             productType.value = product.type;
             imagePreview.src = product.img ? product.img : '';
@@ -740,7 +811,7 @@ const openEditUser = (button) => {
 
     addAnimateUser();
 
-    const btnCloseFormUser = document.querySelector('.closeImgUser'); // Thêm phần này để đảm bảo btnCloseFormUser được tìm thấy
+    const btnCloseFormUser = document.querySelector('.closeImgUser');
     if (btnCloseFormUser) {
         btnCloseFormUser.addEventListener("click", rmvAnimateUser);
     }
@@ -758,12 +829,12 @@ function editProduct(data) {
     const reader = new FileReader();
 
     reader.readAsDataURL(productImg)
-    reader.onload = function(e){
+    reader.onload = function (e) {
         const imgaeUrl = e.target.result;
         if (productToEdit) {
             productToEdit.name = data.nameProduct;
-            productToEdit.model[0].price = data.price;
-            productToEdit.model[0].cpu = data.cpu;
+            productToEdit.model[selectedIndexModelProduct].price = data.price;
+            productToEdit.model[selectedIndexModelProduct].cpu = data.cpu;
             productToEdit.typen = data.type;
             productToEdit.img = imgaeUrl;
 
@@ -773,7 +844,7 @@ function editProduct(data) {
         } else {
             console.log("Product not found for editing with ID " + productId);
         }
-    }   
+    }
 }
 
 const editUser = (data) => {
