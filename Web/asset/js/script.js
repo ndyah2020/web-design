@@ -924,6 +924,7 @@ function search() {
     if (searchField.value.trim() === "") {
         getProduct(listProducts);
         renderPageNumber(listProducts, perPage);
+        handleMoveButton();
         return;
     }
 
@@ -934,9 +935,12 @@ function search() {
             .includes(searchField.value.trim().toLowerCase());
     });
 
+ 
+
     getProduct(productSearch);
-        renderPageNumber(productSearch, perPage);
-        return;
+    renderPageNumber(productSearch, perPage);
+    handleMoveButton();
+    return;
 
     // if (productSearch.length == 0) {
     //     // noProduct.classList.remove("hidden");
@@ -1036,10 +1040,16 @@ function displayHideHistory() {
     history.classList.toggle("active");
 }
 function hideHistoryOrder1() {
-    const btnHistory = document.querySelector(".history");
-    btnHistory.addEventListener("click", () => {
-        displayHideHistory();
-    });
+    const btnHistory = document.querySelector(".menu-history");
+    console.log(btnHistory);
+    
+    if (btnHistory) {
+        btnHistory.addEventListener("click", () => {
+            displayHideHistory();
+        });
+    } else {
+        setTimeout(hideHistoryOrder1, 100);
+    }
 }
 function hideHistoryOrder2() {
     const btnCloseHistory = document.querySelector(".close-history");
