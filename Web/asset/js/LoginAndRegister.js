@@ -12,7 +12,7 @@ var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
 ];
 //Hiển thị login khi ấn vào icon
 const showLoginAndRegister = () => {
-    const iconLogin = document.querySelector('.icon-user');
+    const iconLogin = document.querySelector('.login-icon');
     const loginModal = document.querySelector('.loginBackground');
     const inconLoginStart = document.querySelector('.btn-start');
     const loginBlockModal = document.querySelector('.loginBlock');
@@ -150,16 +150,25 @@ const checkLogin = (dataFromInputLogin) => {
 };
 
 const logoutUser = () => {
-    const iconUser = document.querySelector('.iconUser');
-    iconUser.innerHTML = `<img src="./asset/images/header-user.svg" alt="" class="icon-user" />`
+    const iconUser = document.querySelector('.login-btn');
+    iconUser.innerHTML = `<p class="login-icon">Login</p>`
     saveItemInToLocalStorage('currentLogin', null)
     window.location = "./index.html"
 }
 
 const setIcon = () => {
-    const iconUser = document.querySelector('.iconUser');
+    const iconUser = document.querySelector('.login-btn');
+    const userName = currentLogin.name;
     if (currentLogin) {
-        iconUser.innerHTML = `<img src="./asset/images/admin-logout-icon.svg" alt="" class="icon-logout" onclick="logoutUser()"/>`;
+        iconUser.innerHTML = `
+            <img src="./asset/images/header-user.svg" alt="" class="icon-user" "/> ${userName}
+            <div class="user-menu">
+                <ul >
+                    <li class="menu-history">Lịch sử mua hàng</li>
+                    <li class="user-menu-item" onclick={logoutUser()}>Đăng xuất</li>
+                </ul>
+            </div>
+            `;
     }
 };
 

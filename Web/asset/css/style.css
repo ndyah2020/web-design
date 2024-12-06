@@ -401,15 +401,59 @@ a {
     justify-content: center;
 }
 
-.header .icon-user, .icon-logout {
+
+/* login new */
+.header .login-btn {
     border-radius: 8px;
     padding: 13px;
     background-color: #fff;
-    width: 54px;
+    min-width: 100px;
     height: 54px;
     margin-left: 20px;
     cursor: pointer;
     user-select: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+
+.header .icon-user{
+    background-color: #fff;
+    width: 15px;
+    height: 15px;
+}
+
+.header .login-btn .login-icon {
+    text-align: center;
+    line-height: 28px;
+}
+
+.header .login-btn .user-menu {
+    background-color: #fff;
+    border-radius: 8px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 150px;
+    display: none;
+}
+
+.login-btn:hover .user-menu {
+    display: block;
+}
+
+.login-btn .user-menu ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-menu ul li {
+    padding: 16px;
+}
+
+.user-menu ul li:hover {
+    opacity: 0.5;
 }
 
 /* lịch sử order */
