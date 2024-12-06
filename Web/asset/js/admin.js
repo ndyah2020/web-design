@@ -42,26 +42,57 @@ function renderProductManagement() {
         <h1 class="title">Product Management</h1>
     `;
     document.querySelector(".contain-add-product-search").innerHTML = `
-        <div class="add-product-search">
-            <button class="add-btn" onclick="openAddForm()">Add Product</button>
-            <div class="search">
-                <input type="text" placeholder="Search for..." class="search-field" />
-                <svg xmlns="" height="1em" viewBox="0 0 512 512" class="icon-delete hidden >
-                    <path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" ></path>
-                </svg>
-                <button class="btn-search">
-                    <img src="./asset/images/header-search.svg" alt="" class="search-icon"/>
-                </button>
-            </div>
+    <div class="add-product-search">
+        <button class="add-btn" onclick="openAddForm()">Add Product</button>
+        <div class="search">
+            <input type="text" placeholder="Search for..." class="search-field" oninput="searchProduct(this.value)" id="search-field-product"/>
+
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="icon-delete hidden">
+                <path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"></path>
+            </svg>
+            
+            <button class="btn-search">
+                <img src="./asset/images/header-search.svg" alt="" class="search-icon"/>
+            </button>
         </div>
-        <div class="contain-product"></div>
-    `;
+    </div>
+    <div class="contain-product"></div>
+`;
+
     if (listProducts) {
         renderProducts(listProducts); // Hiển thị danh sách sản phẩm
     } else {
         document.querySelector(".contain-product").innerHTML = `<p>No products available.</p>`;
     }
     // handleProductManagement(); /// chưa làm
+}
+
+const searchProduct = (value) => {
+    const listProductsSearch = []
+    listProducts.forEach((product) => {
+        if (product.name.toLowerCase().includes(value.toLowerCase())) {
+            listProductsSearch.push(product)
+        }
+    })
+    renderProducts(listProductsSearch)
+    deleteValueInputSearch(value)
+}
+
+const deleteValueInputSearch = (value) => {
+    const valueInput = document.getElementById('search-field-product')
+    const inputSearch = document.querySelector('.icon-delete')
+    if (inputSearch) {
+        if (value) {
+            inputSearch.classList.remove('hidden')
+            inputSearch.addEventListener('click', () => {
+                valueInput.value = ''
+                inputSearch.classList.add('hidden')
+                renderProducts(listProducts)
+            })
+        } else {
+            inputSearch.classList.add('hidden')
+        }
+    }
 }
 
 var selectedIndexModelProduct = 0
@@ -171,7 +202,7 @@ function deleteProductConfig(productId) {
         localStorage.setItem('listProducts', JSON.stringify(listProducts));
         renderProducts(listProducts)
         selectedIndexModelProduct = 0
-    }else{
+    } else {
         renderProducts(listProducts)
         selectedIndexModelProduct = 0
     }
