@@ -140,6 +140,9 @@ const updateListOrders = (data) => {
         nameCustomer: data.name,
         order: data.cartItems,
         check: 0,
+        time: new Date().toLocaleString("en-US", {
+            timeZone: "Asia/Ho_Chi_Minh",
+        }),
     };
 
     listOrders.push(listOrdersObject); 

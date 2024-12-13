@@ -2,8 +2,8 @@ var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
     {
         id:         1,
         isAdmin:    0,
-        name: "Client",
-        email:      'client@gmail.com',
+        name: 'Khách Hàng',
+        email:      'khachhang1@gmail.com',
         password:   '123123',
         status:    true,
         cartItems: [

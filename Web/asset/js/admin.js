@@ -16,7 +16,6 @@ let listUsersAdmin = localStorage.getItem("DataUsersAdmin")
 let listOrders = localStorage.getItem("listOrders")
     ? JSON.parse(localStorage.getItem("listOrders"))
     : [];
-
 renderAdmin();
 
 
@@ -73,7 +72,7 @@ function renderProductManagement() {
 
 
 const searchProduct = (value) => {
-    currentPage = 1; 
+    currentPage = 1;
     const listProductsSearch = []
     listProducts.forEach((product) => {
         if (product.name.toLowerCase().includes(value.toLowerCase())) {
@@ -106,10 +105,10 @@ function renderProducts(arr) {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
     const paginatedItems = arr.slice(startIndex, endIndex);
-    
+
     const productListContainer = document.querySelector(".contain-product");
     productListContainer.innerHTML = "";
-    
+
     paginatedItems.forEach((product) => {
         const productDiv = document.createElement("div");
         productDiv.classList.add("product");
@@ -177,7 +176,7 @@ function renderProducts(arr) {
         inputElement.addEventListener('blur', () => {
             inputElement.value = ''
         });
-        
+
         productListContainer.appendChild(productDiv);
     });
 
@@ -188,7 +187,7 @@ function renderPagination(totalItems) {
     const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
     const paginationContainer = document.createElement('div');
     paginationContainer.classList.add('pagination');
-    
+
     // Nút Previous
     const prevButton = document.createElement('button');
     prevButton.classList.add('pagination-btn');
@@ -196,7 +195,7 @@ function renderPagination(totalItems) {
     prevButton.disabled = currentPage === 1;
     prevButton.onclick = () => changePage(currentPage - 1);
     paginationContainer.appendChild(prevButton);
-    
+
     // Các nút số trang
     for (let i = 1; i <= totalPages; i++) {
         const pageButton = document.createElement('button');
@@ -208,7 +207,7 @@ function renderPagination(totalItems) {
         pageButton.onclick = () => changePage(i);
         paginationContainer.appendChild(pageButton);
     }
-    
+
     // Nút Next
     const nextButton = document.createElement('button');
     nextButton.classList.add('pagination-btn');
@@ -216,7 +215,7 @@ function renderPagination(totalItems) {
     nextButton.disabled = currentPage === totalPages;
     nextButton.onclick = () => changePage(currentPage + 1);
     paginationContainer.appendChild(nextButton);
-    
+
     // Thêm phân trang vào sau danh sách sản phẩm
     const productListContainer = document.querySelector(".contain-product");
     const existingPagination = document.querySelector('.pagination');
@@ -329,7 +328,7 @@ function renderWaitOrder(arr) {
             </div>
         `;
             orderManagementBody.appendChild(orderDiv);
-            renderOrderItem(order.order, order.id);
+            renderOrderItem(order.order, order.id, order.time);
         }
     });
 }
@@ -368,7 +367,7 @@ function renderAcceptedOrder(arr) {
             </div>
       `;
             orderManagementBody.appendChild(orderDiv);
-            renderOrderItem(order.order, orderid);
+            renderOrderItem(order.order, orderid, order.time);
         }
     });
 }
@@ -409,7 +408,7 @@ function renderRejectedOrder(arr) {
             </div>
         `;
             orderManagementBody.appendChild(orderDiv);
-            renderOrderItem(order.order, orderid);
+            renderOrderItem(order.order, orderid, order.time);
         }
     });
 }
@@ -426,11 +425,13 @@ function renderTotalShipAdmin(arrOfOrderInListOrder) {
     return shipTotal;
 }
 
-function renderOrderItem(arr, orderid) {
+function renderOrderItem(arr, orderid, time) {
     const orderManagementTbody = document
         .getElementById(orderid)
         .querySelector(".tableHistory");
+
     var variableNeed = ".fee_shipping" + orderid
+
     document.querySelector(variableNeed).textContent = "Fee shipping: $" + renderTotalShipAdmin(arr);
     let number = 0;
     arr.forEach((item) => {
@@ -442,7 +443,7 @@ function renderOrderItem(arr, orderid) {
                 <td>${item.name}</td>
                 <td>${item.quantity}</td>
                 <td>${item.price.toLocaleString("vi-VN") + "đ"}</td>
-                <td>${item.time}</td>
+                <td>${time}</td>
                 <td>${status(listOrders[orderid - 1].check)}</td>
             `;
         orderManagementTbody.appendChild(orderTr);
@@ -560,14 +561,28 @@ const updateUserStatus = (button, newStatus) => {
     }
 };
 
+const productAcceptedTotal = listOrders.reduce((acc, item) => {
+    if (item.check === 1) {
+        item.order.forEach(product => {
+            acc[product.id] = (acc[product.id] || 0) + product.price;
+        });
+    }
+    return acc;
+}, {});
 
+const pieData = Object.entries(productAcceptedTotal).map(([id, totalPrice]) => ({
+    productOrderid: id,
+    totalPrice: totalPrice
+}));
+
+console.log(pieData)
 
 
 function renderOrderStartictis() {
     document.querySelector(".div-title").innerHTML = `
         <h1 class="title">Order Statistics</h1>
     `;
-    
+
     document.querySelector(".contain-add-product-search").innerHTML = `
         <div class="head">
             <div class="form-input-startics">
@@ -608,27 +623,32 @@ function renderOrderStartictis() {
         </div>
         
     `;
-    const ctx = document.getElementById('myChart');
-      
+    const labels = pieData.map(item => item.productOrderid);
+    const data = pieData.map(item => item.totalPrice);
+
+    const backgroundColors = [
+        '#FF5733', '#33FF57', '#3357FF', '#FF33A6', '#FFD133', '#33FFF5', '#C233FF'
+    ];
+
+    const ctx = document.getElementById('myChart').getContext('2d');
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: labels,
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1,
-                
+                label: 'Sản phẩm được mua nhiều nhất theo từng cấu hình',
+                data: data, 
+                backgroundColor: backgroundColors, 
+                borderWidth: 1, 
             }]
         },
         options: {
             scales: {
                 y: {
-                beginAtZero: true
+                    beginAtZero: true,
                 }
             }
         }
-        
     });
 }
 
@@ -652,6 +672,7 @@ function handleOrderStartictis() {
     }
 
     const labelChart = [];
+
     console.log(typeProduct.value);
     listOrders.forEach((item) => {
         const filteredOrders = item.order.filter((order) => {
@@ -685,7 +706,7 @@ function handleOrderStartictis() {
     });
 
     const ctx = document.getElementById('myChart');
-      
+
     new Chart(ctx, {
         type: 'bar',
         data: {
@@ -694,18 +715,18 @@ function handleOrderStartictis() {
                 label: '# of Votes',
                 data: [12, 19, 3, 5, 2, 3],
                 borderWidth: 1,
-                
+
             }]
         },
         options: {
             responsive: true,
             scales: {
                 y: {
-                beginAtZero: true
+                    beginAtZero: true
                 }
             }
         }
-        
+
     });
 }
 
@@ -1037,7 +1058,7 @@ function editProduct(data) {
         const imgaeUrl = e.target.result;
         if (productToEdit) {
             productToEdit.name = data.nameProduct;
-            productToEdit.model[selectedIndexModelProduct].price = data.price;
+            productToEdit.model[selectedIndexModelProduct].price = parent(data.price);
             productToEdit.model[selectedIndexModelProduct].cpu = data.cpu;
             productToEdit.typen = data.type;
             productToEdit.img = imgaeUrl;

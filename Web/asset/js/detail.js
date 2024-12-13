@@ -76,9 +76,6 @@ const selectConfig = (product) => {
                 brand: product.brand,
                 type: product.type,
                 quantity: 1,
-                time: new Date().toLocaleString("en-US", {
-                    timeZone: "Asia/Ho_Chi_Minh",
-                }),
             }
         })
     })
