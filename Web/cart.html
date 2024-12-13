@@ -121,6 +121,17 @@
 
                 <!-- right -->
                 <div class="main-sidebar">
+                    
+                    <select id='provinces' onclick='getProvinces(event)'>
+                        <option value=''>-- Chọn tỉnh --</option>
+                    </select>
+                    <select id='districts' onchange='getDistricts(event)'>
+                        <option value=''>-- Chọn huyện --</option>
+                    </select>
+                    <select id='wards'>
+                        <option value=''>-- Chọn Xã --</option>
+                    </select>
+
                     <div class="main-sidebar__checkout">
                         <div class="show-info">
                             <div class="title">

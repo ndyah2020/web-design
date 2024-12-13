@@ -859,18 +859,22 @@ dellBtn.addEventListener("click", function () {
     renderPageNumber(dellProducts, perPage);
     handleMoveButton();
 });
+if (gamingBtn) {
+    gamingBtn.addEventListener("click", function () {
+        getProduct(gamingProducts);
+        renderPageNumber(gamingProducts, perPage);
+        handleMoveButton();
+    });
+}
+if (officeBtn) {
+    officeBtn.addEventListener("click", function () {
+        getProduct(officeProducts);
+        renderPageNumber(officeProducts, perPage);
+        handleMoveButton();
+    });
+}
 
-gamingBtn.addEventListener("click", function () {
-    getProduct(gamingProducts);
-    renderPageNumber(gamingProducts, perPage);
-    handleMoveButton();
-});
 
-officeBtn.addEventListener("click", function () {
-    getProduct(officeProducts);
-    renderPageNumber(officeProducts, perPage);
-    handleMoveButton();
-});
 
 // phân trang
 var currentPage = 1,
@@ -923,35 +927,38 @@ getProduct(listProducts);
 //
 function renderPageNumber(arr, perPage) {
     totalPage = Math.ceil(arr.length / perPage);
-    document.querySelector(".pagination-ul").innerHTML = "";
+    const pagination = document.querySelector(".pagination-ul");
+    if (pagination) {
+        pagination.innerHTML = ""
 
-    document.querySelector(".pagination-ul").innerHTML += `
+        document.querySelector(".pagination-ul").innerHTML += `
         <a href="#recommend">
             <li class="move-btn move-prev" onclick="prevPage()"><</li>
         </a>
     `;
 
-    for (let i = 1; i <= totalPage; i++) {
-        document.querySelector(".pagination-ul").innerHTML += `
+        for (let i = 1; i <= totalPage; i++) {
+            document.querySelector(".pagination-ul").innerHTML += `
             <a href="#recommend">
                 <li class="list-index li${i}" onclick="activePageIndex(event, ${i})">${i}</li>
             </a>
         `;
-    }
+        }
 
-    document.querySelector(".pagination-ul").innerHTML += `
+        document.querySelector(".pagination-ul").innerHTML += `
         <a href="#recommend">
             <li class="move-btn move-next" onclick="nextPage()">></li>
         </a>
     `;
 
-    document.querySelector(".li1").classList.add("active");
+        document.querySelector(".li1").classList.add("active");
 
-    // if (totalPage > 1) {
-    //     document.querySelector(".li1").classList.add("active");
-    // } else if (totalPage <= 1) {
-    //     document.querySelector(".li1").style.display = "none";
-    // }
+        // if (totalPage > 1) {
+        //     document.querySelector(".li1").classList.add("active");
+        // } else if (totalPage <= 1) {
+        //     document.querySelector(".li1").style.display = "none";
+        // }
+    }
 }
 
 let currentProductList = listProducts;
@@ -960,24 +967,26 @@ function handleMoveButton() {
     let prevBtn = document.querySelector(".move-prev");
     let nextBtn = document.querySelector(".move-next");
 
-    if (totalPage === 1) {
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'none';
-        return;
-    }
+    if (prevBtn && nextBtn) {
+        if (totalPage === 1) {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            return;
+        }
 
-    if (currentPage === 1) {
-        prevBtn.style.display = 'none';
-    }
-    else {
-        prevBtn.style.display = 'block';
-    }
+        if (currentPage === 1) {
+            prevBtn.style.display = 'none';
+        }
+        else {
+            prevBtn.style.display = 'block';
+        }
 
-    if (currentPage === totalPage) {
-        nextBtn.style.display = 'none';
-    }
-    else {
-        nextBtn.style.display = 'block';
+        if (currentPage === totalPage) {
+            nextBtn.style.display = 'none';
+        }
+        else {
+            nextBtn.style.display = 'block';
+        }
     }
 }
 
@@ -1073,8 +1082,11 @@ const prevSlide = function () { // Quay lại slide trước đó hoạt động
     activateDot(curSlide);
 };
 // Nhấn quay lại slide
-btnRight.addEventListener("click", nextSlide);
-btnLeft.addEventListener("click", prevSlide);
+if (btnRight && btnRight) {
+    btnRight.addEventListener("click", nextSlide);
+    btnLeft.addEventListener("click", prevSlide);
+}
+
 // Nhấn mũi tên của bàn phím để chuyển qua lại slide
 document.addEventListener("keydown", function (e) {
     if (e.key === "ArrowLeft") prevSlide();
@@ -1090,14 +1102,14 @@ const createDots = function () { //Tạo các dot tương ứng với số lư�
     });
 };
 const activateDot = function (slide) { // Đánh dấu dot tương ứng với slide đang hiển thị
-    document
-        .querySelectorAll(".dots__dot")
+    document.querySelectorAll(".dots__dot")
         .forEach((dot) => dot.classList.remove("dots__dot--active")); // Lặp qua các dot và loại bỏ class
 
     document
         .querySelector(`.dots__dot[data-slide="${slide}"]`) //Dot tương ứng với giá trị slide thêm vào class
         .classList.add("dots__dot--active");
 };
+
 const init = function () { //Khởi tạo và thiết lập trình chiếu
     goToSlide(0); //Đặt slide đầu tiên (slide 0) ở vị trí trung tâm
     createDots();

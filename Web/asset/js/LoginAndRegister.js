@@ -247,9 +247,10 @@ const logoutUser = () => {
 }
 
 const setIcon = () => {
+
     const iconUser = document.querySelector('.login-btn');
-   
-    if (currentLogin) {
+    
+    if (currentLogin && iconUser) {
         const userName = currentLogin.name;
         iconUser.innerHTML = `
             <img src="./asset/images/header-user.svg" alt="" class="icon-user" "/> ${userName}
