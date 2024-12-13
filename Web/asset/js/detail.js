@@ -73,6 +73,7 @@ const selectConfig = (product) => {
                 price: product.model[index].price,
                 cpu : product.model[index].cpu,
                 img: product.img,
+                brand: product.brand,
                 type: product.type,
                 quantity: 1,
                 time: new Date().toLocaleString("en-US", {

@@ -1,3 +1,5 @@
+const ITEMS_PER_PAGE = 8;
+let currentPage = 1;
 
 let listProducts = localStorage.getItem("listProducts")
     ? JSON.parse(localStorage.getItem('listProducts'))
@@ -16,6 +18,7 @@ let listOrders = localStorage.getItem("listOrders")
     : [];
 
 renderAdmin();
+
 
 // Xử lý ẩn hiện
 function renderAdmin() {
@@ -36,6 +39,7 @@ function renderAdmin() {
         logOutAdmin();
     };
 }
+
 
 function renderProductManagement() {
     document.querySelector(".div-title").innerHTML = `
@@ -67,7 +71,9 @@ function renderProductManagement() {
     // handleProductManagement(); /// chưa làm
 }
 
+
 const searchProduct = (value) => {
+    currentPage = 1; 
     const listProductsSearch = []
     listProducts.forEach((product) => {
         if (product.name.toLowerCase().includes(value.toLowerCase())) {
@@ -97,9 +103,14 @@ const deleteValueInputSearch = (value) => {
 
 var selectedIndexModelProduct = 0
 function renderProducts(arr) {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const paginatedItems = arr.slice(startIndex, endIndex);
+    
     const productListContainer = document.querySelector(".contain-product");
     productListContainer.innerHTML = "";
-    arr.forEach((product) => {
+    
+    paginatedItems.forEach((product) => {
         const productDiv = document.createElement("div");
         productDiv.classList.add("product");
         function formatPrice(price) {
@@ -121,7 +132,6 @@ function renderProducts(arr) {
             </div>
             <span class="price">${formatPrice(product.model[0].price)}</span>
             <div class="group-btn">
-                        
                 <button class="edit-btn" onclick="openEditForm(${product.id})">   
                     Edit
                 </button>
@@ -133,6 +143,8 @@ function renderProducts(arr) {
                 </button>
             </div>
         `;
+
+        // Giữ nguyên phần xử lý sự kiện cho input và select
         const inputElement = productDiv.querySelector('.add-config-input');
         const selectElement = productDiv.querySelector(`#config-${product.id}`);
         const priceElement = productDiv.querySelector('.price');
@@ -165,8 +177,62 @@ function renderProducts(arr) {
         inputElement.addEventListener('blur', () => {
             inputElement.value = ''
         });
+        
         productListContainer.appendChild(productDiv);
     });
+
+    renderPagination(arr.length);
+}
+
+function renderPagination(totalItems) {
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    const paginationContainer = document.createElement('div');
+    paginationContainer.classList.add('pagination');
+    
+    // Nút Previous
+    const prevButton = document.createElement('button');
+    prevButton.classList.add('pagination-btn');
+    prevButton.textContent = '<';
+    prevButton.disabled = currentPage === 1;
+    prevButton.onclick = () => changePage(currentPage - 1);
+    paginationContainer.appendChild(prevButton);
+    
+    // Các nút số trang
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.classList.add('pagination-btn');
+        if (i === currentPage) {
+            pageButton.classList.add('active');
+        }
+        pageButton.textContent = i;
+        pageButton.onclick = () => changePage(i);
+        paginationContainer.appendChild(pageButton);
+    }
+    
+    // Nút Next
+    const nextButton = document.createElement('button');
+    nextButton.classList.add('pagination-btn');
+    nextButton.textContent = '>';
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.onclick = () => changePage(currentPage + 1);
+    paginationContainer.appendChild(nextButton);
+    
+    // Thêm phân trang vào sau danh sách sản phẩm
+    const productListContainer = document.querySelector(".contain-product");
+    const existingPagination = document.querySelector('.pagination');
+    if (existingPagination) {
+        existingPagination.remove();
+    }
+    productListContainer.after(paginationContainer);
+}
+
+function changePage(newPage) {
+    const totalPages = Math.ceil(listProducts.length / ITEMS_PER_PAGE);
+    if (newPage < 1 || newPage > totalPages) {
+        return;
+    }
+    currentPage = newPage;
+    renderProducts(listProducts);
 }
 
 function renderOrderManagement() {
@@ -501,6 +567,7 @@ function renderOrderStartictis() {
     document.querySelector(".div-title").innerHTML = `
         <h1 class="title">Order Statistics</h1>
     `;
+    
     document.querySelector(".contain-add-product-search").innerHTML = `
         <div class="head">
             <div class="form-input-startics">
@@ -517,12 +584,14 @@ function renderOrderStartictis() {
                         </div>
 
                         <div class="form-item">
-                            <label for="type">Type</label>
-                            <select name="type" id="type">
+                            <label for="brand">Brand</label>
+                            <select name="brand" id="brand">
                                 <option value="">---</option>
-                                <option value="sweater">sweater</option>
-                                <option value="pants">pants</option>
-                                <option value="shoe">shoe</option>
+                                <option value="Acer">Acer</option>
+                                <option value="ASUS">Asus</option>
+                                <option value="Dell">Dell</option>
+                                <option value="Lenovo">Lenovo</option>
+                                <option value="MSI">MSI</option>
                             </select>
                         </div>
                     </div>
@@ -532,8 +601,112 @@ function renderOrderStartictis() {
                 <button class="btn-customer" onclick = "handleTopCustomer()">Top Customers</button>
             </div>
         </div>
-        <div class="body-table"></div>
+        <div class="body-table">
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+        </div>
+        
     `;
+    const ctx = document.getElementById('myChart');
+      
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1,
+                
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                beginAtZero: true
+                }
+            }
+        }
+        
+    });
+}
+
+function handleOrderStartictis() {
+    const startDate = document.querySelector("#start-date");
+    const endDate = document.querySelector("#end-date");
+    const typeProduct = document.querySelector("#brand");
+
+    // Clear the previous filtered list
+    listFilter = [];
+
+    const startDateTime = new Date(startDate.value);
+    let endDateTime;
+
+    // If the end date is not specified, set it to the current date
+    if (endDate.value === '') {
+        endDateTime = new Date();
+    } else {
+        endDateTime = new Date(endDate.value);
+        endDateTime.setDate(endDateTime.getDate() + 1);
+    }
+
+    const labelChart = [];
+    console.log(typeProduct.value);
+    listOrders.forEach((item) => {
+        const filteredOrders = item.order.filter((order) => {
+            const orderTime = new Date(order.time);
+            return orderTime >= startDateTime && orderTime < endDateTime;
+        });
+
+        // console.log(filteredOrders);
+
+        const productsWithType = filteredOrders.filter((product) => {
+            console.log(product.brand);
+            return product.brand === typeProduct.value;
+        })
+
+        console.log(productsWithType);
+
+        // if (filteredOrders.length > 0 && matchesType) {
+        //     // Create a new filtered object with only the necessary properties
+        //     const filteredItem = {
+        //         email: item.email,
+        //         id: item.id,
+        //         nameCustomer: item.nameCustomer,
+        //         order: filteredOrders.filter(order => typeProduct.value === '' || order.type === typeProduct.value),
+        //         userId: item.userId
+        //     };
+
+        //     // Add the item to the filtered list
+        //     listFilter.push(filteredItem);
+        // }
+
+    });
+
+    const ctx = document.getElementById('myChart');
+      
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1,
+                
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                beginAtZero: true
+                }
+            }
+        }
+        
+    });
 }
 
 function renderTableBody() {

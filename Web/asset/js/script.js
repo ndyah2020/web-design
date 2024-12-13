@@ -670,7 +670,7 @@ function renderProduct(products) {
             productList.appendChild(productSection);
         })
     }
-    // cartHover();
+    cartHover();
 }
 
 let perProduct = [];
@@ -1193,14 +1193,14 @@ function status(check) {
 
 // nghiên cứu em yêu khoa học
 
-// function getRandomColor() {
-//     var letters = '0123456789ABCDEF';
-//     var color = '#';
-//     for (var i = 0; i < 6; i++) {
-//       color += letters[Math.floor(Math.random() * 16)];
-//     }
-//     return color;
-// }
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 
 // const slider = document.querySelector(".slider");
 // setInterval(() => {
@@ -1219,20 +1219,20 @@ function status(check) {
 //     iconLogin.style.backgroundColor = "#fff";
 // })
      
-// function cartHover() {
-//     var cart = document.querySelectorAll(".cart");
-//     for (let c of cart) {
-//         c.addEventListener('mouseover', function() {
-//             isInterval = setInterval(() => {
-//                 c.style.boxShadow = getRandomColor() + " 0px 5px 15px";
-//             }, 100)
-//         })
-//     }
-//     for (let c of cart) {
-//         c.addEventListener('mouseout', function() {
-//             clearInterval(isInterval);
-//             c.style.boxShadow = "";
-//         })
-//     }
-// }
+function cartHover() {
+    var cart = document.querySelectorAll(".cart");
+    for (let c of cart) {
+        c.addEventListener('mouseover', function() {
+            isInterval = setInterval(() => {
+                c.style.boxShadow = getRandomColor() + " 0px 5px 15px";
+            }, 100)
+        })
+    }
+    for (let c of cart) {
+        c.addEventListener('mouseout', function() {
+            clearInterval(isInterval);
+            c.style.boxShadow = "";
+        })
+    }
+}
 
