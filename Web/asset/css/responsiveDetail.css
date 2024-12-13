@@ -10,3 +10,45 @@
         width: 100%;
     }
 } 
+
+@media only screen and (max-width: 321px){
+    .product-image{
+        width:100%;
+    }
+
+    .body-filter {
+        height: 64px;
+    }
+
+    .header {
+        width:100%;
+    }
+    .container .body{
+        display: block;
+    }
+    .body .body-right{
+        width: 100%;
+    }
+    .body .body-left{
+        width: 100%;
+    }
+}
+
+@media only screen and  (max-width: 376px){
+    .product-image{
+        width: 100%;
+    }
+
+    .header {
+        width:100%;
+    }
+    .container .body{
+        display: block;
+    }
+    .body .body-right{
+        width: 100%;
+    }
+    .body .body-left{
+        width: 100%;
+    }
+}

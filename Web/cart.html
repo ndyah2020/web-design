@@ -166,6 +166,88 @@
         </div>
     </main>
 
+    <div id="checkoutModal" class="modal">
+        <div class="container">
+            <form id="checkoutForm">
+                <div class="row">
+                    <!-- Billing Address -->
+                    <div class="column">
+                        <h3 class="title">Billing Address</h3>
+                        <div class="input-box">
+                            <span>Full Name :</span>
+                            <input type="text" id="billingName" placeholder="Sikibi Toilet" required>
+                        </div>
+                        <div class="input-box">
+                            <span>Email :</span>
+                            <input type="email" id="billingEmail" placeholder="example@example.com" required>
+                        </div>
+                        <div class="input-box">
+                            <span>Address :</span>
+                            <input type="text" id="billingAddress" placeholder="No.273 An Dương Vương Street, District 5" required>
+                        </div>
+                        <div class="input-box">
+                            <span>Phone Number :</span>
+                            <input type="text" id="billingNumber" placeholder="012 344 3456" required>
+                        </div>
+
+                        <div class="flex">
+                            <div class="input-box">
+                                <span>Country:</span>
+                                <select id="billingCountry" required>
+                                    <option value="" disabled selected>Choose a country</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="USA">USA</option>
+                                    <option value="France">France</option>
+                                    <option value="Vietnam">Vietnam</option>
+                                </select>
+                            </div>
+                            <div class="input-box">
+                                <span>City:</span>
+                                <select id="billingCity" required>
+                                    <option value="" disabled selected>Choose a city</option>
+                                </select>
+                            </div>
+                        </div>  
+                    </div>
+
+                    <!-- Payment Details -->
+                    <div class="column">
+                        <h3 class="title">Payment</h3>
+                        <div class="input-box">
+                            <span>Cards Accepted :</span>
+                            <img src="./asset/images/AcceptedCards.jpg" alt="">
+                        </div>
+                        <div class="input-box">
+                            <span>Name On Card :</span>
+                            <input type="text" id="cardName" placeholder="Mr. Jacob Aiden" required>
+                        </div>
+                        <div class="input-box">
+                            <span>Credit Card Number :</span>
+                            <input type="number" id="cardNumber" placeholder="1111 2222 3333 4444" required>
+                        </div>
+                        <div class="input-box">
+                            <span>Exp. Month :</span>
+                            <input type="text" id="cardExpMonth" placeholder="August" required>
+                        </div>
+
+                        <div class="flex">
+                            <div class="input-box">
+                                <span>Exp. Year :</span>
+                                <input type="text" id="cardExpYear" placeholder="2025" required>
+                            </div>
+                            <div class="input-box">
+                                <span>CVV :</span>
+                                <input type="text" id="cardCVV" placeholder="123" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn">Submit</button>
+                <button type="button" class="btn close-modal">Cancel</button>
+            </form>
+        </div>
+    </div>
+
     <script src="./asset/js/responsive.js"></script>
     <script src="./asset/js/validator.js"></script>
     <script src="./asset/js/LoginAndRegister.js"></script>
