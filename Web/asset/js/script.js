@@ -911,7 +911,7 @@ function renderProduct(products) {
             productList.appendChild(productSection);
         })
     }
-    cartHover();
+    // cartHover();
 }
 
 let perProduct = [];
@@ -1453,7 +1453,7 @@ function getRandomColor() {
 
 // const slider = document.querySelector(".slider");
 // setInterval(() => {
-//     slider.style.boxShadow = getRandomColor() + " 0px 20px 40px";
+//     slider.style.boxShadow = getRandomColor() + " 0px 5px 15px";
 // }, 100)
 
 // let isIntervalIcon;

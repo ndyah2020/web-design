@@ -716,7 +716,7 @@ td {
 
 /* CSS */
 .btn-sale, .btn-customer, .btn-submit {
-  background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+  background: blue;
   border: 0;
   border-radius: 12px;
   color: #FFFFFF;

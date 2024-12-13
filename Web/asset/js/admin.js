@@ -1,4 +1,4 @@
-const ITEMS_PER_PAGE = 8;
+const itemPerPage = 8;
 let currentPage = 1;
 
 let listProducts = localStorage.getItem("listProducts")
@@ -102,8 +102,8 @@ const deleteValueInputSearch = (value) => {
 
 var selectedIndexModelProduct = 0
 function renderProducts(arr) {
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const startIndex = (currentPage - 1) * itemPerPage;
+    const endIndex = startIndex + itemPerPage;
     const paginatedItems = arr.slice(startIndex, endIndex);
 
     const productListContainer = document.querySelector(".contain-product");
@@ -184,7 +184,7 @@ function renderProducts(arr) {
 }
 
 function renderPagination(totalItems) {
-    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(totalItems / itemPerPage);
     const paginationContainer = document.createElement('div');
     paginationContainer.classList.add('pagination');
 
@@ -226,7 +226,7 @@ function renderPagination(totalItems) {
 }
 
 function changePage(newPage) {
-    const totalPages = Math.ceil(listProducts.length / ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(listProducts.length / itemPerPage);
     if (newPage < 1 || newPage > totalPages) {
         return;
     }
@@ -635,15 +635,15 @@ function renderOrderStartictis() {
     ];
 
     const ctx = document.getElementById('myChart').getContext('2d');
-    new Chart(ctx, {
+    const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
             datasets: [{
                 label: 'Sản phẩm được mua nhiều nhất theo từng cấu hình',
-                data: data, 
-                backgroundColor: backgroundColors, 
-                borderWidth: 1, 
+                data: data,
+                backgroundColor: backgroundColors,
+                borderWidth: 1,
             }]
         },
         options: {
@@ -654,84 +654,478 @@ function renderOrderStartictis() {
             }
         }
     });
+
+    function updateChartColors() {
+        myChart.data.datasets[0].backgroundColor = randomColorArray(backgroundColors);
+        myChart.update();
+    }
+
+    // setInterval(updateChartColors, 200);
+}
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+function randomColorArray(backgroundColors) {
+    for (var i = 0; i < backgroundColors.length; i++) {
+        backgroundColors[i] = getRandomColor();
+    }
+    return backgroundColors;
 }
 
 function handleOrderStartictis() {
-    const startDate = document.querySelector("#start-date");
-    const endDate = document.querySelector("#end-date");
-    const typeProduct = document.querySelector("#brand");
+    const startDate = document.querySelector("#start-date").value;
+    const endDate = document.querySelector("#end-date").value;
+    const selectedBrand = document.querySelector("#brand").value;
 
-    // Clear the previous filtered list
-    listFilter = [];
-
-    const startDateTime = new Date(startDate.value);
-    let endDateTime;
-
-    // If the end date is not specified, set it to the current date
-    if (endDate.value === '') {
-        endDateTime = new Date();
-    } else {
-        endDateTime = new Date(endDate.value);
-        endDateTime.setDate(endDateTime.getDate() + 1);
+    if (!startDate) {
+        alert("Vui lòng chọn ngày bắt đầu");
+        return;
     }
 
-    const labelChart = [];
+    // Chuyển đổi ngày thành đối tượng Date
+    const startDateTime = new Date(startDate);
+    const endDateTime = endDate ? new Date(endDate) : new Date();
+    endDateTime.setHours(23, 59, 59);
 
-    console.log(typeProduct.value);
-    listOrders.forEach((item) => {
-        const filteredOrders = item.order.filter((order) => {
-            const orderTime = new Date(order.time);
-            return orderTime >= startDateTime && orderTime < endDateTime;
-        });
-
-        // console.log(filteredOrders);
-
-        const productsWithType = filteredOrders.filter((product) => {
-            console.log(product.brand);
-            return product.brand === typeProduct.value;
-        })
-
-        console.log(productsWithType);
-
-        // if (filteredOrders.length > 0 && matchesType) {
-        //     // Create a new filtered object with only the necessary properties
-        //     const filteredItem = {
-        //         email: item.email,
-        //         id: item.id,
-        //         nameCustomer: item.nameCustomer,
-        //         order: filteredOrders.filter(order => typeProduct.value === '' || order.type === typeProduct.value),
-        //         userId: item.userId
-        //     };
-
-        //     // Add the item to the filtered list
-        //     listFilter.push(filteredItem);
-        // }
-
+    // Lọc các đơn hàng trong khoảng thời gian
+    const filteredOrders = listOrders.filter(order => {
+        const orderDate = new Date(order.time);
+        return orderDate >= startDateTime && 
+               orderDate <= endDateTime && 
+               order.check === 1;
     });
 
-    const ctx = document.getElementById('myChart');
+    // Lọc và thống kê sản phẩm theo brand được chọn
+    let brandProducts = [];
+    filteredOrders.forEach(order => {
+        const productsOfBrand = order.order.filter(product => {
+            return selectedBrand ? product.brand === selectedBrand : true;
+        });
+        brandProducts = [...brandProducts, ...productsOfBrand];
+    });
 
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1,
+    // Nếu không có sản phẩm nào được tìm thấy
+    if (brandProducts.length === 0) {
+        alert("??????????????");
+        return;
+    }
 
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
+    // Thống kê theo từng model sản phẩm
+    const productStats = {};
+    brandProducts.forEach(product => {
+        const productKey = `${product.name} - ${product.cpu}`;
+        if (!productStats[productKey]) {
+            productStats[productKey] = {
+                quantity: 0,
+                totalRevenue: 0,
+                brand: product.brand
+            };
+        }
+        productStats[productKey].quantity += product.quantity;
+        productStats[productKey].totalRevenue += product.price * product.quantity;
+    });
+
+    // Chuẩn bị dữ liệu cho biểu đồ
+    const labels = Object.keys(productStats);
+    const quantities = labels.map(key => productStats[key].quantity);
+    const revenues = labels.map(key => productStats[key].totalRevenue);
+
+    console.log("Labels:", labels);
+    console.log("Quantities:", quantities);
+    console.log("Revenues:", revenues);
+
+    // Thêm bảng và canvas vào DOM trước
+    const bodyTable = document.querySelector('.body-table');
+    bodyTable.innerHTML = `
+        <div style="width: 100%; height: 400px;">
+            <canvas id="myChart"></canvas>
+        </div>
+        <table class="statistics-table">
+            <thead>
+                <tr>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng bán ra</th>
+                    <th>Doanh thu</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${Object.entries(productStats).map(([name, stats]) => `
+                    <tr>
+                        <td>${name}</td>
+                        <td>${stats.quantity}</td>
+                        <td>${stats.totalRevenue.toLocaleString('vi-VN')} đ</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><strong>Tổng cộng</strong></td>
+                    <td><strong>${quantities.reduce((a, b) => a + b, 0)}</strong></td>
+                    <td><strong>${revenues.reduce((a, b) => a + b, 0).toLocaleString('vi-VN')} đ</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    `;
+
+    // Đảm bảo canvas đã được tạo
+    setTimeout(() => {
+        // Xóa biểu đồ cũ nếu có
+        const existingChart = Chart.getChart("myChart");
+        if (existingChart) {
+            existingChart.destroy();
         }
 
+        const ctx = document.getElementById('myChart');
+        if (!ctx) {
+            console.error("Canvas element not found!");
+            return;
+        }
+
+        console.log("Creating new chart...");
+        try {
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Số lượng bán ra',
+                            data: quantities,
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Doanh thu (VNĐ)',
+                            data: revenues,
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Số lượng'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Doanh thu (VNĐ)'
+                            },
+                            grid: {
+                                drawOnChartArea: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: `Thống kê bán hàng ${selectedBrand ? `hãng ${selectedBrand}` : 'tất cả hãng'}`
+                        }
+                    }
+                }
+            });
+            console.log("Chart created successfully!");
+        } catch (error) {
+            console.error("Error creating chart:", error);
+        }
+    }, 100);
+}
+
+function handleTopSale() {
+    // Chỉ lấy các đơn hàng đã xác nhận (check === 1)
+    const confirmedOrders = listOrders.filter(order => order.check === 1);
+
+    // Tạo map để thống kê số lượng bán của từng sản phẩm
+    const productStats = {};
+
+    // Duyệt qua từng đơn hàng đã xác nhận
+    confirmedOrders.forEach(order => {
+        order.order.forEach(product => {
+            const productKey = product.name; // Chỉ dùng tên sản phẩm làm key
+            if (!productStats[productKey]) {
+                productStats[productKey] = {
+                    name: product.name,
+                    brand: product.brand,
+                    quantity: 0,
+                    totalRevenue: 0
+                };
+            }
+            productStats[productKey].quantity += product.quantity;
+            productStats[productKey].totalRevenue += product.price * product.quantity;
+        });
     });
+
+    // Chuyển đổi object thành array để sắp xếp
+    const sortedProducts = Object.values(productStats)
+        .sort((a, b) => b.quantity - a.quantity) // Sắp xếp theo số lượng giảm dần
+        .slice(0, 5); // Lấy top 5
+
+    // Chuẩn bị dữ liệu cho biểu đồ
+    const labels = sortedProducts.map(product => product.name);
+    const quantities = sortedProducts.map(product => product.quantity);
+    const revenues = sortedProducts.map(product => product.totalRevenue);
+
+    // Xóa biểu đồ cũ nếu có
+    const existingChart = Chart.getChart("myChart");
+    if (existingChart) {
+        existingChart.destroy();
+    }
+
+    // Thêm bảng và canvas vào DOM
+    const bodyTable = document.querySelector('.body-table');
+    bodyTable.innerHTML = `
+        <div style="width: 100%; height: 400px;">
+            <canvas id="myChart"></canvas>
+        </div>
+        <table class="statistics-table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Hãng</th>
+                    <th>Số lượng bán ra</th>
+                    <th>Doanh thu</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${sortedProducts.map((product, index) => `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${product.name}</td>
+                        <td>${product.brand}</td>
+                        <td>${product.quantity}</td>
+                        <td>${product.totalRevenue.toLocaleString('vi-VN')} đ</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"><strong>Tổng cộng</strong></td>
+                    <td><strong>${quantities.reduce((a, b) => a + b, 0)}</strong></td>
+                    <td><strong>${revenues.reduce((a, b) => a + b, 0).toLocaleString('vi-VN')} đ</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    `;
+
+    // Tạo biểu đồ mới
+    setTimeout(() => {
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Số lượng bán ra',
+                        data: quantities,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Doanh thu (VNĐ)',
+                        data: revenues,
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'Số lượng'
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: 'Doanh thu (VNĐ)'
+                        },
+                        grid: {
+                            drawOnChartArea: false
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Top 5 sản phẩm bán chạy nhất'
+                    }
+                }
+            }
+        });
+    }, 100);
+}
+
+function handleTopCustomer() {
+    // Chỉ lấy các đơn hàng đã xác nhận (check === 1)
+    const confirmedOrders = listOrders.filter(order => order.check === 1);
+
+    // Tạo map để thống kê theo khách hàng
+    const customerStats = {};
+
+    // Duyệt qua từng đơn hàng đã xác nhận
+    confirmedOrders.forEach(order => {
+        const customerName = order.nameCustomer;
+
+        if (!customerStats[customerName]) {
+            customerStats[customerName] = {
+                name: customerName,
+                totalProducts: 0,
+                totalSpent: 0
+            };
+        }
+
+        // Tính tổng số tiền và số lượng sản phẩm trong đơn hàng
+        order.order.forEach(product => {
+            customerStats[customerName].totalSpent += product.price * product.quantity;
+            customerStats[customerName].totalProducts += product.quantity;
+        });
+    });
+
+    // Chuyển đổi object thành array để sắp xếp
+    const sortedCustomers = Object.values(customerStats)
+        .sort((a, b) => b.totalSpent - a.totalSpent) // Sắp xếp theo tổng tiền giảm dần
+        .slice(0, 5); // Lấy top 5
+
+    // Chuẩn bị dữ liệu cho biểu đồ
+    const labels = sortedCustomers.map(customer => customer.name);
+    const totalSpent = sortedCustomers.map(customer => customer.totalSpent);
+    const totalProducts = sortedCustomers.map(customer => customer.totalProducts);
+
+    // Xóa biểu đồ cũ nếu có
+    const existingChart = Chart.getChart("myChart");
+    if (existingChart) {
+        existingChart.destroy();
+    }
+
+    // Thêm bảng và canvas vào DOM
+    const bodyTable = document.querySelector('.body-table');
+    bodyTable.innerHTML = `
+        <div style="width: 100%; height: 400px;">
+            <canvas id="myChart"></canvas>
+        </div>
+        <table class="statistics-table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên khách hàng</th>
+                    <th>Tổng sản phẩm</th>
+                    <th>Tổng chi tiêu</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${sortedCustomers.map((customer, index) => `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${customer.name}</td>
+                        <td>${customer.totalProducts}</td>
+                        <td>${customer.totalSpent.toLocaleString('vi-VN')} đ</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"><strong>Tổng cộng</strong></td>
+                    <td><strong>${totalProducts.reduce((a, b) => a + b, 0)}</strong></td>
+                    <td><strong>${totalSpent.reduce((a, b) => a + b, 0).toLocaleString('vi-VN')} đ</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    `;
+
+    // Tạo biểu đồ mới
+    setTimeout(() => {
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Tổng chi tiêu (VNĐ)',
+                        data: totalSpent,
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Số lượng sản phẩm đã mua',
+                        data: totalProducts,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'Tổng chi tiêu (VNĐ)'
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: 'Số lượng sản phẩm'
+                        },
+                        grid: {
+                            drawOnChartArea: false
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Top 5 khách hàng chi tiêu nhiều nhất'
+                    }
+                }
+            }
+        });
+    }, 100);
 }
 
 function renderTableBody() {
