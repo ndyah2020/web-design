@@ -1,0 +1,11 @@
+@media only screen and (max-width: 769px){
+    .container .body{
+        display: block;
+    }
+    .body .body-right{
+        width: 100%;
+    }
+    .body .body-left{
+        width: 100%;
+    }
+} 
