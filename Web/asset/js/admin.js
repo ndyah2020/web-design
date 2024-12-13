@@ -392,7 +392,7 @@ function renderRejectedOrder(arr) {
                 <table>
                     <thead>
                         <tr>
-                            <th>STT</th>
+                            <th>Order ID</th>
                             <th>Image</th>
                             <th>Name</th>
                             <th>Quatity</th>    
@@ -438,7 +438,7 @@ function renderOrderItem(arr, orderid, time) {
         number++;
         const orderTr = document.createElement("tr");
         orderTr.innerHTML = `
-                <td>${number}</td>
+                <td>${item.id}</td>
                 <td><img class="img-history" src="${item.img}" alt=""></td>
                 <td>${item.name}</td>
                 <td>${item.quantity}</td>
@@ -561,21 +561,22 @@ const updateUserStatus = (button, newStatus) => {
     }
 };
 
-const productAcceptedTotal = listOrders.reduce((acc, item) => {
-    if (item.check === 1) {
-        item.order.forEach(product => {
-            acc[product.id] = (acc[product.id] || 0) + product.price;
-        });
-    }
-    return acc;
-}, {});
 
-const pieData = Object.entries(productAcceptedTotal).map(([id, totalPrice]) => ({
-    productOrderid: id,
-    totalPrice: totalPrice
-}));
+const calculateProductAcceptedTotal = (orders) => 
+    orders.reduce((acc, item) => {
+        if (item.check === 1) {
+            item.order.forEach(product => {
+                acc[product.id] = (acc[product.id] || 0) + product.price;
+            });
+        }
+        return acc;
+    }, {});
 
-console.log(pieData)
+const generatePieData = (productTotal) => 
+    Object.entries(productTotal).map(([id, totalPrice]) => ({
+        productOrderid: id,
+        totalPrice: totalPrice
+    }));
 
 
 function renderOrderStartictis() {
@@ -623,6 +624,9 @@ function renderOrderStartictis() {
         </div>
         
     `;
+    const productAcceptedTotal = calculateProductAcceptedTotal(listOrders);
+    const pieData = generatePieData(productAcceptedTotal);
+
     const labels = pieData.map(item => item.productOrderid);
     const data = pieData.map(item => item.totalPrice);
 

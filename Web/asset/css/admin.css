@@ -644,6 +644,7 @@ td {
 }
 .adminAcceptOrder {
    margin: 20px;
+   margin-right: 300px;
    padding: 5px 20px;
    background-color: rgb(65, 97, 168);
    border-radius: 5px;

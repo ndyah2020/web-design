@@ -3,11 +3,101 @@ var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         id:         1,
         isAdmin:    0,
         name: 'Khách Hàng',
-        email:      'khachhang1@gmail.com',
+        email:      'client@gmail.com',
         password:   '123123',
         status:    true,
         cartItems: [
         ],
+    },
+    {
+        id: 2,
+        isAdmin: 0,
+        name: 'Nguyễn Duy Anh',
+        email: 'nguyenduyanhh2020@gmail.com',
+        password: '123123',
+        status: true,
+        cartItems: [],
+    },
+    {
+        id: 3,
+        isAdmin: 0,
+        name: 'John Doe',
+        email: 'john.doe@example.com',
+        password: '123123',
+        status: true,
+        cartItems: [],
+    },
+    {
+        id: 4,
+        isAdmin: 0,
+        name: 'Jane Doe',
+        email: 'janedoe@example.com',
+        password: '123123',
+        status: true,
+        cartItems: [],
+    },
+    {
+        id: 5,
+        isAdmin: 0,
+        name: 'Michael Jones',
+        email: 'michael.jones@example.com',
+        password: '123123',
+        status: true,
+        cartItems: [],
+    },
+    {
+        id: 6,
+        isAdmin: 0,
+        name: 'Alice Smith',
+        email: 'alice.smith@example.com',
+        password: '123123',
+        status: true,
+        cartItems: [],
+    },
+    {
+        id: 7,
+        isAdmin: 0,
+        name: 'Steven Wilson',
+        email: 'steven.wilson@example.com',
+        password: '123123',
+        status: true,
+        cartItems: [],
+    },
+    {
+        id: 8,
+        isAdmin: 0,
+        name: 'Susan Davis',
+        email: 'susan.davis@example.com',
+        password: '123123',
+        status: true,
+        cartItems: [],
+    },
+    {
+        id: 9,
+        isAdmin: 0,
+        name: 'Robert Johnson',
+        email: 'robert.johnson@example.com',
+        password: '123123',
+        status: true,
+        cartItems: [],
+    },
+    {
+        id: 10,
+        isAdmin: 0,
+        name: 'Linda Martin',
+        email: 'linda.martin@example.com',
+        password: '123123',
+        status: true,
+        cartItems: [],
+    },
+    {
+        id: 11,
+        isAdmin: 0,
+        name: 'Emily White',
+        email: 'emily.white@example.com',
+        password: '123123',
+        status: true,
+        cartItems: [],
     },
 ];
 //Hiển thị login khi ấn vào icon
@@ -158,8 +248,9 @@ const logoutUser = () => {
 
 const setIcon = () => {
     const iconUser = document.querySelector('.login-btn');
-    const userName = currentLogin.name;
+   
     if (currentLogin) {
+        const userName = currentLogin.name;
         iconUser.innerHTML = `
             <img src="./asset/images/header-user.svg" alt="" class="icon-user" "/> ${userName}
             <div class="user-menu">
