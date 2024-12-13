@@ -562,7 +562,7 @@ const updateUserStatus = (button, newStatus) => {
 };
 
 
-const calculateProductAcceptedTotal = (orders) => 
+const calculateProductAcceptedTotal = (orders) =>
     orders.reduce((acc, item) => {
         if (item.check === 1) {
             item.order.forEach(product => {
@@ -572,7 +572,7 @@ const calculateProductAcceptedTotal = (orders) =>
         return acc;
     }, {});
 
-const generatePieData = (productTotal) => 
+const generatePieData = (productTotal) =>
     Object.entries(productTotal).map(([id, totalPrice]) => ({
         productOrderid: id,
         totalPrice: totalPrice
@@ -630,9 +630,6 @@ function renderOrderStartictis() {
     const labels = pieData.map(item => item.productOrderid);
     const data = pieData.map(item => item.totalPrice);
 
-    const backgroundColors = [
-        '#FF5733', '#33FF57', '#3357FF', '#FF33A6', '#FFD133', '#33FFF5', '#C233FF'
-    ];
 
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
@@ -642,7 +639,8 @@ function renderOrderStartictis() {
             datasets: [{
                 label: 'Sản phẩm được mua nhiều nhất theo từng cấu hình',
                 data: data,
-                backgroundColor: backgroundColors,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1,
             }]
         },
@@ -697,9 +695,9 @@ function handleOrderStartictis() {
     // Lọc các đơn hàng trong khoảng thời gian
     const filteredOrders = listOrders.filter(order => {
         const orderDate = new Date(order.time);
-        return orderDate >= startDateTime && 
-               orderDate <= endDateTime && 
-               order.check === 1;
+        return orderDate >= startDateTime &&
+            orderDate <= endDateTime &&
+            order.check === 1;
     });
 
     // Lọc và thống kê sản phẩm theo brand được chọn

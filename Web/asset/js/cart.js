@@ -1,5 +1,4 @@
 
-
 const render = () => {
     const productListContainer = document.querySelector(".main-left__product");
     productListContainer.innerHTML = "";
@@ -117,7 +116,7 @@ const renderPrice = () => {
 const checkOut = () => {
     const checkOutBtn = document.querySelector('.action-checkout')
     checkOutBtn.onclick = function () {
-        updateListOrders(currentLogin)
+        updateListOrdersAndAddress(currentLogin)
     }
 }
 
@@ -131,7 +130,38 @@ const setId = () => {
     return maxId + 1;
 };
 
-const updateListOrders = (data) => {
+function updateListOrdersAndAddress(data) {
+    let flag = 0;
+
+    const provinceSelect = document.getElementById('provinces');
+    const districtSelect = document.getElementById('districts');
+    const wardSelect = document.getElementById('wards');
+
+    const selectedProvince = provinceSelect.options[provinceSelect.selectedIndex];
+    const selectedDistrict = districtSelect.options[districtSelect.selectedIndex];
+    const selectedWard = wardSelect.options[wardSelect.selectedIndex];
+
+    const provinceFullName = selectedProvince.getAttribute('data-full-name');
+    const districtFullName = selectedDistrict.getAttribute('data-full-name');
+    const wardFullName = selectedWard.getAttribute('data-full-name');
+
+    const streetName = document.getElementById('streetName').value
+    let newAddress
+    if (provinceFullName && districtFullName && wardFullName) {
+        flag = 1;
+        newAddress = {
+            id: `AD-${provinceSelect.value}-${districtSelect.value}-${wardFullName}`,
+            nameAddress: `${streetName}, ${provinceFullName}, ${districtFullName}, ${streetName}`
+        }
+        if (currentLogin.address.find((address) => address.id === newAddress.id)) {
+            alert('địa chỉ đã tồn tại')
+            return
+        }
+        currentLogin.address.push(newAddress)
+        saveItemInToLocalStorage('listOrders', listOrders)
+        updateUserData()
+    }
+
     const listOrdersObject = {
         id: setId(),
         userId: data.id,
@@ -142,12 +172,17 @@ const updateListOrders = (data) => {
         time: new Date().toLocaleString("en-US", {
             timeZone: "Asia/Ho_Chi_Minh",
         }),
+        address: flag === 1 ? newAddress.nameAddress : addressSeleted()
     };
-
+    
+    if(!listOrdersObject.address){
+        alert('Vui lòng chọn địa chỉ giao hàng')
+        return
+    }
     listOrders.push(listOrdersObject);
-
     saveItemInToLocalStorage('listOrders', listOrders);
     afterUpdate();
+    flag = 0
 };
 
 const afterUpdate = () => {
@@ -158,6 +193,30 @@ const afterUpdate = () => {
     window.location = "./index.html"
 }
 
+const getAddressUser = () => {
+    const btnSeleted = document.getElementById('haveAddress')
+    const addressUser = currentLogin.address
+    if (btnSeleted && addressUser) {
+        addressUser.map((address) => {
+            btnSeleted.innerHTML += `<option data-full-name='${address.nameAddress}'  value='${address.id}'>${address.nameAddress}</option>`
+        })
+    }
+}
+const addressSeleted = () => {
+    const addressSelete = document.getElementById('haveAddress');
+    const selectedProvince = addressSelete.options[addressSelete.selectedIndex];
+
+    const selectNewAddress = document.querySelector('.new-address');
+   
+    if (addressSelete.value) {
+        selectNewAddress.classList.add('hidden');
+        console.log(selectedProvince.getAttribute('data-full-name'));
+        return selectedProvince.getAttribute('data-full-name');
+    } else {
+        selectNewAddress.classList.remove('hidden');
+    }
+};
+
 
 const fetchProvinces = async () => {
     try {
@@ -166,7 +225,7 @@ const fetchProvinces = async () => {
         let provinces = data.data;
         console.log(provinces)
         provinces.map(value => {
-            document.getElementById('provinces').innerHTML += `<option value='${value.id}'>${value.full_name}</option>`;
+            document.getElementById('provinces').innerHTML += `<option data-full-name='${value.full_name}' value='${value.id}'>${value.full_name}</option>`;
         });
     } catch (error) {
         console.error('Không thể lấy dữ liệu:', error);
@@ -181,7 +240,7 @@ const fetchDistricts = async (provincesID) => {
         let districts = data.data;
         document.getElementById('districts').innerHTML = `<option value=''>-- Chọn quận/huyện --</option>`;
         districts.map(value => {
-            document.getElementById('districts').innerHTML += `<option value='${value.id}'>${value.full_name}</option>`;
+            document.getElementById('districts').innerHTML += `<option data-full-name='${value.full_name}'  value='${value.id}'>${value.full_name}</option>`;
         });
 
     } catch (error) {
@@ -197,7 +256,7 @@ const fetchWards = async (districtsID) => {
         let wards = data.data;
         document.getElementById('wards').innerHTML = `<option value=''>-- Chọn xã/phường --</option>`;
         wards.map(value => {
-            document.getElementById('wards').innerHTML += `<option value='${value.id}'>${value.full_name}</option>`;
+            document.getElementById('wards').innerHTML += `<option data-full-name='${value.full_name}'  value='${value.id}'>${value.full_name}</option>`;
         });
 
     } catch (error) {
@@ -218,5 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
     render()
     checkOut()
     fetchProvinces()
+    getAddressUser()
 })
 

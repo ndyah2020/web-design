@@ -78,7 +78,7 @@
                 <div class="body-filter">
                     <a class="title" href="./index.html">Home</a>
                     <img src="./asset/images/arrow-right.svg" alt="" />
-                    <a class="title" href="#!">Checkout</a>
+                    <a class="title" href="#!">Thanh Toán</a>
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@
                                     </div>
                                     <div class="delete-action">
                                         <a><img src="./asset/images/Delete.svg" alt="Delete" /></a>
-                                        <div class="title">Delete</div>
+                                        <div class="title">Xóa</div>
                                     </div>
                                 </div>
                             </div>
@@ -115,53 +115,62 @@
 
                     <div class="continue">
                         <img src="./asset/images/Arrow - Left 2.svg" alt="" class="image-continue" />
-                        <a href="./index.html" class="title">Continue Shopping</a>
+                        <a href="./index.html" class="title">Tiếp tục mua sắm</a>
                     </div>
                 </div>
 
                 <!-- right -->
                 <div class="main-sidebar">
-                    
-                    <select id='provinces' onclick='getProvinces(event)'>
-                        <option value=''>-- Chọn tỉnh --</option>
+
+                    <select id='haveAddress' onchange='addressSeleted()'>
+                        <option value='0'>-- Chọn địa của bạn --</option>
+                        <option value=''>-- Thêm địa chỉ mới --</option>
                     </select>
-                    <select id='districts' onchange='getDistricts(event)'>
-                        <option value=''>-- Chọn huyện --</option>
-                    </select>
-                    <select id='wards'>
-                        <option value=''>-- Chọn Xã --</option>
-                    </select>
+
+                    <div class="new-address hidden">
+                        <select id='provinces' onchange='getProvinces(event)'>
+                            <option value=''>-- Chọn tỉnh --</option>
+                        </select>
+                        <select id='districts' onchange='getDistricts(event)'>
+                            <option value=''>-- Chọn huyện --</option>
+                        </select>
+                        <select id='wards'>
+                            <option value=''>-- Chọn Xã --</option>
+                        </select>
+                        <input type="text"  id="streetName" placeholder="Nhập tên đường hoặc số nhà" required>
+                        <!-- <button class="btn-address-ok">Thêm Địa chỉ mới</button> -->
+                    </div>
 
                     <div class="main-sidebar__checkout">
                         <div class="show-info">
                             <div class="title">
-                                <strong>Subtotal</strong> (items)
+                                <strong>Số lượng</strong> (items)
                             </div>
                             <div class="show-number total-quantity">1</div>
                         </div>
 
                         <div class="show-info">
                             <div class="title">
-                                <strong>Price</strong> (Total)
+                                <strong>Giá</strong> (Total)
                             </div>
                             <div class="show-number price-checkout">25.000.000 VND</div>
                         </div>
 
                         <div class="show-info">
                             <div class="title">
-                                <strong>Shipping</strong>
+                                <strong>Phí Vận chuyển</strong>
                             </div>
                             <div class="show-number price-ship">0.000 VND</div>
                         </div>
 
                         <div class="show-info total">
                             <div class="title">
-                                <strong>Estimated Total</strong>
+                                <strong>Tổng tiền</strong>
                             </div>
                             <div class="show-number total-price-full">25.000.000 VND</div>
                         </div>
                         <button class="action-checkout">
-                            <div class="title">Continue to checkout</div>
+                            <div class="title">Thanh Toán</div>
                         </button>
                     </div>
 

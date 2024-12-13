@@ -49,7 +49,8 @@ body {
     color: var(--secondary-color-secondary-2, #9e9da8);
     font-size: 1.6rem;
     font-weight: 500;
-    line-height: 1.5; /* 150% */
+    line-height: 1.5;
+    /* 150% */
 }
 
 .body-filter .title:hover {
@@ -83,7 +84,7 @@ body {
     overflow: auto;
     height: 700px;
 }
-/* -------------------------- Phần css của class riêng của Cu Huy -------------------------- */
+
 .main-left__product .main-product .product-image {
     width: 175px;
     height: 172px;
@@ -101,7 +102,8 @@ body {
     color: #1a162e;
     font-size: 1.8rem;
     font-weight: 500;
-    line-height: 1.44; /* 144.444% */
+    line-height: 1.44;
+    /* 144.444% */
 }
 
 .main-left__product .main-product .product-details .data {
@@ -114,7 +116,8 @@ body {
     color: #1a162e;
     font-size: 2.2rem;
     font-weight: 700;
-    line-height: 1.45; /* 145.455% */
+    line-height: 1.45;
+    /* 145.455% */
 }
 
 .main-left__product .main-product .product-details .product-price:hover {
@@ -126,7 +129,8 @@ body {
     color: #9e9da8;
     font-size: 1.8rem;
     font-weight: 300;
-    line-height: 1.44; /* 144.444% */
+    line-height: 1.44;
+    /* 144.444% */
 }
 
 .main-left__product .main-product .delete-button {
@@ -143,6 +147,7 @@ body {
     background: #44b0a5;
     color: #ff6f00;
 }
+
 /*  */
 
 .main-left .main-product {
@@ -171,9 +176,9 @@ body {
 
 .your-cart {
     padding-left: 400px;
-    font-family:'Courier New', Courier, monospace;
+    font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
-    color: black;  
+    color: black;
 }
 
 .main-left .main-product .info-product {
@@ -190,13 +195,16 @@ body {
     color: #1a162e;
     font-size: 1.8rem;
     font-weight: 500;
-    line-height: 1.44; /* 144.444% */
+    line-height: 1.44;
+    /* 144.444% */
 }
+
 .info-product .info-product__title .cpu,
 .info-product .info-product__title .price {
     color: #1a162e;
     font-weight: 700;
-    line-height: 1.45; /* 145.455% */
+    line-height: 1.45;
+    /* 145.455% */
 }
 
 .info-product__action {
@@ -215,7 +223,7 @@ body {
     gap: 10px;
 }
 
-.info-product__action .delete-action img{
+.info-product__action .delete-action img {
     cursor: pointer;
     width: 35px;
 }
@@ -257,6 +265,7 @@ body {
     font-size: 1.8rem;
     font-weight: 500;
 }
+
 /* Right */
 .main-sidebar {
     padding: 30px 30px 0 0;
@@ -282,7 +291,8 @@ body {
     color: #1a162e;
     font-size: 1.6rem;
     font-weight: 500;
-    line-height: 1.5; /* 150% */
+    line-height: 1.5;
+    /* 150% */
 }
 
 .show-info .title {
@@ -296,15 +306,17 @@ body {
     color: #1a162e;
     font-size: 1.6rem;
     font-weight: 700;
-    line-height: 1.5; /* 150% */
+    line-height: 1.5;
+    /* 150% */
 }
 
 .main-sidebar__checkout .total {
     margin-top: 28px;
     position: relative;
-  
+
 }
-.info-product__title{
+
+.info-product__title {
     display: flex;
     flex-direction: column;
 }
@@ -365,7 +377,8 @@ body {
     color: #1a162e;
     font-size: 1.8rem;
     font-weight: 500;
-    line-height: 1.44; /* 144.444% */
+    line-height: 1.44;
+    /* 144.444% */
 }
 
 .main-sidebar__gift-info .desc {
@@ -388,8 +401,9 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    }
-    .modal .container {
+}
+
+.modal .container {
     position: relative;
     margin: auto;
     max-width: 800px;
@@ -397,48 +411,58 @@ body {
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-    }
-    .modal .close-modal {
+}
+
+.modal .close-modal {
     background: #e74c3c;
     margin-top: 15px;
-    }
-    .modal .close-modal:hover {
+}
+
+.modal .close-modal:hover {
     background: #c0392b;
-    }
-    .column .title {
+}
+
+.column .title {
     font-size: 20px;
     color: #333;
     text-transform: uppercase;
     margin-bottom: 5px;
     text-align: center;
-    }
-    .column .input-box {
+}
+
+.column .input-box {
     margin: 15px 0;
-    }
-    .input-box span {
+}
+
+.input-box span {
     display: block;
     margin-bottom: 10px;
-    }
-    .input-box input {
+}
+
+.input-box input {
     width: 100%;
     padding: 10px 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 15px;
-    }
-    .column .flex {
+}
+
+.column .flex {
     display: flex;
     gap: 5px;
-    }
-    .flex .input-box {
+}
+
+.flex .input-box {
     margin-top: 5px;
-    }
-    .input-box img {
+}
+
+.input-box img {
     height: 34px;
     margin-top: 5px;
     filter: drop-shadow(0 0 1px #000);
-    }
-    form .btn {
+}
+
+form .btn {
     width: 100%;
     padding: 12px;
     background: #8175d3;
@@ -450,24 +474,125 @@ body {
     margin-top: 5px;
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    }
-    form .btn:hover {
+}
+
+form .btn:hover {
     transform: translateY(-2px);
-    }
-    form .btn:active {
+}
+
+form .btn:active {
     transform: translateY(1px);
-    }
-    .input-box select {
+}
+
+.input-box select {
     width: 100%;
     padding: 10px 15px;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 15px;
-    background: #fff;s
-    color: #333;
+    background: #fff;
+    s color: #333;
     cursor: pointer;
-    }
-    .input-box select:focus {
+}
+
+.input-box select:focus {
     outline: none;
     border-color: #8175d3;
+}
+
+.main-sidebar #streetName{
+    width: 100%; 
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    background-color: #fff; 
+    font-size: 16px; 
+    appearance: none; 
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+    cursor: pointer; 
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.main-sidebar select {
+    width: 100%; 
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    background-color: #fff; 
+    font-size: 16px; 
+    appearance: none; 
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"%3E%3Cpath d="M7 10l5 5 5-5H7z" fill="%23999"%3E%3C/path%3E%3C/svg%3E'); /* Mũi tên tùy chỉnh */
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+    cursor: pointer; 
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+
+.main-sidebar select {
+    padding-right: 30px;
+}
+
+
+.main-sidebar select:hover {
+    border-color: #888; 
+}
+
+.main-sidebar select:focus {
+    border-color: #007BFF; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+    outline: none; 
+}
+
+
+.main-sidebar select option[value=""] {
+    color: #888; 
+}
+
+
+@media (max-width: 600px) {
+    .main-sidebar select {
+        font-size: 14px; 
+        padding: 8px 12px; 
     }
+}
+.main-sidebar .btn-address-ok {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 15px;
+}
+
+.main-sidebar .btn-address-ok:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.main-sidebar .btn-address-ok:active {
+    background-color: #1e7e34;
+    transform: translateY(0);
+}
+
+.main-sidebar .btn-address-ok:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+@media (max-width: 600px) {
+    .main-sidebar .btn-address-ok {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}

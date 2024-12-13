@@ -6,6 +6,7 @@ var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         email:      'client@gmail.com',
         password:   '123123',
         status:    true,
+        address: [],
         cartItems: [
         ],
     },
@@ -16,6 +17,7 @@ var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         email: 'nguyenduyanhh2020@gmail.com',
         password: '123123',
         status: true,
+        address: [],
         cartItems: [],
     },
     {
@@ -25,6 +27,7 @@ var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         email: 'john.doe@example.com',
         password: '123123',
         status: true,
+        address: [],
         cartItems: [],
     },
     {
@@ -34,6 +37,7 @@ var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         email: 'janedoe@example.com',
         password: '123123',
         status: true,
+        address: [],
         cartItems: [],
     },
     {
@@ -43,6 +47,7 @@ var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         email: 'michael.jones@example.com',
         password: '123123',
         status: true,
+        address: [],
         cartItems: [],
     },
     {
@@ -52,6 +57,7 @@ var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         email: 'alice.smith@example.com',
         password: '123123',
         status: true,
+        address: [],
         cartItems: [],
     },
     {
@@ -61,6 +67,7 @@ var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         email: 'steven.wilson@example.com',
         password: '123123',
         status: true,
+        address: [],
         cartItems: [],
     },
     {
@@ -70,6 +77,7 @@ var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         email: 'susan.davis@example.com',
         password: '123123',
         status: true,
+        address: [],
         cartItems: [],
     },
     {
@@ -79,6 +87,7 @@ var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         email: 'robert.johnson@example.com',
         password: '123123',
         status: true,
+        address: [],
         cartItems: [],
     },
     {
@@ -88,6 +97,7 @@ var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         email: 'linda.martin@example.com',
         password: '123123',
         status: true,
+        address: [],
         cartItems: [],
     },
     {
@@ -97,6 +107,7 @@ var DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         email: 'emily.white@example.com',
         password: '123123',
         status: true,
+        address: [],
         cartItems: [],
     },
 ];
@@ -270,7 +281,7 @@ var isRegister = false
 function setIdUser() {
     let max = DataUsers[0].id;
     for (let i = 1; i < DataUsers.length; i++) {
-      if (DataUsers[i].id > max) max = DataUsers[i].id;
+        if (DataUsers[i].id > max) max = DataUsers[i].id;
     }
     return max + 1;
 }
