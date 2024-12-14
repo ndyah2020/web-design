@@ -1040,30 +1040,29 @@ const showAndCloseAbout = () => {
 
 
 //_________________________Chuyển động banner_______________________//
-// Khai báo phần tử
-const slides = document.querySelectorAll(".slide"); // Chứa tất cả phần tử của class slide
-const btnLeft = document.querySelector(".btn-left"); // Nút điều hướng
-const btnRight = document.querySelector(".btn-right"); // Nút điều hướng
-const dotContainer = document.querySelector(".dots"); // Chứa nút để chỉ thị và điều khiển slide
+const slides = document.querySelectorAll(".slide"); 
+const btnLeft = document.querySelector(".btn-left");
+const btnRight = document.querySelector(".btn-right");
+const dotContainer = document.querySelector(".dots"); 
 
-let curSlide = 0; // Biến vị trí hiện tại của slide đầu tiên
+let curSlide = 0; 
 
-const goToSlide = function (slide) { // Dịch chuyển silde
-    slides.forEach( // Lặp qua các slide 
-        (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`) // Slide hiện tại sẽ có vị trí 0%, slide tiếp theo là 100%, và slide trước đó là -100%
+const goToSlide = function (slide) { 
+    slides.forEach( 
+        (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`) 
     );
 };
 
-const nextSlide = function () { // Chuyển sang slide tiếp theo
-    if (curSlide === slides.length - 1) { // Kiểm tra xem slide ở vị trí cuối cùng
-        curSlide = 0; // Đặt vị trí 0
+const nextSlide = function () { 
+    if (curSlide === slides.length - 1) {
+        curSlide = 0;
     } else {
-        curSlide++; // Nếu không tăng 1
+        curSlide++; 
     }
-    goToSlide(curSlide); // Cập nhật vị trí hiện tại
-    activateDot(curSlide); // Cập nhật dot của slide hiện tại.
+    goToSlide(curSlide); 
+    activateDot(curSlide); 
 };
-const prevSlide = function () { // Quay lại slide trước đó hoạt động ngược lại với nextSlide
+const prevSlide = function () { 
     if (curSlide == 0) {
         curSlide = slides.length - 1;
     } else {
@@ -1081,30 +1080,29 @@ document.addEventListener("keydown", function (e) {
     if (e.key === "ArrowRight") nextSlide();
 });
 // Dot
-const createDots = function () { //Tạo các dot tương ứng với số lượng slide
-    slides.forEach(function (_, i) { // Lặp qua slide và tạo dot
+const createDots = function () {
+    slides.forEach(function (_, i) { 
         dotContainer.insertAdjacentHTML(
             "beforeend",
-            `<button class="dots__dot" data-slide="${i}"></button>` // Gán giá trị để xác định vị trí tương ứng
+            `<button class="dots__dot" data-slide="${i}"></button>` 
         );
     });
 };
-const activateDot = function (slide) { // Đánh dấu dot tương ứng với slide đang hiển thị
+const activateDot = function (slide) {
     document
         .querySelectorAll(".dots__dot")
-        .forEach((dot) => dot.classList.remove("dots__dot--active")); // Lặp qua các dot và loại bỏ class
-
+        .forEach((dot) => dot.classList.remove("dots__dot--active")); 
     document
-        .querySelector(`.dots__dot[data-slide="${slide}"]`) //Dot tương ứng với giá trị slide thêm vào class
+        .querySelector(`.dots__dot[data-slide="${slide}"]`) 
         .classList.add("dots__dot--active");
 };
-const init = function () { //Khởi tạo và thiết lập trình chiếu
-    goToSlide(0); //Đặt slide đầu tiên (slide 0) ở vị trí trung tâm
+const init = function () { 
+    goToSlide(0); 
     createDots();
     activateDot(0);
 };
 init();
-dotContainer.addEventListener("click", function (e) { //Cho phép người dùng nhấn vào dot để chuyển đến slide tương ứng.
+dotContainer.addEventListener("click", function (e) { 
     if (e.target.classList.contains("dots__dot")) {
         const { slide } = e.target.dataset;
         goToSlide(slide);
